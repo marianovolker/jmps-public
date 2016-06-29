@@ -1,0 +1,458 @@
+#!/bin/sh
+
+#######################################################################################
+C_JMPS_LIB_FILE="/opt/jmps/scripts/jmps.lib.sh"
+. $C_JMPS_LIB_FILE 2>/dev/null
+test $? -ne 0 && echo "ERROR: loading library file, it must located in [$C_JMPS_LIB_FILE]" && exit 1
+#######################################################################################
+
+#######################################################################################
+debug=0
+test $debug -eq 1 && set -x
+#######################################################################################
+
+
+#######################################################################################
+usb_hub_list=""
+usb_device_list=""
+#######################################################################################
+
+#######################################################################################
+# name 			: disconnect_hub_usb_device
+# description 	: Disconnect the entire hub from the system.
+# parameters	: $1 the hub id.
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+disconnect_hub_usb_device()
+{
+	local path_devices="/sys/bus/usb/devices"
+	local disconnect_file="/sys/bus/usb/drivers/hub/unbind"
+	local hub_id="$1"
+
+	if test -d "$path_devices/$hub_id"
+	then
+		log "disconnecting [$hub_id] device."
+		echo -n "$hub_id" > $disconnect_file
+		test $? -ne 0 && log "error disconnecting [$hub_id]" && return 1
+	fi
+
+	return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: connect_hub_usb_device
+# description 	: connect the entire hub into the system.
+# parameters	: $1 the hub id.
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+connect_hub_usb_device()
+{
+	local path_devices="/sys/bus/usb/devices"
+	local connect_file="/sys/bus/usb/drivers/hub/bind"
+	local hub_id="$1"
+
+	if test -d "$path_devices/$hub_id"
+	then
+		log "connecting [$hub_id] device."
+		echo -n "$hub_id" > $connect_file
+		test $? -ne 0 && log "error connecting [$hub_id]" && return 1
+	fi
+
+	return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: reset_hub_usb_device
+# description 	: Disconnect the entire hub from the system.
+# parameters	: $1 the hub id.
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+reset_hub_usb_device()
+{
+	local path_devices="/sys/bus/usb/devices"
+	local disconnect_file="/sys/bus/usb/drivers/hub/unbind"
+	local connect_file="/sys/bus/usb/drivers/hub/bind"
+	local hub_id="$1"
+
+	if test -d "$path_devices/$hub_id"
+	then
+		log "disconnecting [$hub_id] device."
+		echo -n "$hub_id" > $disconnect_file
+		test $? -ne 0 && log "error disconnecting [$hub_id]" && return 1
+		sleep 2
+		log "re-connecting [$hub_id] device."
+		echo -n "$hub_id" > $connect_file
+		test $? -ne 0 && log "error re-connecting [$hub_id]" && return 1
+	fi
+
+	return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: disconnect_usb_device
+# description 	: Disconnect the usb from the system.
+# parameters	: $1 the usb id.
+#				  $2 the name of the usb device.
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+disconnect_usb_device()
+{
+	local path_devices="/sys/bus/usb/devices"
+	local disconnect_file="/sys/bus/usb/drivers/usb/unbind"
+	local usb_id="$1"
+	local name_device="$2"
+
+	if test -d "$path_devices/$usb_id"
+	then
+		log "disconnecting [$usb_id][$name_device] device."
+		echo -n "$usb_id" > $disconnect_file
+		test $? -ne 0 && log "error disconnecting [$usb_id][$name_device]" && return 1
+	fi
+
+	return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: connect_usb_device
+# description 	: connect the usb into the system.
+# parameters	: $1 the usb id.
+#				  $2 the name of the usb device.
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+connect_usb_device()
+{
+	local path_devices="/sys/bus/usb/devices"
+	local connect_file="/sys/bus/usb/drivers/usb/bind"
+	local usb_id="$1"
+	local name_device="$2"
+
+	if test -d "$path_devices/$usb_id"
+	then
+		log "connecting [$usb_id][$name_device] device."
+		echo -n "$usb_id" > $connect_file
+		test $? -ne 0 && log "error connecting [$usb_id][$name_device]" && return 1
+	fi
+
+	return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: reset_usb_device
+# description 	: Disconnect the usb from the system.
+# parameters	: $1 the usb id.
+#				  	  $2 the name of the usb device.
+# return			: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+reset_usb_device()
+{
+	local path_devices="/sys/bus/usb/devices"
+	local disconnect_file="/sys/bus/usb/drivers/usb/unbind"
+	local connect_file="/sys/bus/usb/drivers/usb/bind"
+	local usb_id="$1"
+	local name_device="$2"
+
+	if test -d "$path_devices/$usb_id"
+	then
+		log "disconnecting [$usb_id][$name_device] device."
+		echo -n "$usb_id" > $disconnect_file
+		test $? -ne 0 && log "error disconnecting [$usb_id][$name_device]" && return 1
+		sleep 2
+		log "re-connecting [$usb_id][$name_device] device."
+		echo -n "$usb_id" > $connect_file
+		test $? -ne 0 && log "error re-connecting [$usb_id][$name_device]" && return 1
+	fi
+
+	return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: build_list_of_devices
+# description 	: Build the list of devices configure in the system.
+# parameters	: none.
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+build_list_of_devices()
+{
+   local i=1
+   local max=10
+   local devices=""
+   local var=""
+
+   while test $i -le $max
+   do
+      var="C_DEVICE_$i"
+      eval value="\$$var"
+
+      if test -z "$devices"
+      then
+         test -n "$value" && devices="$value";
+      else
+         test -n "$value" && devices="$devices|$value"
+      fi
+
+      i=$(expr $i + 1)
+   done
+   
+   log "list of devices:[$devices]"
+
+   echo "\"$devices\""
+   
+   return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: build_reset_list
+# description 	: Build the list of devices to be reseted.
+# parameters	: none.
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+build_reset_list()
+{
+	local device=""
+	local name_device=""
+	local hub_id=""
+	local usb_id=""
+	local devices=""
+	local path_devices="/sys/bus/usb/devices"
+	local usb_hub_list_to_log=""
+	local usb_device_list_to_log=""	
+	
+	devices=$(build_list_of_devices)
+
+	for device in $(ls $path_devices/*/product)
+	do
+		name_device=$(cat $device | awk '{printf "%s", $0}')
+		echo "$devices" | grep -q "$name_device"
+		if test $? -eq 0
+		then
+			hub_id=$(echo $device | awk -F '/' '{printf "%s", $(NF-1)}' | awk -F '.' '{printf "%s:1.0", $1}')
+			echo "$usb_hub_list" | grep -q "$hub_id"
+			test $? -ne 0 && usb_hub_list=$(printf "%s\n%s " $usb_hub_list $hub_id)
+
+			usb_id=$(echo $device | awk -F '/' '{printf "%s", $(NF-1)}')
+			echo "$usb_device_list" | grep -q "$usb_id"
+			test $? -ne 0 && usb_device_list=$(printf "%s\n%s " $usb_device_list $usb_id)
+		fi
+	done
+
+	usb_hub_list_to_log=$(replace_new_line_in_string "$usb_hub_list" "|")
+	usb_device_list_to_log=$(replace_new_line_in_string "$usb_device_list" "|")
+
+	log "list of devices (hubs) to be reseted:[$usb_hub_list_to_log]"
+	log "list of devices (usbs) to be reseted:[$usb_device_list_to_log]"
+
+	return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: reset_devices
+# description 	: Do the properly reset of indicated list.
+# parameters	: $1 type of reset to do (all: both usbs and hubs, hubs:only the hubs, 
+#				  usbs:only the usbs)
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+reset_devices()
+{
+	local hub=""
+	local usb=""
+	local name_device=""
+	local which="$1"
+	local path_devices="/sys/bus/usb/devices"
+
+	if test "$which" = "all" -o "$which" = "hubs"
+	then
+		log "****************************************"
+		for hub in $(echo $usb_hub_list)
+		do
+			log "Resetting usb-hub:[$hub]"
+			reset_hub_usb_device $hub
+		done
+		log "****************************************"
+	fi
+
+	if test "$which" = "all" -o "$which" = "usbs"
+	then
+		log "****************************************"
+		for usb in $(echo $usb_device_list)
+		do
+			name_device=$(cat $path_devices/$usb/product | awk '{printf "%s", $0}')
+			log "Resetting usb-device:[$usb][$name_device]"
+			reset_usb_device $usb "$name_device"
+		done
+		log "****************************************"
+	fi
+
+   return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: disconnect_devices
+# description 	: Do the properly disconnect of indicated list.
+# parameters	: $1 type of disconnect to do (all: both usbs and hubs, hubs:only the hubs, 
+#				  usbs:only the usbs)
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+disconnect_devices()
+{
+	local hub=""
+	local usb=""
+	local name_device=""
+	local which="$1"
+	local path_devices="/sys/bus/usb/devices"
+
+	if test "$which" = "all" -o "$which" = "hubs"
+	then
+		log "****************************************"
+		for hub in $(echo $usb_hub_list)
+		do
+			log "Disconnecting usb-hub:[$hub]"
+			disconnect_hub_usb_device $hub
+		done
+		log "****************************************"
+	fi
+
+	if test "$which" = "all" -o "$which" = "usbs"
+	then
+		log "****************************************"
+		for usb in $(echo $usb_device_list)
+		do
+			name_device=$(cat $path_devices/$usb/product | awk '{printf "%s", $0}')
+			log "Disconnecting usb-device:[$usb][$name_device]"
+			disconnect_usb_device $usb "$name_device"
+		done
+		log "****************************************"
+	fi
+
+   return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: connect_devices
+# description 	: Do the properly connect of indicated list.
+# parameters	: $1 type of connect to do (all: both usbs and hubs, hubs:only the hubs, 
+#				  usbs:only the usbs)
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+connect_devices()
+{
+	local hub=""
+	local usb=""
+	local name_device=""
+	local which="$1"
+	local path_devices="/sys/bus/usb/devices"
+
+	if test "$which" = "all" -o "$which" = "hubs"
+	then
+		log "****************************************"
+		for hub in $(echo $usb_hub_list)
+		do
+			log "Connecting usb-hub:[$hub]"
+			connect_hub_usb_device $hub
+		done
+		log "****************************************"
+	fi
+
+	if test "$which" = "all" -o "$which" = "usbs"
+	then
+		log "****************************************"
+		for usb in $(echo $usb_device_list)
+		do
+			name_device=$(cat $path_devices/$usb/product | awk '{printf "%s", $0}')
+			log "Connecting usb-device:[$usb][$name_device]"
+			connect_usb_device $usb "$name_device"
+		done
+		log "****************************************"
+	fi
+
+   return $C_TRUE
+}
+#######################################################################################
+
+#######################################################################################
+# name 			: main
+# description 	: Main function of the shell script.
+# parameters	: $1 type of reset to do (all: both usbs and hubs, hubs:only the hubs, 
+#				  usbs(default):only the usbs)
+# return		: C_TRUE if OK, otherwise C_FALSE.
+#######################################################################################
+main()
+{
+	#----------------------------------------------------------------------------------
+	check_if_there_is_another_instance_running "$0"
+	if test $? -ne $C_OK
+	then
+		log "There is another instance of [$0] running. Exiting..."
+		exit $C_NOK
+	fi
+	#----------------------------------------------------------------------------------
+	
+	log "****************************************"
+	log "************  COMIENZO  ****************"
+	log "****************************************"
+
+	local which="$1"
+	local action="$2"
+
+	log "which=$which"
+	log "action=$action"
+
+	# Set the default values...
+	###################################################################################
+	if [ "$action" != "reset" ] && [ "$action" != "disconnect" ] && [ "$action" != "connect" ]
+	then
+		action="reset"
+	fi
+	
+	if [ "$which" != "all" ] && [ "$which" != "usbs" ] && [ "$which" != "hubs" ]
+	then 
+		which="usbs"
+	fi
+
+	log "which=$which"
+	log "action=$action"
+	###################################################################################
+	
+	###################################################################################
+	build_reset_list
+	
+	if [ "$action" = "reset" ]
+	then  
+		reset_devices "$which"
+	fi
+	
+	if [ "$action" = "disconnect" ]
+	then
+		disconnect_devices "$which"
+	fi
+	
+	if [ "$action" = "connect" ]
+	then
+		connect_devices "$which"
+	fi
+	###################################################################################
+
+	log "****************************************"
+	log "***************  FIN  ******************"
+	log "****************************************"
+	
+	#----------------------------------------------------------------------------------
+	erase_flag_for_instance_running "$0"	
+	return $C_TRUE
+	#----------------------------------------------------------------------------------	
+}
+#######################################################################################
+
+#######################################################################################
+main "$1" "$2"
+return $?
+#######################################################################################

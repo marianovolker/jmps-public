@@ -1,0 +1,46 @@
+#!/bin/sh
+
+
+#######################################################################################
+C_INSTALLATION_PATH="/opt/jmps/scripts"
+C_PATH_LOG=$C_INSTALLATION_PATH"/logs"
+C_MAX_SIZE_LOG=20000000
+C_QUANTITY_OF_VIDEO_DEVICES=6
+C_QUANTITY_OF_SOCKET_TCP=5
+C_QUANTITY_OF_THREADS=$C_QUANTITY_OF_SOCKET_TCP
+C_SOCKET_PORT_DEVICE_1=10001
+C_SOCKET_PORT_DEVICE_2=10002
+C_SOCKET_PORT_DEVICE_3=10003
+C_SOCKET_PORT_DEVICE_4=10004
+C_SOCKET_PORT_DEVICE_5=10005
+C_SOCKET_PORT_DEVICE_6=10006
+C_MOTION_SERVICE_STARTUP="/etc/init.d/webcam-server start"
+C_MOTION_SERVICE_SHUTDOWN="/etc/init.d/webcam-server stop"
+C_QUANTITY_OF_DAYS_TO_REMAIN_RECORDING_FILES=80
+C_PATH_FOR_VIDEO_DEVICES="/var/www/jmps"
+C_OWNER_FOR_RECORDING_FILES="www-data.www-data"
+C_FILE_PERMISSIONS_FOR_RECORDING_FILES="777"
+#######################################################################################
+
+#######################################################################################
+C_JMPS_LIB_FILE="/opt/jmps/scripts/jmps.lib.sh"
+. $C_JMPS_LIB_FILE 2>/dev/null
+test $? -ne 0 && echo "ERROR: loading library file, it must located in [$C_JMPS_LIB_FILE]" && exit 1
+#######################################################################################
+
+# Automation section
+#######################################################################################
+C_MAILS_DESTINATARIOS_NOTIFICACIONES="marianovolker@gmail.com marianovolker@yahoo.com.ar fachu_reitano@hotmail.com"
+C_ACCOUNT_MAIL_FROM="jmpssolutions@yahoo.com.ar"
+C_ACCOUNT_USER_FROM="jmpssolutions"
+C_ACCOUNT_PASSWD_FROM="SolucionesSimples0192"
+C_PATH_AUTOMATION_LOG="/opt/jmps/scripts/persiana/logs"
+C_PATH_AUTOMATION_BIN="/opt/jmps/scripts/persiana"
+C_AUTOMATION_BINARY_NAME="./persiana-controller"
+C_START_TIME_OF_WORKDAY="8"
+C_END_TIME_OF_WORKDAY="19"
+C_AUTOMATION_INODE_DEVICE="/dev/ttyUSB0"
+C_AUTOMATION_MSJ_NOTIFICATION="EL ESTACIONAMIENTO ESTA ABIERTO EN UN HORARIO NO PERMITIDO"
+#######################################################################################
+
+

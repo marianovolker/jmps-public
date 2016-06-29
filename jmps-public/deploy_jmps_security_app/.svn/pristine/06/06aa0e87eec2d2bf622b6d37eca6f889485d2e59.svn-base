@@ -1,0 +1,7 @@
+videodevice /dev/video0
+input 1
+target_dir /opt/jmps/streams/stream02
+stream_port 10001
+on_picture_save "chown www-data.www-data"
+brightness 150
+

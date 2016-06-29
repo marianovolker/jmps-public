@@ -1,0 +1,4 @@
+# m h  dom mon dow   command
+* * * * * sh /opt/jmps/scripts/check_webcamserver.sh 2>/dev/null 1>&2
+* * * * * sh /opt/jmps/scripts/admin_tasks_on_media_files.sh 2>/dev/null 1>&2
+* * * * * sh /opt/jmps/scripts/persiana/automation_persiana_controller.sh automatic 2>/dev/null 1>&2

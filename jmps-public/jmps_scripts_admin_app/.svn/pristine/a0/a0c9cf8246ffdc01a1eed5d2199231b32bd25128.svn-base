@@ -1,0 +1,8 @@
+#!/bin/sh
+
+nohup sh /etc/init.d/networking.sh 2>/dev/null 1>&2 &
+nohup sh /etc/init.d/check_dispositivos_garage_juan_maria.sh 2>/dev/null 1>&2 &
+sh /scripts_jmps/startup_dispositivos_garage_juan_maria.sh 2>/dev/null 1>&2 &
+touch /forcefsck
+
+exit 0

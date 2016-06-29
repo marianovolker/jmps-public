@@ -1,0 +1,62 @@
+
+
+
+
+set +x
+. ./jmps.lib.sh
+#echo "[$?]"
+
+
+#######################################################################################
+quit()
+{
+	stop_progress_indicator
+	warning "Interrupt signal received, quiting ..."
+	exit 0
+}
+#######################################################################################
+
+#######################################################################################
+setup()
+{
+	# Trap any signal between 1-30 and call quit function to log and exit cleanly.
+	trap quit 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 18 19 20 21 22 23 24 25 26 27 28 29 30
+
+	return 0
+}
+#######################################################################################
+
+setup 
+
+#log "hola"
+
+#start_progress_indicator 99
+
+#rc=$(length "test for somethingjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj?")
+
+#echo "[$?][$rc]"
+
+#ask_and_execute_function "ejecutar" 'length holaaaaaaae_aaaaaaaaaaaa ' 
+#length "holaaaaaaae aaaaaaaaaaaa "
+#echo $(get_current_shell)
+
+if test "$1" = "daemon"
+then
+	shift
+	run_in_background "daemonized" "$*"
+	#echo "[$?][$!]"
+	exit 0
+elif test "$1" = "daemonized"
+then
+	shift
+	echo "listo [$*][$0]"
+else
+	sh -c "sh $PWD/$0 daemon $*"
+	exit 0
+fi
+
+#echo "[$?][$!]"
+
+sleep 360
+
+exit 0
