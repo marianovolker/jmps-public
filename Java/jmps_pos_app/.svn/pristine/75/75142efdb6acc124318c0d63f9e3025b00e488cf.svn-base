@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Abonados mensuales - Abonados -->
+    <string name="toastAbMensualesAlta">Abonado mensual agregado</string>
+    <string name="toastAbMensualesModificacion">Abonado mensual modificado</string>
+    <string name="toastAbMensualesEliminacion">Abonado mensual eliminado</string>
+
+    <!-- Abonados mensuales - Tarifas -->
+    <string name="toastAbMensualesTarifaAlta">Nueva tarifa agregada</string>
+    <string name="toastAbMensualesTarifaModificacion">Tarifa modificada</string>
+    <string name="toastAbMensualesTarifaEliminacion">Tarifa eliminada</string>
+
+    <!-- Abonados mensuales - Pagos -->
+    <string name="toastAbMensualesPagosPagado">Pago realizado con éxito</string>
+
+    <!-- Abonados diarios - Tarifas -->
+    <string name="toastAbDiariosTarifaEliminacion">Tarifa eliminada</string>
+    <string name="toastAbDiariosTarifaAlta">Tarifa agregada</string>
+    <string name="toastAbDiariosTarifaModificacion">Tarifa modificada</string>
+
+    <!-- Abonados diarios - Categorías -->
+    <string name="toastAbDiariosCategoriaEliminacion">Categoria eliminada</string>
+    <string name="toastAbDiariosCategoriasAlta">Categoría agregada</string>
+    
+    <!-- Abonados diarios - Ingreso, Egreso, Egreso QR -->
+    <string name="toastAbDiariosIngreso">Vehículo ingresado correctamente</string>
+    <string name="toastAbDiariosEgreso">Vehículo egresado correctamente</string>
+
+</resources>
