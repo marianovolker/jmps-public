@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<resource xmlns="http://www.wxwindows.org/wxxrc" version="2.3.0.1">
+	<object class="wxFrame" name="GSPOTDashboardMainGUI">
+		<style>wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxMINIMIZE|wxTAB_TRAVERSAL</style>
+		<size>900,640</size>
+		<bg>#e0e0e0</bg>
+		<title>SPOTDashboard</title>
+		<centered>1</centered>
+		<object class="wxFlexGridSizer">
+			<rows>5</rows>
+			<cols>4</cols>
+			<vgap>10</vgap>
+			<hgap>10</hgap>
+			<growablecols></growablecols>
+			<growablerows></growablerows>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticText" name="m_staticText1">
+					<font>
+						<family>default</family>
+						<style>normal</style>
+						<weight>bold</weight>
+						<underlined>0</underlined>
+					</font>
+					<label>Card Reader</label>
+					<wrap>-1</wrap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticText" name="m_staticText2">
+					<font>
+						<family>default</family>
+						<style>normal</style>
+						<weight>bold</weight>
+						<underlined>0</underlined>
+					</font>
+					<label>Keypad</label>
+					<wrap>-1</wrap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticText" name="m_staticText3">
+					<font>
+						<family>default</family>
+						<style>normal</style>
+						<weight>bold</weight>
+						<underlined>0</underlined>
+					</font>
+					<label>System</label>
+					<wrap>-1</wrap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticText" name="m_staticText4">
+					<font>
+						<family>default</family>
+						<style>normal</style>
+						<weight>bold</weight>
+						<underlined>0</underlined>
+					</font>
+					<label>Security Module</label>
+					<wrap>-1</wrap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALIGN_BOTTOM|wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxStaticBitmap" name="m_bitmap1">
+					<size>200,180</size>
+					<bitmap>images/hcr.png</bitmap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticBitmap" name="m_bitmap11">
+					<size>200,180</size>
+					<bitmap>images/keypad_py.png</bitmap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALIGN_BOTTOM|wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxStaticBitmap" name="m_bitmap2">
+					<bitmap>images/screen.png</bitmap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxStaticBitmap" name="m_bitmap3">
+					<style>wxNO_BORDER|wxRAISED_BORDER|wxSIMPLE_BORDER|wxSTATIC_BORDER|wxSUNKEN_BORDER</style>
+					<exstyle>wxWS_EX_PROCESS_UI_UPDATES</exstyle>
+					<bitmap>images/server-key-icon.png</bitmap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button23">
+					<bg>#ff1600</bg>
+					<fg>#00a51a</fg>
+					<tooltip>0x08 This is a sample error description in button 23</tooltip>
+					<label>Communication</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button231">
+					<fg>#008f0a</fg>
+					<label>Communication</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button232">
+					<fg>#ff0000</fg>
+					<tooltip>This is another sample tooltip in button 232 (error code0x08)</tooltip>
+					<label>Communication</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button233">
+					<fg>#008a13</fg>
+					<label>Communication</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button234">
+					<bg>#00a10c</bg>
+					<fg>#007800</fg>
+					<label>Dismount</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button2341">
+					<fg>#007800</fg>
+					<label>Dismount</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel10">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button2342">
+					<fg>#ff0000</fg>
+					<label>Dismount</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button2343">
+					<fg>#007800</fg>
+					<label>Tamper</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button23431">
+					<fg>#ff0000</fg>
+					<label>Tamper</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel11">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button23432">
+					<fg>#00a60c</fg>
+					<label>Tamper</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button23433">
+					<fg>#ff0000</fg>
+					<label>Error/ Status</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button234331">
+					<fg>#ff0000</fg>
+					<label>Error/ Status</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button2343311">
+					<fg>#ff0000</fg>
+					<label>Error/ Status</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button234332">
+					<fg>#068500</fg>
+					<label>Error/ Status</label>
+					<default>0</default>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel13">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel131">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel132">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel1321">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel1322">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel1323">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel1324">
+					<style>wxTAB_TRAVERSAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALIGN_RIGHT|wxALL</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_button2">
+					<font>
+						<family>default</family>
+						<style>normal</style>
+						<weight>normal</weight>
+						<underlined>0</underlined>
+					</font>
+					<label>Exit</label>
+					<default>0</default>
+				</object>
+			</object>
+		</object>
+	</object>
+</resource>

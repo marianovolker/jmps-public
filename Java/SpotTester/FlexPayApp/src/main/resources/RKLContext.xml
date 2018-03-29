@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<description>
+		spring XML file for PropertyPlaceHolderConfigurer
+	</description>
+	
+	<bean id="RKLServerBroker" class="com.gilbarco.globaltools.flexpay.rkl.state.ServerRKLBroker" parent="RKLBroker" scope="singleton">
+	</bean>
+	<bean id="RKLSpotBroker" class="com.gilbarco.globaltools.flexpay.rkl.state.SpotRKLBroker" parent="RKLBroker" scope="singleton">
+	</bean>
+	<bean id="RKLBroker" abstract="true">
+	</bean>
+	<bean id="RKLStateEventHandler" class="com.gilbarco.globaltools.flexpay.rkl.state.RKLStateEventHandler" scope="singleton">
+	</bean>	
+</beans>

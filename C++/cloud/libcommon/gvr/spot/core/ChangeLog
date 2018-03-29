@@ -1,0 +1,58 @@
+libgvrspot (0.8.0) m3 m5 m7 native; urgency=low
+  * RM-579 refactor payload generation for Registration & DeviceConfigChangeEvent
+  * RM-409 implement the SPOT OPT Status info message
+  * RM-552 modify the file download & install cmd flows to remove the necessary release bundle file
+  * RM-281 update the file upload (log) flow process (full-logs only)
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Mon, 06 Jul 2015 10:00:00 -0300
+
+libgvrspot (0.7.0) m3 m5 m7 native; urgency=low
+  * RM-533 - create File Upload worker skeleton
+  * RM-327 - Software upload process got interrupted with an error code 60e
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Mon, 22 Jun 2015 10:00:00 -0300
+
+libgvrspot (0.6.0) m3 m5 m7 native; urgency=low
+  * RM-59 - implement SPOT messages to retrieve logs
+  * RM-284 - update the Registration Request payload to include OPT HW & SW Info
+  * RM-517 - have a different command key identification for Ephemeral Key SPOT commands
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Mon, 22 Jun 2015 10:00:00 -0300
+
+libgvrspot (0.5.0) m3 m5 m7 native; urgency=low
+   * RM-104 add PH into M5 ROMfs6 pkg
+   * RM-82 implement the business logic to report the File Download Status event
+   * RM-282 implement the SPOT OPT HW info
+   * RM-283 implement the SPOT OPT SW Info
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Tue, 26 May 2015 10:00:00 -0300
+
+libgvrspot (0.4.0) m3 m5 m7 native; urgency=low
+   * RM-16: implement business logic for OPT Cloud registration flow: 
+   * RM-326: Software upload process report debians have been successfully loaded but are not present in the device
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Thu, 07 May 2015 10:00:00 -0300
+
+libgvrspot (0.3.0) m3 m5 m7 native; urgency=low
+   * RM-41: create the sw install flow process
+   * RM-25: create the file download flow process
+   * RM-288: create Server Stream Channel
+   * RM-289: upload a complete SW bundle to the SPOT
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Thu, 23 Apr 2015 10:00:00 -0300
+
+libgvrspot (0.2.0) m3 m5 m7 native; urgency=low
+  * RM-34: implement message flow to update debians
+  * RM-255: create Ephemeral keys commands
+  * RM-77: process GVR Cloud reset payload (request and response)
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Wed, 08 Apr 2015 10:00:00 -0300
+
+libgvrspot (0.1.1) m3 m5 win32 native; urgency=low
+  * Added spot library.
+ -- Angeles Grieco <maria.grieco@gilbarco.com>  Fri, 12 Dec 2014 10:00:00 -0300
+
+libgvrspot (0.1.0) m3 m5 win32 native; urgency=low
+
+  * Added SpotSessionWorker to spot library. spot_session_tool created.
+
+ -- Angeles Grieco <maria.grieco@gilbarco.com>  Thr, 22 Jan 2015 17:00:00 -0300
+ 
+  * Added New spot messages: SpotMessageDebianInfo, SpotMessageReset, SpotMessageSoftwareInfo, SpotMessageHardwareInfo
+  * Changed spot_session_tool parameters.
+  
+ -- Angeles Grieco <maria.grieco@gilbarco.com>  Wnd, 25 Feb 2015 16:00:00 -0300
+ 

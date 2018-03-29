@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			This schema is used by
+			the SPOTPeriTester. This is used to verify the xml information
+			obtained through the socket.
+	    </xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:simpleType name="idType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[Kk][Ee][Yy][Bb][Oo][Aa][Rr][Dd]" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="details">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="200" />
+			<xsd:minLength value="1" />
+			<xsd:whiteSpace value="preserve" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="errorCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-6]" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="keyType">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1" />
+			<xsd:pattern value="[1-9EeCc]" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="KeysType">
+		<xsd:sequence>
+			<xsd:element name="Key" type="keyType" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="Command">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Keys" type="KeysType" minOccurs="1"
+					maxOccurs="1" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="idType" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="Response">
+		<xsd:complexType>
+			<xsd:sequence maxOccurs="1" minOccurs="1">
+				<xsd:element name="errorCode" type="errorCodeType" />
+				<xsd:element name="details" type="details" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="idType" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

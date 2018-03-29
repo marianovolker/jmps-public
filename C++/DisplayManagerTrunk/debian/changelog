@@ -1,0 +1,554 @@
+displaymanager (01.1.05) hardy; urgency=low
+
+  * Add system restart for scenarios where the Display Manager fails to fork a process (NGP-1300)
+  * Fix to terminate gmixer properly (NGP-1302)
+
+ -- paycm <paycm@vm-eng-psbs06>  Wed, 28 Aug 2013 17:58:13 -0400
+
+displaymanager (01.1.04) hardy; urgency=low
+
+  * Only use one pipeline to avoid assert error with new DVSDK and GStreamer changes
+
+ -- Aaron Sorgius <sorgius@vm-eng-psbs06>  Wed, 17 Jul 2013 15:16:47 -0400
+
+displaymanager (01.1.03) hardy; urgency=low
+
+  * Fix for video framerate (NGP-1178)
+
+ -- Aaron Sorgius <sorgius@vm-eng-psbs06>  Fri, 07 Jun 2013 15:16:47 -0400
+
+displaymanager (01.1.02) hardy; urgency=low
+
+  * Call waitpid when staring gstd (NGP-825)
+  * Modify CRIND DM restart to kill dispmgrd_signal_handler only (NGP-833)
+  * Handle the scenario where gstd cannot be killed (NGP-842)
+  * Shutdown gstd from the DM when the CRIND triggers the DM signal handler (NGP-867)
+
+ -- Payment Configuration Management User <paycm@vm-eng-psbs06>  Fri, 22 Mar 2013 15:16:47 -0400
+
+displaymanager (01.1.01) hardy; urgency=low
+
+  * Fix for video sizes being incorrect after the DM is restarted by the GRestartManager (NGP-168)
+
+ -- Aaron Sorgius <sorgius@gsovm-psbs05.gso.gilbarco.com>  Thu, 23 Feb 2012 11:41:10 -0500
+
+displaymanager (01.0.74) hardy; urgency=low
+
+  * Fix for "white screen issue" after the DM is restarted by the GRestartManager (NGP-110)
+
+ -- Aaron Sorgius <sorgius@gsovm-psbs05.gso.gilbarco.com>  Thu, 10 Nov 2011 11:41:10 -0500
+
+displaymanager (01.0.73) hardy; urgency=low
+
+  * Kill gstd using signals (eusse00006544)
+
+ -- Aaron Sorgius <sorgius@gsovm-psbs05.gso.gilbarco.com>  Wed, 20 Jul 2011 11:41:10 -0500
+
+displaymanager (01.0.72) hardy; urgency=low
+
+  * Remove daily rotation parameter from DM logrotate config (eusse00006575)
+
+ -- Payment Configuration Management User <paycm@gsovm-psbs05.gso.gilbarco.com>  Thu, 15 Sep 2011 14:32:32 -0400
+
+displaymanager (01.0.71) hardy; urgency=low
+
+  * Added a class named GDMQtApplication that captures de exception lauched from GDisplayManagerDaemon (eusse00006564)
+
+ -- Leonardo Seminara <leonardo.seminara@globant.com>  Tue, 10 Aug 2011 12:55:00 -0300
+
+displaymanager (01.0.70) hardy; urgency=low
+
+  * The default log level should be changed to 3, therefore the important LOG_LEVEL4 sentences should be changed
+
+ -- Leonardo Seminara <leonardo.seminara@globant.com>  Tue, 18 Aug 2011 13:10:00 -0300
+
+displaymanager (01.0.69) hardy; urgency=low
+
+  * Correct video size when using GStreamer Daemon. (eusse00006563)
+
+ -- Payment Configuration Management User <paycm@gsovm-psbs03.gso.gilbarco.com>  Mon, 29 Aug 2011 09:43:36 -0400
+
+displaymanager (01.0.68) hardy; urgency=low
+
+  * Play video using GStreamer Daemon. (eusse00005723)
+  * Add ability to select either gst_launch or gstd to play video (eusse00005723)
+
+ -- Aaron Sorgius <sorgius@gsovm-psbs05.gso.gilbarco.com>  Wed, 06 Apr 2011 11:41:10 -0500
+
+displaymanager (01.0.67) hardy; urgency=low
+
+   * Display manager eliminated more than one consecutive white spaces and showed only one in flytext (eusse00006461)
+
+ -- Leonardo Seminara <leonardo.seminara@globant.com>  Tue, 20 May 2011 13:45:00 -0300
+
+displaymanager (01.0.66) hardy; urgency=low
+ 
+   * debian/control file asked for personalities no longer available (eusse00006472)
+
+ -- Leonardo Seminara <leonardo.seminara@globant.com>  Tue, 19 May 2011 19:21:00 -0300
+
+displaymanager (01.0.65) hardy; urgency=low
+
+   * ADA mode prompts not displaying (eusse00005675)
+
+ -- Leonardo Seminara <leonardo.seminara@globant.com>  Tue, 10 May 2011 12:20:00 -0300
+
+displaymanager (01.0.64) hardy; urgency=low
+
+   * Audio intermitant fixed between audio promotions. (eusse00004007)
+
+ -- Ryan Murray <murrayr@gsovm-psbs05.gso.gilbarco.com>  Thu, 10 Feb 2011 11:41:10 -0500
+
+displaymanager (01.0.63) hardy; urgency=low
+
+  * DisplayManager Design Documentation Improvement. (eusse00005127) 
+
+ -- Ryan Murray <murrayr@gsovm-psbs05.gso.gilbarco.com>  Mon, 20 Dec 2010 17:25:09 -0500
+
+displaymanager (01.0.62) hardy; urgency=low
+
+  * Audio URL processing fails to detect mute and unmute commands with new
+    standard URL request. (eusse00005398)
+
+ -- Ryan Murray <murrayr@gsovm-psbs05.gso.gilbarco.com>  Mon, 29 Nov 2010 10:46:58 -0500
+
+displaymanager (01.0.61) hardy; urgency=low
+
+  * gst-launch termination using two signal method can cause lockup. (eusse00005362)
+
+ -- Ryan Murray <ryan.murray@gilbarco.com>  Thu, 18 Nov 2010 13:48:00 -0300
+
+displaymanager (01.0.60) hardy; urgency=low
+
+  * Prevent DisplayManager shutdown when set personality does not exist. (eusse00005384)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com>  Fri, 12 Nov 2010 17:00:00 -0300
+
+displaymanager (01.0.59.bug-eusse00005398) hardy; urgency=low
+
+  * Audio URL processing fails to detect mute and unmute commands with new standard URL request. (eusse00005398)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com>  Thu, 18 Nov 2010 13:00:00 -0300
+
+displaymanager (01.0.59) hardy; urgency=low
+
+  * this change version updates the notes below; 5099 was already incorporated
+    in 01.0.58 but the notes didn't say that.
+
+ -- Brian Kuebert <kuebert@gsovm-psbs05.gso.gilbarco.com>  Wed, 10 Nov 2010 16:03:20 -0500
+
+displaymanager (01.0.58) unstable; urgency=low
+
+  * Remove DisplayManager personalities from DisplayManager svn repository to one for themselves. (eusse00005359)
+  * Add DM stdout/stderr (GStreamer/gst-launch) logging (eusse00005099)
+
+ -- Brian Kuebert <kuebert@gsovm-psbs05.gso.gilbarco.com>  Wed, 10 Nov 2010 16:01:08 -0500
+
+displaymanager (01.0.57) unstable; urgency=low
+
+  * Remove 3 second delay to terminate playback process on gst-launch end video routine if the stop playback signal fails. (eusse00005289)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com> Fri, 12 Oct 2010 19:00:00 -0300
+
+displaymanager (01.0.56) unstable; urgency=low
+
+  * Improved config file update process. (eusse00005175)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com> Fri, 01 Oct 2010 14:30:00 -0300
+
+displaymanager (01.0.55) unstable; urgency=low
+
+  * Latest personality changes has to be updated into the displaymanager release. (eusse00005227)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com> Fri, 24 Sep 2010 11:30:00 -0300
+
+displaymanager (01.0.54) unstable; urgency=low
+
+  * DisplayManager does not upgrade without user intervention. (eusse00005168)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com> Fri, 10 Sep 2010 17:30:00 -0300
+
+displaymanager (01.0.53) unstable; urgency=low
+
+  * Screens stack during download process. (eusse00005154)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Thu, 08 Sep 2010 18:00:00 -0300
+
+=======
+displaymanager (01.0.52.bug-eusse00005127) unstable; urgency=low
+
+  * DisplayManager Design Documentation Improvement. (eusse00005127)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Thu, 02 Sep 2010 18:00:00 -0300
+
+>>>>>>> .merge-right.r1075
+displaymanager (01.0.52) unstable; urgency=low
+
+  * Adding validation of video files existence. Improving Logging. Adaptation for new gstreamer. (eusse00005040)
+
+ -- Martin Pablo Costantini <martin.costantini@globant.com> Thu, 24 Aug 2010 15:00:00 -0300
+
+displaymanager (01.0.51) unstable; urgency=low
+
+  * Update rotating clock mechanism cause critical problems. (eusse00004837)
+
+ -- Juan Carol <francisco.oliveto@gilbarco.com> Tue, 03 Aug 2010 15:00:00 -0300
+
+displaymanager (01.0.50) unstable; urgency=low
+
+  * Added cache functionality. (eusse00004687)
+  * Stop Media task made synchronic when DM terminates. (eusse00004868)
+  * Make that URL request always returns a response. (eusse00004884)
+  * Create Unit Test For Short Term Solution. (eusse00004933)
+  * Wrong DM behavior when the audio mute or video applications are not
+    present. (eusse00004920)
+  * Standalone Video Application Functionality improvements. (eusse00004879)
+  * Making CM compatible for displaying not only videos using an standalone
+    app but also videos using browser. (eusse00004880)
+  * Personality url_prefix not being correctly handled. (eusse00004962)
+
+ -- Pablo Crespo <pablo.crespo@gilbarco.com> Mon, 9 Aug 2010 13:00:00 -0300
+
+displaymanager (01.0.49) unstable; urgency=low
+
+  * DM with Video Stand-alone application. (eusse00004840)
+
+ -- Martin Costantini <martin.costantini@globant.com> Mon, 19 Jul 2010 15:30:00 -0300
+
+displaymanager (01.0.48) unstable; urgency=low
+
+  * Display stuck on odometer entry screen (eusse00003763)
+  * Check existance of /etc/config/extapps folder. (eusse00004753)
+
+ -- Pablo Crespo <pablo.crespo@gilbarco.com> Sat, 17 Jul 2010 16:40:00 -0300
+
+displaymanager (01.0.47) unstable; urgency=low
+
+  * Location of DM log files must be changed, according to the new mode of recovery logs that was implemented in spotupdatetool. (eusse00004662)
+  * Display manager processes have the same name and sometimes it can be confusing. (eusse00004678)
+  
+ -- Pablo Crespo <pablo.crespo@gilbarco.com> Wed, 30 Jun 2010 15:30:00 -0300
+
+displaymanager (01.0.46) unstable; urgency=low
+ 
+  * For a screen with more than one segment  only last segment created displayed (eusse00004426)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.44) unstable; urgency=low
+ 
+  * GDIdrawtext  scrolling Attributes not displayed at Dispenser (eusse00004400)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.43.bug-eusse00004400) unstable; urgency=low
+
+  * GDIdrawtext  scrolling Attributes not displayed at Dispenser (eusse00004400)
+
+ -- Leonardo Seminara <leonardo.seminara@gilbarco.com> Tue, 01 Jun 2010 12:00:00 -0500
+
+displaymanager (01.0.43) unstable; urgency=low
+ 
+  * create DM log links (eusse00004498)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.43-bug_eusse00004498) unstable; urgency=low
+ 
+  * create DM log link under /var/opt (eusse00004498)
+ 
+ -- Daniel Sappa <daniel.sappa@globant.com> Thu, 20 May 2010 18:00:00 -0300
+
+displaymanager (01.0.42) unstable; urgency=low
+ 
+  * invalid commit of glibrary.js file to trunk (eusse00004448)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.41) unstable; urgency=low
+ 
+  * Signal handlers coupled in DisplayManager. When logrotate signal is sent the DM also interprets shutdown signal. (eusse00004455)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.40.bug-eusse00004455) unstable; urgency=low
+ 
+  * Signal handlers coupled in DisplayManager. 
+    When logrotate signal is sent the DM also interprets shutdown signal. (eusse00004455)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 13 May 2010 17:00:00 -0300
+
+displaymanager (01.0.40) unstable; urgency=low
+ 
+  * Rel_17116: Received Black Screen following unit reboot. (eusse00004411)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.39) unstable; urgency=low
+
+  * Remove C_DEBUG variable from init script (eusse00004159)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.38) unstable; urgency=low
+ 
+  * Remove C_DEBUG variable from init script (eusse00004377)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.34.bug-eusse00004377) unstable; urgency=low
+
+  * Remove CE_DEBUG variable from init script (eusse00004377)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com> Thu, 06 May 2010 14:00:00 -0400
+
+displaymanager (01.0.34) unstable; urgency=low
+ 
+  * GDIDrawtext request does not output data at the  CRIND Display (eusse00004162)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.30) unstable; urgency=low
+ 
+  * GDIDrawtext request does not output data at the  CRIND Display (eusse00004162)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.30) unstable; urgency=low
+ 
+  * GDIDrawtext request does not output data at the  CRIND Display (eusse00004162)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.29) hardy; urgency=low
+
+  * added cron to run logrotate every 5 minutes (eusse00004204)
+
+ -- Brian Kuebert <kuebert@gsovm-psbs05.gso.gilbarco.com>  Wed, 14 Apr 2010 14:59:09 -0400
+
+displaymanager (01.0.28) unstable; urgency=low
+ 
+  * Auto-Pay Merchandising (eusse00004087)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.27) unstable; urgency=low
+ 
+  *  (eusse00004157)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.26) unstable; urgency=low
+
+  * Issues in displayed elements at the DisplayManager (eusse00004132)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+
+displaymanager (01.0.25) unstable; urgency=low
+
+  * Issues in displayed elements at the DisplayManager (eusse00004132)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+
+displaymanager (01.0.24) unstable; urgency=low
+
+  * Adding logging to help detect problems associated with CrindToCrind sessions connecting and disconnecting (eusse00004117)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+
+displaymanager (01.0.23) unstable; urgency=low
+
+  * remerge of (eusse00004109)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.22) unstable; urgency=low
+ 
+  * Log files in DM should be compressed after the rotation of the file. (eusse00004101/)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.21) unstable; urgency=low
+ 
+  * Issues in displayed elements at the DisplayManager (eusse00004132)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.20) unstable; urgency=low
+ 
+  * Adding logging to help detect problems associated with CrindToCrind sessions connecting and disconnecting. (eusse00004117)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.19) unstable; urgency=low
+ 
+  * Do not start DM after installation (eusse00004109)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.18) unstable; urgency=low
+ 
+  * REL_16333 Dispenser must be warmstarted after Purged to complete graphic download (eusse00004001)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.17) unstable; urgency=low
+ 
+  * Invalid attribute not recorded for add graphic segment command (eusse00003889)
+ 
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+ 
+displaymanager (01.0.16) unstable; urgency=low
+
+  * Improved java script embedded code performance. (eusse00003607)
+
+ -- DM Team <pablo.cantarini@gilbarco.com>  Mon, 22 Mar 2010 17:00:00 -0300
+ 
+displaymanager (01.0.15) unstable; urgency=low
+
+  * 16073: Graphics displayed on the Dispenser Idle screen are too small. (eusse00003851)
+
+ -- Creig Smith <smitcr@gsovm-psbs05.gso.gilbarco.com>  Wed, 10 Mar 2010 20:24:08 -0500
+
+displaymanager (01.0.14) unstable; urgency=low
+
+  * Some Personalities Missing from Diagnostics Mode (eusse00003901)
+
+ -- Brian Kuebert <kuebert@gsovm-psbs05.gso.gilbarco.com>  Wed, 10 Mar 2010 20:24:08 -0500
+
+displaymanager (01.0.13) unstable; urgency=low
+
+  * updated build environment to support lgpl Qt (eusse00003870)
+
+ -- Brian Kuebert <kuebert@gsovm-psbs05.gso.gilbarco.com>  Wed, 10 Mar 2010 20:24:08 -0500
+
+displaymanager (01.0.12) unstable; urgency=low
+
+  * update dependency to ensure LGPL version of Qt is used (eusse00003870)
+
+ -- Brian Kuebert <kuebert@gsovm-psbs03.gso.gilbarco.com>  Wed, 03 Mar 2010 13:27:35 -0500
+
+displaymanager (01.0.11) unstable; urgency=low
+
+  * Display only once promotions are not displayed at the flexpay10.4" dispenser. (eusse00003806)
+
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com>  Wed, 24 Feb 2010 20:00:00 -0300
+
+displaymanager (01.0.10) unstable; urgency=low
+
+  * added dependencies for dvsdk, gstreamer & libiconv (eusse00003804)
+
+ -- Brian Kuebert <kuebert@gsovm-psbs03.gso.gilbarco.com>  Mon, 22 Feb 2010 12:16:46 -0500
+
+displaymanager (01.0.09) unstable; urgency=low
+
+  * Remove doble buffer for URL request in DM application (eusse00003795)
+  * The text display overlaps in the "make selection" page (eusse00003525)
+  * DisplayManager logging system affects overall performance detriment and impacts on memory leaks (eusse00003783)
+
+ -- Brian Kuebert <kuebert@gsovm-psbs03.gso.gilbarco.com>  Fri, 19 Feb 2010 12:16:46 -0500
+
+displaymanager (01.0.08) unstable; urgency=low
+
+  * Code inprovement on view for performance issues (eusse00003744)
+  * Flexpay 10.4" screen looks like 5.7" screen after installing the new NGPM release. (eusse00003695)
+  * Add gstreamer path to DM init script (eusse00003664)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+
+displaymanager (01.0.07) unstable; urgency=low
+
+  * Allow DisplayManager HTTPS flow through firewall (eusse00003735)
+  * Now NGP Display Manager reference Gilbarco CA certificate via /etc/ssl/certs (eusse00003683)
+  * Solve performance issues with QString (eusse00003606)
+  * Save application is not sending the "Application Save Complete (30)" response code when succesfully finished. (eusse00003249)
+  * Diagnostic does not support small font (eusse00003701)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com> Mon, 08 Feb 2010 18:00:00 -0300
+
+displaymanager (01.0.06) unstable; urgency=low
+  * Limit URL request to HTTPS and JavaScript requests(eusse00003504)
+  * Gilbarco Veeder-Root Logo screen on top of diagnostics menu(eusse00003625)
+
+ -- Martin Costantini <martin.costantini@globant.com> Mon, 14 Dec 2009 15:30:00 -0300
+
+displaymanager (01.0.05) unstable; urgency=low
+  * unit test has a race condition (eusse00003381)
+  * RTTI C++ Feature Removal For performance improvement(eusse00003516)
+
+ -- Martin Costantini <martin.costantini@globant.com> Mon, 14 Dec 2009 15:30:00 -0300
+
+displaymanager (01.0.04) unstable; urgency=low
+
+  * Images of 320x240 resolution were not scaled for that resolution. Replacement of images for scaled ones (eusse00003477)
+  * Direction of arrow-images corrected (eusse00003477).
+
+ -- Martin Costantini <martin.costantini@globant.com> Mon, 14 Dec 2009 15:30:00 -0300
+
+ displaymanager (01.0.03) unstable; urgency=low
+
+  * Bugfixes, changelog and makefiles issues fixed (eusse00003405)
+  * Bugfixes, improvement of gdi functionality (eusse00003413)
+  * Fix defect eusse00003405 by fix the functionality of set_default_personality command (eusse00003405).
+  * Fix defect eusse00003426 by updating the displaymanager package
+    dependency. It must depend of displaymanager-personalities packages.(eusse00003426)
+
+ -- Mariano Volker <mariano.volker@gilbarco.com>  Mon, 07 Dec 2009 09:00:00 -0300
+
+displaymanager (01.0.02) unstable; urgency=low
+
+  * Fix defect eusse00003409 by updating the gvr-qt-embedded package
+    dependency to be >= 4.5.2-4
+  * Set EOL style of debian control files to LF
+
+ -- Brian Kuebert <brian.kuebert@gilbarco.com>  Thu, 26 Nov 2009 09:00:00 -0500
+
+displaymanager (01.0.01) unstable; urgency=low
+
+  * Fix defect eusse00003389 by updating Makefiles to properly detect
+    dependencies using dpkg to test for relationships.
+  * Fix several basic Makefile problem (using make instead of the MAKE
+    variable to call submakes, etc).
+
+ -- Brian Kuebert <brian.kuebert@gilbarco.com>  Mon, 23 Nov 2009 09:00:00 -0500
+
+displaymanager (01.0.00) unstable; urgency=low
+
+  * Bugfixes, scroll text field being fixed (eusse00003341)
+  * Bugfixes, debian packages with non root user group permissions applied (eusse00003320)
+  * Bugfixes, image transparency accurately applied for downloaded monochrome scaled images (eusse00003270).
+  * Bugfixes, infoscreen display segment now set visible the invisible segment (eusse00003258).
+
+ -- pablo <pablo.cantarini@gilbarco.com>  Sat, 09 Nov 2009 09:00:00 -0500
+
+displaymanager (previous) unstable; urgency=low
+
+  * Bugfixes, no segment will clip its contents if they exceed segment size.
+  * Bugfixes, Save Application Response code fixed to send "Save Application Completed (30)" if successfully completed.
+  * Initial Release.
+  * Bugfixes, InfoScreenView is added.
+  * Bugfixes, Read from Config file is now supported.
+  * Bugfixes, Personality loading is now supported.
+  * Bugfixes, Gdi is now supported.
+  * Bugfixes, InfoScreen FlyText is now supported.
+  * Bugfixes, ImageMappings is now supported.
+  * Bugfixes, AvoidPageFlickering is now supported.
+  * Bugfixes, Font Mapping is now supported.
+  * Bugfixes, GDI and Infoscreen Attributes are now supported.
+  * Bugfixes, Change directory hierarchy of binaries and files according to FHS compliance.
+  * Bugfixes, Removed cursor from embedded system screen.
+  * Bugfixes, Fix performance issues.
+
+ -- mariano <mariano.volker@gilbarco.com>  Fri, 06 Nov 2009 09:00:00 -0300
+
+
+
+
+
+
+
+
+
+
+
+

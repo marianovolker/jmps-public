@@ -1,0 +1,27 @@
+<File1>
+   <Name>File1.xml</Name>
+   <Purpose>Unit Test</Purpose>
+   <type binary="false">XML</type>
+   <deeper>
+      <Level2>Yes</Level2>
+      <deeperstill>
+         <Level3>Yes</Level3>
+      </deeperstill>
+   </deeper>
+   <float>1.23456</float>
+   <float1>3.14159</float1>
+   <uint>3456789012</uint>
+   <uint1>4294901760</uint1>
+   <int>-1234567890</int>
+   <int1>-1073741824</int1>
+   <bool>false</bool>
+   <bool1>true</bool1>
+   <bool2>TRUE</bool2>
+   <bool3>True</bool3>
+   <bool4>1</bool4>
+   <bool5>false</bool5>
+   <bool6>FALSE</bool6>
+   <bool7>False</bool7>
+   <bool8>0</bool8>
+   <default>Ocean</default>
+</File1>

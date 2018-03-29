@@ -1,0 +1,19 @@
+SpotIp                        = 127.0.0.1
+SpotPort                      = 5200
+SpotPlatform                  = @GVR_TARGET_PLATFORM@
+SpotClientId                  = 0E
+UccIp                         = 127.0.0.1
+UccPort                       = 21300
+CrlIp                         = 127.0.0.1
+CrlPort                       = 21301
+SpotReleaseFile               = @SPOT_RELEASE_DIR@
+CloudUploadDir                = @CLOUD_UPLOAD_DIR@
+UploadableLogFiles            = @UPLOADABLE_LOG_FILES@
+PathRegistrationServerData    = @REGISTRATION_SERVER_DATA@
+PathCloudServerData           = @CLOUD_ENCRYPTED_DATA@
+PathNewCloudServerData        = @CLOUD_NEW_ENCRYPTED_DATA@
+# TODO: should remove PathDeviceInfoData entry once deviceInfo.ini file is removed
+PathDeviceInfoData            = @DEVICE_INFO@
+PathDeviceRegisterInfo        = @DEVICE_REGISTRATION_INFO@
+PathDeviceDnsConfiguration    = @DEVICE_DNS_CONFIGURATION_INFO@
+ReConnectionDelayValue        = 60

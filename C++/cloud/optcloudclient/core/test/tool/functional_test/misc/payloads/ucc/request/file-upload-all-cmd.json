@@ -1,0 +1,13 @@
+
+{
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+  "operation": "file-upload-cmd",
+  "deviceId": "14",
+  "payload": {
+    "fileCategory": "log",
+    "fileType": "ALL",
+    "trackingNumber": "2329D93PW830DI90",
+    "url": "https://i360-transfer-gw.gilbarco.com/fileupload/14/log/pinpad/2329D93PW830DI90"
+  }
+}
+

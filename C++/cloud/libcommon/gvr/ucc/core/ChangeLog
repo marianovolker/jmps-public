@@ -1,0 +1,61 @@
+libgvrucc (0.7.0) m3 m5 m7 native; urgency=low
+  * RM-405 create the Device Component Event message
+  * RM-552 modify the file download & install cmd flows to remove the necessary release bundle file
+  * RM-281 update the file upload (log) flow process (full-logs only)
+  * RM-565 update the connect flow to pass the DNS & Delay parameters to the UCC
+  * RM-411 update the registration flow to pass the DNS configuration to the UCC
+  * RM-566 implement a DNS flow to process the new set of DNS commands: get, set, test DNS
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Mon, 06 Jul 2015 10:00:00 -0300
+
+libgvrucc (0.6.0) m3 m5 m7 native; urgency=low
+  * RM-364 - Install Status Event is not being sent before start the installation
+  * RM-393 - implement the Security Change message
+  * RM-280 - implement the UCC Send File to SODA message
+  * RM-480 - implement the UCC Send File To Cloud status
+  * RM-378 - implement the UCC File Upload Cmd message
+  * RM-383 - implement the File Upload Status Event message
+  * RM-479 - implement the UCC receiveFromCloud-status command
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Mon, 22 Jun 2015 10:00:00 -0300
+
+libgvrucc (0.5.0) m3 m5 m7 native; urgency=low
+  * RM-392 - implement the business logic (flow) to manage the Security Change cmd
+  * RM-562 - implement CRL get DNS message configuration
+  * RM-400 - implement CRL set DNS message configuration
+  * RM-563 - implement CRL test DNS message configuration
+  * RM-564 - implement UCC test DNS message configuration
+  * RM-390 - implement the Reconnect cmd
+  * RM-533 - create File Upload worker skeleton
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Mon, 22 Jun 2015 10:00:00 -0300
+
+libgvrucc (0.4.0) m3 m5 m7 native; urgency=low
+   * RM-104 add PH into M5 ROMfs6 pkg
+   * RM-336 implement the Config Change Event message
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Tue, 26 May 2015 10:00:00 -0300
+
+libgvrucc (0.3.0) m3 m5 m7 native; urgency=low
+   * RM-16: implement business logic for OPT Cloud registration flow: 
+   * RM-274: update the business logic for the registration flow
+   * RM-325: retrieve the spot IP configuration
+   * RM-275: implement the UCC Connect message
+   * RM-81: implement the File Download Status Event message
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Thu, 07 May 2015 10:00:00 -0300
+
+libgvrucc (0.2.0) m3 m5 m7 native; urgency=low
+   * RM-41: create the sw install flow process
+   * RM-258: create CRL Session
+   * RM-277: implement the UCC Receive File from SODA message
+   * RM-273: implement the UCC Registration Server Update message
+   * RM-271: create the CRL Cloud Registration message
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Thu, 23 Apr 2015 10:00:00 -0300
+
+libgvrucc (0.1.0) m3 m5 m7 native; urgency=low
+  * RM-173: create UCC Connection Status unsolicited command
+  * RM-77: process GVR Cloud reset payload (request and response)
+  * RM-243: create UCC Start Registration command
+  * RM-256: create UCC Reset cmd structure
+  * RM-257: create UCC SW Upload cmd structure
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Wed, 08 Apr 2015 10:00:00 -0300
+
+libgvrucc (0.0.0) m3 m5 m7 win32 native; urgency=low
+  * Added Universal Cloud Connector library.
+ -- Pablo Cantarini <pablo.cantarini@gilbarco.com>  Fri, 27 Feb 2015 10:00:00 -0300

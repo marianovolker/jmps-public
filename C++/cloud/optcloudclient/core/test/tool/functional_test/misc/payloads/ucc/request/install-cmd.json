@@ -1,0 +1,12 @@
+
+{
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+  "operation": "install-cmd",
+  "deviceId": "14",
+  "payload": {
+    "fileType": "software-bundle",
+    "trackingNumber": "2329D93PW830DI90",
+    "localURL": "10.28.120.11/download/config/crind-bios-mode.cfg"
+  }
+}
+

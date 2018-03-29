@@ -1,0 +1,11 @@
+{
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+  "operation": "receiveFromCloud",
+  "deviceId": "14",
+  "payload": {
+    "success": true,
+    "path":	"storage/releases",
+    "fileSize": 4000000,
+    "trackingNumber":	"2329D93PW830DI90"
+  }
+}

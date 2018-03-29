@@ -1,0 +1,10 @@
+<File2>
+   <Name>File2.xml</Name>
+   <Purpose>Unit Test</Purpose>
+   <type>XML</type>
+   <bool>true</bool>
+   <int>-12345</int>
+   <uint>12345</uint>
+   <float>1.2345</float>
+   <string>Alpha</string>
+</File2>

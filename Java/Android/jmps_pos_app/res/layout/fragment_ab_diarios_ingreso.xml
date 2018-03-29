@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.jmps.android.pos.AbDiariosIngresoActivity$PlaceholderFragment" >
+
+    <EditText
+        android:id="@+id/txtAbDiariosIngresoPatenteLetras"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/patenteLetras"
+        android:inputType="textCapCharacters" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtAbDiariosIngresoPatenteNumeros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtAbDiariosIngresoPatenteLetras"
+        android:ems="10"
+        android:hint="@string/patenteNumeros"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/spiAbDiariosIngresoCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtAbDiariosIngresoPatenteNumeros"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/btnAbDiariosIngresoCancelar"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spiAbDiariosIngresoCategoria"
+        android:layout_marginTop="50dp"
+        android:text="@android:string/cancel" />
+
+    <Button
+        android:id="@+id/btnAbDiariosIngresoGuardar"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spiAbDiariosIngresoCategoria"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/btnAbDiariosIngresoCancelar"
+        android:text="Ingresar" />
+
+</RelativeLayout>

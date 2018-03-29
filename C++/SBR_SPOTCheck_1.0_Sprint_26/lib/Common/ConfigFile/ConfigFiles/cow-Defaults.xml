@@ -1,0 +1,146 @@
+<config>
+   <general>
+      <CRINDMode>99</CRINDMode>                                                <!-- Enum(eMOC = 0, eGeneric = 1, eMOCKiosk = 2, eGenericKiosk = 3, eMOCEnhancedKiosk = 4, eUnspecifiedMode = 99) -->
+      <Platform>5</Platform>                                                   <!-- Enum(eCCNX = 1, eAIMB_330 = 2, eSPOT_M3 = 4, eSPOT_M5 = 5) -->
+      <DualSidedUnit>false</DualSidedUnit>                                     <!-- Boolean -->
+      <IDSideA>99</IDSideA>                                                    <!-- UINT32 -->
+      <IDSideB>99</IDSideB>                                                    <!-- UINT32 -->
+      <DebugLevel>0</DebugLevel>                                               <!-- Enum(eError = 0, eWarning = 1, eTrace = 2, eDebug = 3) -->
+      <LogFileSize>10M</LogFileSize>                                            <!-- STRING -->
+      <LogFileCount>7</LogFileCount>                                           <!-- UINT8 -->
+      <MaxNumSides>1</MaxNumSides>                                             <!-- UINT32 -->
+      <ActualNumSides>1</ActualNumSides>                                       <!-- UINT32 -->
+      <VersionsFile>/c/dev/cow/var/opt/crindbios/log/versions.log</VersionsFile>         <!-- STRING -->
+      <SpotProtocolLogger>true</SpotProtocolLogger>                            <!-- Boolean --> <!-- True to trace all the communication between CRIND/SPOT -->
+   </general>
+
+   <peripherals>
+      <TRINDEnabled>false</TRINDEnabled>                                       <!-- Boolean -->
+      <CashEnabled>false</CashEnabled>                                         <!-- Boolean -->
+      <KioskSupported>false</KioskSupported>                                   <!-- Boolean -->
+      <SoftKeysEnabled>true</SoftKeysEnabled>                                  <!-- Boolean -->
+      <UseSPOTServices>true</UseSPOTServices>                                  <!-- Boolean -->
+      <AllocateAppMem>true</AllocateAppMem>                                    <!-- Boolean --> <!-- True for eAIMB_330 and eSPOT_M2, otherwise false -->
+      <EMVPassThruAvail>true</EMVPassThruAvail>                                <!-- Boolean -->
+      <EPPPassThruAvail>false</EPPPassThruAvail>                               <!-- Boolean -->
+	  <DisplayRotatingClock>true</DisplayRotatingClock>                        <!-- Boolean -->
+      <SecureSvcAvail>true</SecureSvcAvail>                                    <!-- Boolean -->
+      <SmartConnectEnabled>false</SmartConnectEnabled>                         <!-- Boolean -->
+      <EncryptionDirectMode>true</EncryptionDirectMode>                        <!-- Boolean -->
+      <KeymapFilePath>/c/dev/cow/var/opt/crindbios/config/keymap.conf</KeymapFilePath>   <!-- STRING -->
+      <TRINDInterface>serial</TRINDInterface>                                  <!-- STRING ("gateway" or "serial") -->
+      <TRINDWirelessSyncEnabled>false</TRINDWirelessSyncEnabled>               <!-- Boolean -->    
+      <LONVersionSource>0</LONVersionSource>                                   <!-- Enum (eZModem = 0, eLONUSB = 1, eC101Eth = 2) -->
+      <DoorSwitchEnabled>true</DoorSwitchEnabled>                              <!-- Boolean -->
+      <SecureScreenRangesPath>/c/dev/cow/var/opt/crindbios/config/securescreenranges.conf</SecureScreenRangesPath>
+      <NonPinLookUpPath>/c/dev/cow/var/opt/crindbios/promptmapper/nonpinlookup.txt</NonPinLookUpPath>
+      <PinLookUpPath>/c/dev/cow/var/opt/crindbios/promptmapper/pinlookup.txt</PinLookUpPath>
+      <ADAKeymapFilePath>/c/dev/cow/var/opt/crindbios/config/ADAKeys.conf</ADAKeymapFilePath>
+   </peripherals>
+
+   <port_settings>
+      <LONDriverType>NONE</LONDriverType>                                      <!-- STRING ("PLTA", "EL", "NONE" -->
+      <Pump2w>/c/dev/cow/dev/gvr-pump2w</Pump2w>                                         <!-- STRING (Device Name) -->
+      <ZModemPort>/c/dev/cow/dev/gvr-zmodem</ZModemPort>                                 <!-- STRING (Device Name) -->
+      <UseZModemFlowControl>false</UseZModemFlowControl>                       <!-- Boolean -->
+      <POS2W>/c/dev/cow/dev/gvr-pos2w</POS2W>                                            <!-- STRING (Device Name) -->
+      <UsePOS2WDriver>true</UsePOS2WDriver>                                    <!-- Boolean -->
+      <GenericCRINDBaudRate>12</GenericCRINDBaudRate>                          <!-- Enum(eAutoBaud = 0, eBaud1200 = 9, eBaud2400 = 11, eBaud4800 = 12, eBaud9600 = 13, eBaud19200 = 14, eBaud38400 = 15, eBaud57600 = 4097, eBaud115200 = 4098) -->
+      <TRINDDeviceName>/c/dev/cow/dev/gvr-trind</TRINDDeviceName>                        <!-- STRING (Device Name) -->
+      <ScannerDeviceName>/c/dev/cow/dev/gvr-scanner</ScannerDeviceName>                  <!-- String -->
+   </port_settings>
+
+   <display>
+      <DisplayMode>2</DisplayMode>                                             <!-- Enum(eLegacyMonochrome = 1, eHTMLGenericColor = 2) -->
+      <DisplayType>6</DisplayType>                                             <!-- Enum(eNoDisplay = 1, eSingleLine = 2, eMonochrome = 3, eColor = 4, eSPOTDisplayM3 = 5, eSPOTDisplayM5 = 6) -->
+      <BitDepth>1</BitDepth>                                                   <!-- UINT32 -->
+      <Width>320</Width>                                                       <!-- UINT32 -->
+      <Height>240</Height>                                                     <!-- UINT32 -->
+      <DispTouchEnabled>false</DispTouchEnabled>                               <!-- Boolean -->
+      <MonoScreenPresent>false</MonoScreenPresent>                             <!-- Boolean -->
+      <MonochromeContrastA>50</MonochromeContrastA>                            <!-- UINT32 -->
+      <MonochromeContrastB>50</MonochromeContrastB>                            <!-- UINT32 -->
+      <MOCPOSDisplayType>1</MOCPOSDisplayType>                                 <!-- STRING ("1" - Monochrome, "2" - Info Screen Color) -->
+      <PredictorAvailable>true</PredictorAvailable>                            <!-- Boolean -->
+      <PredictorPersistenceFile>/c/dev/cow/var/opt/crindbios/config/sequences.xml</PredictorPersistenceFile>	<!-- Predictor persistence file name and path -->
+      <ExtraDisplay>
+         <DisplayMode>1</DisplayMode>                                          <!-- Enum(eLegacyMonochrome = 1, eHTMLGenericColor = 2) -->
+         <DisplayType>1</DisplayType>                                          <!-- Enum(eNoDisplay = 1, eSingleLine = 2, eMonochrome = 3, eColor = 4, eSPOTDisplayM3 = 5, eSPOTDisplayM5 = 6) -->
+      </ExtraDisplay>
+   </display>
+   
+   <multimedia>
+      <VideoSupport>embedded</VideoSupport>                                    <!-- STRING ("standalone", "embedded", "none") -->
+      <AudioSupport>embedded</AudioSupport>                                    <!-- STRING ("standalone", "embedded", "none") -->
+      <FlashSupport>false</FlashSupport>                                       <!-- STRING ("true", "false") -->
+   </multimedia>
+
+   <merchandising>
+      <TerminalIDA>99</TerminalIDA>                                            <!-- UINT32 -->
+      <TerminalIDB>99</TerminalIDB>                                            <!-- UINT32 -->
+      <TermIDConfigAutomatic>TRUE</TermIDConfigAutomatic>                      <!-- Boolean -->
+      <MerchInterfaceVersion>01.2.01</MerchInterfaceVersion>                   <!-- STRING -->
+      <PumpStateSource>1</PumpStateSource>                                     <!-- Enum (eZModem = 0, eLONUSB = 1, eC101Eth = 2, eNewBoard = 3, eNone = 4) -->
+   </merchandising>
+
+   <printer>
+      <PrinterFontSize>32</PrinterFontSize>                                    <!-- UINT8 -->
+      <PrinterCountryCode>0</PrinterCountryCode>                               <!-- INT32 -->
+      <PrinterType>3</PrinterType>                                             <!-- Enum (eNoPrinter = 1, eTextPrinter = 2, eGraphicsPrinter = 3) -->
+      <PrinterMediaWidth>448</PrinterMediaWidth>                               <!-- UINT16 -->
+      <BarcodeCheckDigitRequired>false</BarcodeCheckDigitRequired>             <!-- Boolean -->
+      <DefaultCharsPerLine>20</DefaultCharsPerLine>                            <!-- UINT16 -->
+      <QuadrupleWidthCharSupported>false</QuadrupleWidthCharSupported>         <!-- Boolean -->
+      <QuadrupleHeightCharSupported>false</QuadrupleHeightCharSupported>       <!-- Boolean -->
+      <DoubleWidthCharSupported>true</DoubleWidthCharSupported>                <!-- Boolean -->
+      <DoubleHeightCharSupported>true</DoubleHeightCharSupported>              <!-- Boolean -->
+      <HalfWidthAndHeightCharSupported>true</HalfWidthAndHeightCharSupported>  <!-- Boolean -->
+      <BarcodeSymbologies>255</BarcodeSymbologies>                             <!-- UINT32 -->
+   </printer>
+
+   <barcode_scanner>
+      <ScannerEnabled>false</ScannerEnabled>                                   <!-- Boolean -->
+      <AIMCodesEnabled>false</AIMCodesEnabled>                                 <!-- Boolean -->
+      <LaserScanMode>0</LaserScanMode>                                         <!-- Enum: (eLaserRasterMode = 0, eLaserCyclonicMode = 1) -->
+      <UPC_A_Enabled>true</UPC_A_Enabled>                                      <!-- Boolean -->
+      <UPC_E_Enabled>true</UPC_E_Enabled>                                      <!-- Boolean -->
+      <EAN_13_Enabled>true</EAN_13_Enabled>                                    <!-- Boolean -->
+      <EAN_8_Enabled>true</EAN_8_Enabled>                                      <!-- Boolean -->
+      <Code_39_Enabled>true</Code_39_Enabled>                                  <!-- Boolean -->
+      <Code_128_Enabled>true</Code_128_Enabled>                                <!-- Boolean -->
+      <UCC_EAN_128_Enabled>true</UCC_EAN_128_Enabled>                          <!-- Boolean -->
+      <Interleaved_2_of_5_Enabled>true</Interleaved_2_of_5_Enabled>            <!-- Boolean -->
+      <ScannerInterface>1</ScannerInterface>                                   <!-- Enum: (eSerialHardwareLON = 0, eSerialHardwareDirect = 1) -->
+   </barcode_scanner>
+
+   <network>
+      <NetworkAutoConfig>true</NetworkAutoConfig>
+      <HideNetworkSettings>false</HideNetworkSettings>
+      <IPAddressSideA>10.5.48.169</IPAddressSideA>
+      <IPAddressSideB>000.000.000.000</IPAddressSideB>
+      <NetworkMask>255.255.255.0</NetworkMask>
+      <RACIP>000.000.000.000</RACIP>
+      <MerchAutoConfig>false</MerchAutoConfig>
+      <MerchServerIP>10.5.48.66</MerchServerIP>
+      <DefaultGateway>000.000.000.000</DefaultGateway>
+      <MerchPort>80</MerchPort>
+      <MACAddress>00:00:00:00:00:00</MACAddress>
+      <NetworkHasBeenConfigured>false</NetworkHasBeenConfigured>
+      <AllowBIOSNetworkConfig>true</AllowBIOSNetworkConfig>
+   </network>
+   
+
+   <audio>
+      <AudioType>alsa</AudioType>                                              <!-- STRING ( "pcm", "alsa", "none") -->
+      <AudioTestClip>/c/dev/cow/opt/crindbios/share/audiotest.mp2</AudioTestClip>        <!-- STRING -->
+      <AudioVolumeGain>2</AudioVolumeGain>                                     <!-- UINT8 -->
+      <SideAVol>80</SideAVol>                                                  <!-- UINT8 -->
+      <SideBVol>80</SideBVol>                                                  <!-- UINT8 -->
+   </audio>
+
+   <cash>
+      <CashHardwareType>1</CashHardwareType>
+     <CashPort>/c/dev/cow/dev/gvr-cash</CashPort>
+   </cash>
+</config>
+

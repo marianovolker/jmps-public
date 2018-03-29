@@ -1,0 +1,22 @@
+#!/bin/sh
+
+DM_PATH=/opt/displaymanager/bin
+DM_RUN_PATH=/var/opt/displaymanager/run
+DM_CONFIG_PATH=/etc/opt/displaymanager
+DM_LOG_PATH=/var/opt/displaymanager/log
+ARGS="-qws"
+
+export PATH=/opt/gstreamer/bin:$PATH
+export LD_LIBRARY_PATH=/opt/gstreamer/lib:/opt/gstreamer/lib/gstreamer-0.10:/usr/lib/gstreamer-0.10
+export GST_PLUGIN_PATH=/opt/gstreamer/lib
+export GST_REGISTRY=/tmp/gst_registry.bin
+
+export DM_CONFIG_PATH=${DM_CONFIG_PATH}
+export QWS_DISPLAY="LinuxFb:/dev/fb1"
+export GST_DEBUG_NO_COLOR=1
+
+cd ${DM_PATH}
+echo "`date` - DM Start (${0})" >>${DM_LOG_PATH}/dm_stdout.log
+exec ./dispmgrd ${ARGS} 1>>${DM_LOG_PATH}/dm_stdout.log 2>&1
+
+exit 0

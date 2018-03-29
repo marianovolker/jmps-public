@@ -1,0 +1,5 @@
+subdirs(
+	Common
+	SPOT	
+	platform
+)

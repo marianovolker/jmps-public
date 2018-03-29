@@ -1,0 +1,123 @@
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.jmps.android.pos.AbDiariosTarifasAgregarActivity$PlaceholderFragment" >
+
+        <TextView
+            android:id="@+id/txtAbDiariosTarifasAgregarInfoNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/nombre"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtAbDiariosTarifasAgregarNombre"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarInfoNombre" />
+
+        <TextView
+            android:id="@+id/txtAbDiariosTarifasAgregarInfoCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarNombre"
+            android:text="@string/categoria"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/spiAbDiariosTarifasAgregarCategoria"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarInfoCategoria" />
+
+        <TextView
+            android:id="@+id/txtAbDiariosTarifasAgregarInfoDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spiAbDiariosTarifasAgregarCategoria"
+            android:text="@string/descripcion"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtAbDiariosTarifasAgregarDescripcion"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarInfoDescripcion" />
+
+        <TextView
+            android:id="@+id/txtAbDiariosTarifasAgregarInfoTiempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarDescripcion"
+            android:text="@string/tiempo"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtAbDiariosTarifasAgregarTiempo"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarInfoTiempo"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/txtAbDiariosTarifasAgregarInfoTolerancia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarTiempo"
+            android:text="@string/tolerancia"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtAbDiariosTarifasAgregarTolerancia"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarInfoTolerancia"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/txtAbDiariosTarifasAgregarInfoPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarTolerancia"
+            android:text="@string/precio"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtAbDiariosTarifasAgregarPrecio"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarInfoPrecio"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btnAbDiariosTarifasAgregarCancelar"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarPrecio"
+            android:layout_marginTop="30dp"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/btnAbDiariosTarifasAgregarAceptar"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/txtAbDiariosTarifasAgregarPrecio"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@id/btnAbDiariosTarifasAgregarCancelar"
+            android:text="@string/save" />
+    </RelativeLayout>
+
+</ScrollView>

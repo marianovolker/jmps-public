@@ -1,0 +1,386 @@
+##-#######################################################################-##
+# Copyright © 2015 Gilbarco Inc.
+# Confidential and Proprietary.
+##
+## @file CMakeLists.txt
+## @author pcantarini
+## @date Friday, February 27, 2015
+## @copyright Copyright © 2015 Gilbarco Inc. Confidential and Proprietary.
+##-#######################################################################-##
+
+cmake_minimum_required(VERSION 2.8.1 FATAL_ERROR)
+
+if (NOT DEFINED GVR_MODULE_PATH)
+  message(FATAL_ERROR "GVR_MODULE_PATH not defined.")
+endif (NOT DEFINED GVR_MODULE_PATH)
+
+############### Project Definition ###############
+project(libgvrucc)
+
+if (GVR_MODULE_PATH)
+  include("${GVR_MODULE_PATH}/gvr/GvrFoundation.cmake")
+endif (GVR_MODULE_PATH)
+if (NOT DEFINED GVR_FOUNDATION_INCLUDED)
+  message(FATAL_ERROR "GvrFoundation not found.")
+endif (NOT DEFINED GVR_FOUNDATION_INCLUDED)
+
+include(GvrExport)
+if (NOT DEFINED GVR_EXPORT_INCLUDED)
+  message(FATAL_ERROR "GvrExport not found.")
+endif (NOT DEFINED GVR_EXPORT_INCLUDED)
+
+include(GvrDoxygen)
+if (NOT DEFINED GVR_DOXYGEN_INCLUDED)
+  message(FATAL_ERROR "GvrDoxygen not found.")
+endif (NOT DEFINED GVR_DOXYGEN_INCLUDED)
+
+include(GvrCheckVersion)
+if (NOT DEFINED GVR_CHECK_VERSION_INCLUDED)
+  message(FATAL_ERROR "GvrCheckVersion not found.")
+endif (NOT DEFINED GVR_CHECK_VERSION_INCLUDED)
+
+include(GvrExportBuild)
+if (NOT DEFINED GVR_EXPORT_BUILD_INCLUDED)
+  message(FATAL_ERROR "GvrExportBuild not found.")
+endif (NOT DEFINED GVR_EXPORT_BUILD_INCLUDED)
+
+if (NOT GVR_DISABLE_IMPORT)
+  gvr_import_check(libgvrucc PATHS ${GVR_REMOTE_IMPORT_LOCATIONS} PATH_SUFFIXES ${GVR_IMPORT_PATH_SUFFIXES})
+endif (NOT GVR_DISABLE_IMPORT)
+if (libgvrucc_IMPORTABLE)
+  return()
+endif (libgvrucc_IMPORTABLE)
+
+if (GVR_RUN_TEST)
+  enable_testing()
+endif (GVR_RUN_TEST)
+
+############### Project General Information ###############
+set(${PROJECT_NAME}_BUNDLE_NAME "gvrucc")
+
+set(${PROJECT_NAME}_MAJOR_VERSION 0)
+set(${PROJECT_NAME}_MINOR_VERSION 7)
+set(${PROJECT_NAME}_PATCH_VERSION 0)
+# set(${PROJECT_NAME}_TWEAK_VERSION 0) ##TODO: Modify as needed.
+set(${PROJECT_NAME}_VERSION_COUNT 3) ## 1 Means "Major" - 2 Means "Major.Minor" - 3 Means "Major.Minor.Patch" - 4 Means "Major.Minor.Patch.Tweak"
+
+set(${PROJECT_NAME}_VERSION "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}.${${PROJECT_NAME}_PATCH_VERSION}")
+if (GVR_REVISION)
+  set(${PROJECT_NAME}_VERSION "${${PROJECT_NAME}_VERSION}-r${GVR_REVISION}")
+endif (GVR_REVISION)
+
+############### Project Temporary Information ###############
+set(${PROJECT_NAME}_TEMPORARY_LOCATION "${PROJECT_BINARY_DIR}/temporary")
+set(${PROJECT_NAME}_TEMPORARY_DOCUMENTATION_LOCATION "${${PROJECT_NAME}_TEMPORARY_LOCATION}/documentation")
+
+############### Project Export Information ###############
+set(${PROJECT_NAME}_EXPORTABLE_TARGETS)
+
+############### Project Install Information ###############
+set(${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION "${GVR_INSTALL_PROVIDER_RELATIVE_LOCATION}")
+
+set(${PROJECT_NAME}_INSTALLABLE_TARGETS)
+
+############### Project API (Internal) Documentation Information ###############
+set(${PROJECT_NAME}_DOCUMENTATION_API_FILE "${PROJECT_SOURCE_DIR}/Doxyfile.in")
+set(${PROJECT_NAME}_DOCUMENTATION_API_SOURCE "${PROJECT_SOURCE_DIR}")
+set(${PROJECT_NAME}_DOCUMENTATION_API_DESTINATION "${GVR_DOCUMENTATION_LOCATION}/${${PROJECT_NAME}_BUNDLE_NAME}-${${PROJECT_NAME}_VERSION}")
+set(${PROJECT_NAME}_DOCUMENTATION_API_TEMPORARY "${${PROJECT_NAME}_TEMPORARY_DOCUMENTATION_LOCATION}/api")
+
+############### Project API (Internal) Documentation Process ###############
+gvr_document_with_doxygen(DOXYFILE "${${PROJECT_NAME}_DOCUMENTATION_API_FILE}" DESTINATION_LOCATION "${${PROJECT_NAME}_DOCUMENTATION_API_DESTINATION}"
+                                   TEMPORARY_LOCATION "${${PROJECT_NAME}_DOCUMENTATION_API_TEMPORARY}"
+                                   PROPERTIES
+                                              DOCUMENTATION_PROJECT ${PROJECT_NAME}
+                                              DOCUMENTATION_VERSION ${${PROJECT_NAME}_VERSION}
+                                              DOCUMENTATION_SOURCE  ${${PROJECT_NAME}_DOCUMENTATION_API_SOURCE}
+                                              DOCUMENTATION_EXCLUDE_PATTERNS "*/.svn/* */.build/*"
+                                              DOCUMENTATION_DESTINATION "."
+                                   CUSTOM_TARGET ${PROJECT_NAME}-documentation
+                                   DEPENDS "${${PROJECT_NAME}_DOCUMENTATION_API_FILE}"
+                                   SKIP_DOT
+                                   VERSION 1.6.3)
+
+############### Project Build Requirements ###############
+####################################################
+## Prioritized import locations for a new package ##
+#if (NOT GVR_DISABLE_IMPORT)
+#  find_package({...} 0.0.0 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_REMOTE_IMPORT_LOCATIONS} PATH_SUFFIXES import)
+#endif (NOT GVR_DISABLE_IMPORT)
+#find_package({...} 0.0.0 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_LOCAL_IMPORT_LOCATIONS})
+#find_package({...} 0.0.0 NO_MODULE REQUIRED)
+####################################################
+#SET(CMAKE_THREAD_PREFER_PTHREAD ON)
+find_package(Threads REQUIRED)
+
+if (NOT GVR_DISABLE_IMPORT)
+  find_package(libopenssl_3rdparty 1.0.1 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_REMOTE_IMPORT_LOCATIONS} PATH_SUFFIXES ${GVR_IMPORT_PATH_SUFFIXES})
+endif (NOT GVR_DISABLE_IMPORT)
+find_package(libopenssl_3rdparty 1.0.1 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_LOCAL_IMPORT_LOCATIONS})
+find_package(libopenssl_3rdparty 1.0.1 NO_MODULE REQUIRED)
+
+if (NOT libopenssl_3rdparty_IMPORTED_EXTERNAL)
+  message(FATAL_ERROR "Package libopenssl_3rdparty should be imported as an external library.")
+endif (NOT libopenssl_3rdparty_IMPORTED_EXTERNAL)
+
+if (NOT GVR_DISABLE_IMPORT)
+  find_package(libpoco_3rdparty 1.4.7 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_REMOTE_IMPORT_LOCATIONS} PATH_SUFFIXES ${GVR_IMPORT_PATH_SUFFIXES})
+endif (NOT GVR_DISABLE_IMPORT)
+find_package(libpoco_3rdparty 1.4.7 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_LOCAL_IMPORT_LOCATIONS})
+find_package(libpoco_3rdparty 1.4.7 NO_MODULE REQUIRED)
+
+if (NOT libpoco_3rdparty_IMPORTED_EXTERNAL)
+  message(FATAL_ERROR "Package libpoco_3rdparty should be imported as an external library.")
+endif (NOT libpoco_3rdparty_IMPORTED_EXTERNAL)
+
+if (NOT GVR_DISABLE_IMPORT)
+  find_package(libcjson_3rdparty 0.0.1 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_REMOTE_IMPORT_LOCATIONS} PATH_SUFFIXES ${GVR_IMPORT_PATH_SUFFIXES})
+endif (NOT GVR_DISABLE_IMPORT)
+find_package(libcjson_3rdparty 0.0.1 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_LOCAL_IMPORT_LOCATIONS})
+find_package(libcjson_3rdparty 0.0.1 NO_MODULE REQUIRED)
+
+if (NOT libcjson_3rdparty_IMPORTED_EXTERNAL)
+  message(FATAL_ERROR "Package libcjson_3rdparty should be imported as an external library.")
+endif (NOT libcjson_3rdparty_IMPORTED_EXTERNAL)
+
+if (NOT GVR_DISABLE_IMPORT)
+  find_package(libgvrcommunication 0.0.0 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_REMOTE_IMPORT_LOCATIONS} PATH_SUFFIXES ${GVR_IMPORT_PATH_SUFFIXES})
+endif (NOT GVR_DISABLE_IMPORT)
+find_package(libgvrcommunication 0.0.0 NO_MODULE QUIET NO_DEFAULT_PATH PATHS ${GVR_LOCAL_IMPORT_LOCATIONS})
+find_package(libgvrcommunication 0.0.0 NO_MODULE REQUIRED)
+
+if (NOT libgvrcommunication_IMPORTED)
+  message(FATAL_ERROR "Package libgvrcommunication should be imported as an external library.")
+endif (NOT libgvrcommunication_IMPORTED)
+
+############### Project Check Version ###############
+gvr_check_version(PACKAGE ${PROJECT_NAME} VERSION ${${PROJECT_NAME}_VERSION} CHANGELOG "${PROJECT_SOURCE_DIR}/ChangeLog")
+
+############### Project Build Process ###############
+add_definitions(${GVR_BUILD_FLAGS})
+
+include_directories("${PROJECT_SOURCE_DIR}/include"
+                    "${libopenssl_3rdparty_IMPORTED_INCLUDES}"
+                    "${libpoco_3rdparty_IMPORTED_INCLUDES}"
+                    "${libcjson_3rdparty_IMPORTED_INCLUDES}"
+                    "${libgvrcommunication_IMPORTED_INCLUDES}")
+
+link_directories("${libopenssl_3rdparty_IMPORTED_LINK_LOCATIONS}"
+                 "${libpoco_3rdparty_IMPORTED_LINK_LOCATIONS}"
+                 "${libcjson_3rdparty_IMPORTED_LINK_LOCATIONS}"
+                 "${libgvrcommunication_IMPORTED_LINK_LOCATIONS}")
+
+if (NOT TARGET gvrucc)
+  set(${PROJECT_NAME}_TARGET gvrucc)
+
+  add_library(${${PROJECT_NAME}_TARGET}
+                                        ${GVR_BUILD_LIBRARY_TYPE}
+                                        "${PROJECT_SOURCE_DIR}/src/crl/classifier/base/ICrlClassifyMessage.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/classifier/CrlClassifyMessageClient.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/classifier/CrlClassifyMessageServer.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/base/AbsCrlMessage.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/base/AbsCrlMessageInternal.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/base/ICrlMessage.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageAny.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageCloudStatus.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageCloudStatusResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageRegistration.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageRegistrationResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageGetDnsConfiguration.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageGetDnsConfigurationResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageSetDnsConfiguration.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageSetDnsConfigurationResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageTestDns.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/message/CrlMessageTestDnsResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/session/CrlSession.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/session/CrlSessionClient.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/session/CrlSessionServer.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/CrlChannel.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/CrlMessageSpec.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/crl/ICrlSessionListener.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/base/IUccClassifyMessage.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/UccClassifyMessageCloudClient.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/UccClassifyMessageCloudServer.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/UccClassifyMessageInternalClient.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/UccClassifyMessageInternalServer.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/UccClassifyMessageInternalClientForLoginResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/UccClassifyMessageInternalServerForLogin.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/classifier/UccClassifyMessageRegister.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessage.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessageCloud.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessageCloudCommandRequest.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessageCloudCommandResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessageCloudEventRequest.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessageCloudEventResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessageInternal.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/AbsUccMessageRegister.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/base/IUccMessage.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageAny.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudDeviceConfigChange.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudDeviceConfigChangeResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileDownload.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileDownloadResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageConnect.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageConnectResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageTestDns.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageTestDnsResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudReset.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudResetResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudInstall.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudInstallResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudInstallStatus.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageLogin.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageLoginResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageRegisterRequest.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageRegisterResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageFileDownload.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageFileDownloadResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageFileDownloadStatusEvent.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileDownloadStatusEvent.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileDownloadStatusEventResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageServerUpdate.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageServerUpdateResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageStatus.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileUploadResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileUpload.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileUploadStatusEventResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudFileUploadStatusEvent.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudSecurityChangeResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudSecurityChange.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/session/UccSession.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/session/UccSessionClient.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/session/UccSessionServer.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/IUccSessionListener.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/UccChannel.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/UccMessageSpec.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/utils/AbsJson.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/utils/Json.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageSendToCloudStatusEvent.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageSendToCloud.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageSendToCloudResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudReconnect.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudReconnectResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudDeviceComponentStatusEvent.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudDeviceComponentStatusEventResponse.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudDeviceStatusEvent.cpp"
+                                        "${PROJECT_SOURCE_DIR}/src/ucc/message/UccMessageCloudDeviceStatusEventResponse.cpp"
+                                        )
+
+  set_target_properties(${${PROJECT_NAME}_TARGET}
+                                                  PROPERTIES
+                                                             VERSION ${${PROJECT_NAME}_VERSION}
+                                                             SOVERSION 0)
+
+  # Need to add 'd' at the end of the library name if build for debug.
+  set(${PROJECT_NAME}_POCO_LIBS PocoNet PocoFoundation)
+  if (GVR_DEBUG)
+    set(${PROJECT_NAME}_POCO_LIBS_AUX ${${PROJECT_NAME}_POCO_LIBS})
+    set(${PROJECT_NAME}_POCO_LIBS "")
+    foreach (${PROJECT_NAME}_POCO_LIB ${${PROJECT_NAME}_POCO_LIBS_AUX})
+      set(${PROJECT_NAME}_POCO_LIBS ${${PROJECT_NAME}_POCO_LIBS} "${${PROJECT_NAME}_POCO_LIB}d")
+    endforeach (${PROJECT_NAME}_POCO_LIB)
+    set(${PROJECT_NAME}_POCO_LIBS_AUX "")
+  endif (GVR_DEBUG)
+
+  target_link_libraries(${${PROJECT_NAME}_TARGET}
+                                                  gvrcommunication
+                                                  ${${PROJECT_NAME}_POCO_LIBS}
+                                                  cjson
+                                                  ssl crypto
+                                                  ${libpoco_3rdparty_OPTIONAL_DYNAMIC_LINK_FLAGS}
+                                                  ${CMAKE_THREAD_LIBS_INIT})
+
+  if (GVR_CHECK_REVISION)
+    add_dependencies(${${PROJECT_NAME}_TARGET}
+                                               ${GVR_CHECK_REVISION}
+                                               gvrcommunication
+                                               ${${PROJECT_NAME}_POCO_LIBS}
+                                               cjson
+                                               ssl crypto
+                                               ${libpoco_3rdparty_OPTIONAL_DYNAMIC_LINK_FLAGS}
+                                               ${CMAKE_THREAD_LIBS_INIT})
+  endif (GVR_CHECK_REVISION)
+
+  set(${PROJECT_NAME}_EXPORTABLE_TARGETS ${${PROJECT_NAME}_EXPORTABLE_TARGETS} ${${PROJECT_NAME}_TARGET})
+
+  set(${PROJECT_NAME}_INSTALLABLE_TARGETS ${${PROJECT_NAME}_INSTALLABLE_TARGETS} ${${PROJECT_NAME}_TARGET})
+endif (NOT TARGET gvrucc)
+
+############### Project Export Process ###############
+if (${PROJECT_NAME}_EXPORTABLE_TARGETS)
+  gvr_export( NAME "${PROJECT_NAME}"
+              DESTINATION_LOCATION "${GVR_LOCAL_EXPORT_LOCATION}"
+              COPYRIGHT "Copyright © 2014 Gilbarco Inc. Confidential and Proprietary."
+              VERSION "${${PROJECT_NAME}_VERSION}"
+              COMPATIBILITY AnyNewerVersion
+              INCLUDES "${PROJECT_SOURCE_DIR}/include"
+              TARGETS ${${PROJECT_NAME}_EXPORTABLE_TARGETS})
+endif (${PROJECT_NAME}_EXPORTABLE_TARGETS)
+
+############### Project Install Process ###############
+if (${PROJECT_NAME}_INSTALLABLE_TARGETS)
+  install(TARGETS ${${PROJECT_NAME}_INSTALLABLE_TARGETS}
+                  RUNTIME DESTINATION "${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/bin"                                            COMPONENT Runtime
+                  LIBRARY DESTINATION "${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/lib"                                            COMPONENT Runtime
+                  ARCHIVE DESTINATION "${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/lib/${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}" COMPONENT Development)
+endif (${PROJECT_NAME}_INSTALLABLE_TARGETS)
+
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/include/" DESTINATION "${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/include"
+                  USE_SOURCE_PERMISSIONS
+                  DIRECTORY_PERMISSIONS
+                    OWNER_READ OWNER_EXECUTE OWNER_WRITE
+                    GROUP_READ GROUP_EXECUTE
+                    WORLD_READ WORLD_EXECUTE
+                  COMPONENT Development
+                  REGEX "share/info/dir|share/info/dir\\.gz$" EXCLUDE
+                  REGEX "/\\.svn$" EXCLUDE)
+
+############### Project Export Build Process ###############
+set(EXPORT_BUILD_STRIP)
+set(EXPORT_BUILD_OPTIONS)
+if (CMAKE_BUILD_TYPE STREQUAL RELEASE)
+  set(EXPORT_BUILD_STRIP STRIP)
+endif (CMAKE_BUILD_TYPE STREQUAL RELEASE)
+
+gvr_export_build_install(PROJECT ${PROJECT_NAME}
+                         DESTINATION "${GVR_REMOTE_EXPORT_LOCATION}/${PROJECT_NAME}/${CMAKE_BUILD_TYPE}"
+                         ${EXPORT_BUILD_OPTIONS}
+                         REMOVE_FIRST
+                         ${EXPORT_BUILD_STRIP})
+
+if (CMAKE_BUILD_TYPE STREQUAL RELEASE)
+  gvr_export_build_extra(PROJECT ${PROJECT_NAME}
+                         DESTINATION "${GVR_REMOTE_EXPORT_LOCATION}/${PROJECT_NAME}"
+                         RESOURCES "misc/export/Makefile"
+                         DIRECTORY_PERMISSIONS
+                           OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                           GROUP_READ GROUP_WRITE
+                           WORLD_READ
+                         FILE_PERMISSIONS 
+                           OWNER_READ OWNER_WRITE
+                           GROUP_READ GROUP_WRITE
+                           WORLD_READ
+                         NO_SOURCE_PERMISSIONS
+                         PATTERNS
+                          PATTERN "*.readonly" PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+                          REGEX "/\\.svn$" EXCLUDE
+                         REMOVE_FIRST_RESOURCES_ONLY)
+endif (CMAKE_BUILD_TYPE STREQUAL RELEASE)
+
+gvr_export_build_information(PROJECT ${PROJECT_NAME}
+                             NAME "${PROJECT_NAME}"
+                             DESTINATION "${GVR_REMOTE_EXPORT_LOCATION}/${PROJECT_NAME}/${GVR_EXPORT_BUILD_IMPORT_PATH_SUFFIX}"
+                             COPYRIGHT "Copyright © 2014 Gilbarco Inc. Confidential and Proprietary."
+                             VERSION "${${PROJECT_NAME}_VERSION}"
+                             COMPATIBILITY AnyNewerVersion
+                             INCLUDES "<PROJECT_IMPORTED_EXTERNAL_PREFIX_LOCATION>/${CMAKE_BUILD_TYPE}/${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/include"
+                             LINK_LOCATIONS "<PROJECT_IMPORTED_EXTERNAL_PREFIX_LOCATION>/${CMAKE_BUILD_TYPE}/${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/lib"
+                                            "<PROJECT_IMPORTED_EXTERNAL_PREFIX_LOCATION>/${CMAKE_BUILD_TYPE}/${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/lib/${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}"
+                             COMMAND_LOCATIONS "<PROJECT_IMPORTED_EXTERNAL_PREFIX_LOCATION>/${CMAKE_BUILD_TYPE}/${${PROJECT_NAME}_INSTALL_RELATIVE_LOCATION}/bin"
+                             TARGETS ${${PROJECT_NAME}_INSTALLABLE_TARGETS}
+                             REMOVE_FIRST)
+
+gvr_export_build_bundle(PROJECT ${PROJECT_NAME} BUNDLES gvr ucc)
+
+############### Project Test Process ###############
+add_subdirectory(test)

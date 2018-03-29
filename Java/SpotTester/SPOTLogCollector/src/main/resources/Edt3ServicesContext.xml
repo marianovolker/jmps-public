@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ <description> Services to be registered </description>
+	
+	<!-- Edt3 ClientSocketService -->
+	<bean id="ClientSocketDefinition"
+		class="com.gilbarco.globaltools.edt.services.io.socket.EdtSocketDefinition">
+		<constructor-arg name="name" index="0"
+			value="ClientSocketDefinition"></constructor-arg>
+		<constructor-arg name="serviceClass" index="1"
+			value="com.gilbarco.globaltools.edt.services.io.socket.EdtClientSocketAdapter"></constructor-arg>
+		<constructor-arg name="uri" index="2" value="10.28.120.11"></constructor-arg>
+		<constructor-arg name="port" type="int" value="5200"></constructor-arg>
+		<constructor-arg name="autoConnect" type="boolean" value="false"></constructor-arg>		
+	</bean>
+	<bean id="ClientSocketService"
+		class="com.gilbarco.globaltools.edt.services.io.socket.EdtClientSocketService">
+		<constructor-arg>
+			<ref bean="ClientSocketDefinition" />
+		</constructor-arg>
+	</bean>
+
+	<!-- Edt3 ProcessService -->
+	<bean id="ProcessDefinition"
+		class="com.gilbarco.globaltools.edt.services.EdtServiceDefinition">
+		<constructor-arg name="name" index="0" value="ProcessDefinition"></constructor-arg>
+		<constructor-arg name="adapterClass" index="1"
+			value="com.gilbarco.globaltools.edt.services.process.EdtProcessAdapter"></constructor-arg>
+	</bean>
+	<bean id="ProcessService"
+		class="com.gilbarco.globaltools.edt.services.process.EdtProcessService">
+		<constructor-arg>
+			<ref bean="ProcessDefinition" />
+		</constructor-arg>
+	</bean>
+
+	<!-- Edt3 TimerService -->
+	<bean id="TimerDefinition"
+		class="com.gilbarco.globaltools.edt.services.EdtServiceDefinition">
+		<constructor-arg name="name" index="0" value="TimerDefinition"></constructor-arg>
+		<constructor-arg name="adapterClass" index="1"
+			value="com.gilbarco.globaltools.edt.services.timer.EdtTimerAdapter"></constructor-arg>
+	</bean>
+	<bean id="TimerService"
+		class="com.gilbarco.globaltools.edt.services.timer.EdtTimerService">
+		<constructor-arg>
+			<ref bean="TimerDefinition" />
+		</constructor-arg>
+	</bean>
+	
+	<import resource="SpotProtocolService.xml"/>  
+	
+	<!-- Edt3 Services definition -->
+	<bean id="ServicesDefinitionFactory"
+		class="com.gilbarco.globaltools.spottester.model.SpotServiceDefinitionsFactory"
+		scope="singleton">
+		<property name="timerDefinition">
+			<ref bean="TimerDefinition" />
+		</property>
+		<property name="mgpDefinition">
+			<ref bean="SpotServiceDefinition" />
+		</property>
+		<property name="processDefinition">
+			<ref bean="ProcessDefinition" />
+		</property>
+		<property name="socketDefinition">
+			<ref bean="ClientSocketDefinition" />
+		</property>
+	</bean>
+	
+	<bean id="EdtServiceBus" class="com.gilbarco.globaltools.edt.services.DefaultEventBus"></bean>
+				
+				
+	<!-- SPOTLogCollector ProcessService -->
+	<bean id="SPOTLogCollectorProcessDefinition"
+	  class="com.gilbarco.globaltools.edt.services.EdtServiceDefinition">
+	  <constructor-arg name="name" index="0" value="SPOTLogCollectorProcessDefinition"></constructor-arg>
+	  <constructor-arg name="adapterClass" index="1"
+	    value="com.gilbarco.globaltools.edt.services.process.EdtProcessAdapter"></constructor-arg>
+	</bean>
+	<bean id="SPOTLogCollectorProcessService"
+	  class="com.gilbarco.globaltools.edt.services.process.EdtProcessService">
+	  <constructor-arg> <ref bean="SPOTLogCollectorProcessDefinition" /> </constructor-arg>
+	</bean>
+	
+	<!-- SPOTLogCollector Services definition -->
+	<bean id="SPOTLogCollectorServicesDefinitionFactory"
+	  class="com.gilbarco.globaltools.spotlogcollector.model.SPOTLogCollectorServiceDefinitionsFactory">
+	    <property name="spotLogCollectorProcessDefinition">
+	    <ref bean="SPOTLogCollectorProcessDefinition" />
+	  </property>
+	</bean>	
+	  
+	  
+	<!-- ServiceManager -->
+	<bean id="ServiceManager" class="com.gilbarco.globaltools.edt.services.EdtServiceManager">
+		<constructor-arg>
+			<ref bean="EdtServiceBus"/>
+		</constructor-arg>
+		<property name="services">
+			<set>
+				<ref bean="ClientSocketService" />
+				<ref bean="TimerService" />
+				<ref bean="ProcessService" />
+				<ref bean="SpotService" />
+				<ref bean="SPOTLogCollectorProcessService" />
+			</set>
+		</property>
+	</bean>
+</beans>

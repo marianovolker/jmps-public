@@ -1,0 +1,109 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# These are used for cross-compiling and for saving the configure script
+# # from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_HOST_ARCH       ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+
+DM_DIR_PKG = debian/displaymanager
+DM_DIR 	   = /opt/displaymanager
+DM_DIR_BIN = /opt/displaymanager/bin
+DM_DIR_CFG = /etc/opt/displaymanager
+DM_DIR_PER = /opt/displaymanager/personality
+DM_DIR_VID = /opt/displaymanager/video
+DM_DIR_VAR = /var/opt/displaymanager
+DM_DIR_LOG = /var/opt/displaymanager/log
+DM_DIR_XML = /var/opt/displaymanager/xml
+DM_DIR_IMG = /var/opt/displaymanager/images
+DM_DIR_RUN = /var/opt/displaymanager/run
+DM_DIR_IND = /etc/init.d
+DM_LOG_ROT = /etc/logrotate.d
+NGP_DIR_CFG= /etc/config
+DM_DIR_SMN = /etc/config/extapps/level5
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+ifeq ($(DEB_HOST_ARCH), i386)
+	@$(MAKE) DM_BUILD_TYPE=X86 x86-makefile
+endif
+ifneq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+	@$(MAKE) DM_BUILD_TYPE=ARM arm-makefile
+endif
+
+build: build-stamp
+build-stamp: configure-stamp
+	dh_testdir
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+ifeq ($(DEB_HOST_ARCH), i386)
+	@$(MAKE) DM_BUILD_TYPE=X86 clean
+	@$(MAKE) DM_BUILD_TYPE=X86 distclean
+endif
+ifneq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+	@$(MAKE) DM_BUILD_TYPE=ARM clean
+	@$(MAKE) DM_BUILD_TYPE=ARM distclean
+endif
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs ${DM_DIR_BIN} ${DM_DIR_CFG} ${DM_DIR_PER} ${DM_DIR_VID} ${DM_DIR_VAR} ${DM_DIR_LOG} ${DM_DIR_XML} ${DM_DIR_IMG} ${DM_DIR_RUN} ${NGP_DIR_CFG}
+ifeq ($(DEB_HOST_ARCH), i386)
+	dh_installinit --no-start -- start 80 2 3 4 5 . stop 80 0 1 6 .
+else
+	dh_install debian/displaymanager.sysman ${DM_DIR_SMN}
+	mv ${DM_DIR_PKG}${DM_DIR_SMN}/displaymanager.sysman ${DM_DIR_PKG}${DM_DIR_SMN}/displaymanager
+endif
+	dh_installlogrotate
+ifeq ($(DEB_HOST_ARCH), i386)
+	@$(MAKE) DM_BUILD_TYPE=X86 DM_DIR_VAR=${DM_DIR_VAR} DM_DIR=${DM_DIR} DM_DIR_BIN=${DM_DIR_BIN} DM_DIR_CFG=${DM_DIR_CFG} DM_DIR_PER=${DM_DIR_PER} DM_DIR_VID=${DM_DIR_VID} DM_DIR_LOG=${DM_DIR_LOG} DM_DIR_XML=${DM_DIR_XML} DM_DIR_IMG=${DM_DIR_IMG} DM_DIR_RUN=${DM_DIR_RUN} DM_DIR_IND=${DM_DIR_IND} DM_LOG_ROT=${DM_LOG_ROT} NGP_DIR_CFG=${NGP_DIR_CFG} complete_install
+endif
+ifneq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+	@$(MAKE) DM_BUILD_TYPE=ARM DM_DIR_VAR=${DM_DIR_VAR} DM_DIR=${DM_DIR} DM_DIR_BIN=${DM_DIR_BIN} DM_DIR_CFG=${DM_DIR_CFG} DM_DIR_PER=${DM_DIR_PER} DM_DIR_VID=${DM_DIR_VID} DM_DIR_LOG=${DM_DIR_LOG} DM_DIR_XML=${DM_DIR_XML} DM_DIR_IMG=${DM_DIR_IMG} DM_DIR_RUN=${DM_DIR_RUN} DM_DIR_IND=${DM_DIR_SMN} DM_LOG_ROT=${DM_LOG_ROT} NGP_DIR_CFG=${NGP_DIR_CFG} complete_install
+endif
+
+binary-indep: build install
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installcron
+	dh_installdocs
+	dh_installexamples
+	dh_installman
+	dh_link
+	$(and ${DM_RELEASE}, dh_strip)
+	dh_compress
+	dh_fixperms
+	chown -R 200:1000 ${DM_DIR_PKG}${DM_DIR}
+	chown -R 200:1000 ${DM_DIR_PKG}${DM_DIR_VAR}
+	chown -R 200:1000 ${DM_DIR_PKG}${DM_DIR_CFG}
+	chmod 0755 ${DM_DIR_PKG}${DM_DIR_BIN}/dispmgrd
+	chmod 0755 ${DM_DIR_PKG}${DM_DIR_SMN}/displaymanager
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure
+

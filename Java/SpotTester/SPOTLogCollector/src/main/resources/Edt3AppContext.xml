@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<description>
+		Applications to be started
+	</description>
+	
+	<bean id="EdtMainView" class="com.gilbarco.globaltools.edt.gui.EdtMainView">
+		<property name="applications">
+			<set>
+        <ref bean="SpotTesterApp"/>
+				<ref bean="SPOTLogCollectorApp"/>
+			</set>
+		</property>
+		<property name="lookAndFeel" value ="swing.crossplatformlaf"></property>
+	</bean>
+	
+	<bean id="SPOTLogCollectorApp" class="com.gilbarco.globaltools.spotlogcollector.main.gui.SPOTLogCollectorView"></bean>	
+	<bean id="SpotTesterApp" class="com.gilbarco.globaltools.spottester.gui.SpotTesterView"></bean>
+</beans>

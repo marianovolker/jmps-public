@@ -1,0 +1,14 @@
+
+{
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+  "operation": "security-change-cmd",
+  "deviceId": "14",
+  "payload": {
+     "uri" : "site-gw.sandbox.aws.gilbarco.com:8443/gateway/socket/device/14",
+     "certFormat" : "P12",
+     "cert" : "qiurqu83whhf9093JANAPWE9R3J.........",
+     "pwd" : "1ED99md#31093ndJ$KD#"
+  }
+}
+
+

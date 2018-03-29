@@ -1,0 +1,32 @@
+{
+    "registerDevice": {
+        "registrationCode": "5956671900",
+        "certFormat": "JKS",
+        "dnsSupported": true
+    },
+    "deviceConfig": {
+        "deviceType": "CRIND",
+        "localId": 1,
+        "assetInfo": {
+            "manufacturer": "GilbarcoV-R",
+            "model": "B7920G",
+            "serialNbr": "PA136594",
+            "firmware": [],
+            "components": []
+        },
+        "events": [
+            {
+                "eventName": "event_name1",
+                "payload": "payload1"
+            }
+        ],
+        "cmds": [
+            {
+                "cmdName": "CMD",
+                "request": "pjr, xml",
+                "response": "pjr, xml2"
+            }
+        ],
+        "associated": []
+    }
+}

@@ -1,0 +1,170 @@
+==================
+Building SPOTCheck
+==================
+
+The SPOTCheck build system uses CMake to generate makefiles/projects for
+specific platforms.  You can use use CMake directly, but there is also a
+simple front-end that makes common build tasks easier.
+
+CMake builds *out-of-source*, so all build artifacts including executables and
+libraries will be in a directory ``.build_<platform>`` when building is
+complete.  Depending on your environment and options passed, ``<platform>``
+will be ``linux``, ``M5``, ``M3``, or ``windows``.
+
+.. contents::
+
+
+Using the Front-End
+===================
+
+The front-end builder lives in the ``spotcheck`` directory.  By default,
+the builder builds for the platform it is being run on.  The builder has the 
+following usage::
+
+	./build [-b -c -t -p] [target]
+
+The ``target`` parameter can be any valid makefile target.  This includes the
+special ``all`` target which builds everything including extlib, and the
+unit tests.  If no``target`` is supplied, ``all`` is assumed.
+
+The options are as follows:
+
+	-b
+		Perform a build on ``target``
+
+	-c
+		Peform a clean on ``target``.  If ``target`` is ``all``, the entire
+		CMake build directories are removed.
+
+	-t
+		Run unit tests for ``target``.  A build will be peformed first.  In
+		this instance ``target`` must refer to a test executable.
+
+	-p
+		Peform the previous options for the production platform (e.g. use the
+		ARM cross-compiler).  Note that the ``-t`` option is ignored this flag
+		is supplied.
+
+	-r
+		After building, make a release package. For the Linux and M5 
+		platforms, a debian package is created (.deb).  For Windows, a ZIP file
+		is created (.zip).  Please note that the ZIP generator does not
+		preserve empty directories.  *****NOT YET IMPLEMENTED*****
+
+If no - options are given, ``-b`` is assumed.
+
+
+Common Front-end Usage Examples
+--------------------------------
+
+Peform a full clean/build/test cycle for the native platform::
+
+	./build -cbt
+
+Peform full clean/build/test cycle for the ARM production platform::
+
+	./build -cbpr
+
+Running a specific unit test::
+
+	./build -t ConfigFileUT
+
+
+
+Using CMake Directly
+====================
+
+The front-end builder provides a simplified interface for common tasks.
+However, for finer-grained control, you can use the CMake interface directly.
+Please note we've added some artifical rules to the CMake usage.  Specifically
+the CMake build directories need to follow a naming convention:
+
+* Use ``.build_windows`` when building on Windows using MinGW
+* Use ``.build_linux`` when building on Linux
+* Use ``.build_M3`` when building using the ucLinux cross-compiler on Windows
+  or Linux.
+* Use ``.build_M5`` when building using the ARM cross-compiler on Windows
+  or Linux.
+
+
+Building SPOTCheck (Linux)
+------------------------
+
+To build ``spotcheck`` change directories to your ``spotcheck`` directory and 
+invoke the following::
+
+	mkdir .build_linux
+	cd .build_linux
+	cmake ..
+	make
+
+Building SPOTCheck (Windows)
+--------------------------
+
+To build ``spotcheck``, using an MSYS shell, change directories to your 
+``spotcheck`` directory and invoke the following::
+
+	mkdir .build_windows
+	cd .build_windows
+	cmake -G"MSYS Makefiles" ..
+	make
+
+Building SPOTCheck for ARM (Windows or Linux)
+-------------------------------------------
+
+To build ``spotcheck`` change directories to your ``spotcheck`` directory and 
+invoke the following::
+
+	mkdir .build_M5
+	cd .build_M5
+	# Use the next line only for Linux
+	cmake -DCMAKE_TOOLCHAIN_FILE=../tool-codesourcery.cmake ..
+	# Use the next line only for Windows
+	cmake -DCMAKE_TOOLCHAIN_FILE=../tool-codesourcery.cmake -G"MSYS Makefiles" ..
+	make
+
+Building SPOTCheck for uCLinux (Windows or Linux)
+-------------------------------------------
+
+TBD
+
+Using CMake After The Initial Build
+-----------------------------------
+
+After you have built once using the front-end or CMake directly, you can
+perform subsequent builds by simply invoking ``make`` in the ``.build_*``
+directory.  Invoking ``make`` will re-invoke ``cmake`` if necessary.  If you
+add a new file, however, you should re-invoke ``cmake`` before invoking 
+``make``.  You can use the short form though::
+
+	cmake ..
+
+The previous options you gave to ``cmake`` are cached and re-used.
+
+Invoking ``make help`` will provide a list of targets you can pass to
+``make``.  The targets will include build and clean targets for each library
+and exectuable defined in the CMake makefiles.
+
+
+Running Unit Tests
+------------------
+
+Any of the built unit tests can be run from the ``.build_*`` directories.  To
+run all tests, simple invoke ``ctest`` with no options.  This will run the
+tests and provide you with a summary of pass/fail.  CTest only reports
+pass/fail for an entire exectuable no matter how many tests were defined in
+the exectuable.  To see the full GoogleTest output, invoke ``ctest -V``.
+
+Individual tests may be run by using the ``-R`` option and providing a
+regular expression.  Any test matching the regular expression will be run.
+For example::
+
+	ctest -V -R Service
+
+This will run any tests executables with *Service* in their name.
+
+You may also run the test exectuables directly. The ``.build_*`` directories
+mirror the source directories.  Thus, each test executable will be located in
+the same relative path as its source is in the source directory.  Running the
+executables directly will allow you to pass GoogleTest options.
+

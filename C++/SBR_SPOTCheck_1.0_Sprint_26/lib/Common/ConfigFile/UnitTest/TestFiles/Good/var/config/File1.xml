@@ -1,0 +1,15 @@
+<File1>
+   <Name>File1.xml</Name>
+   <Purpose>Unit Test</Purpose>
+   <type binary="false">XML</type>
+   <float>3.14159</float>
+   <uint>4294901760</uint>
+   <int>-1073741824</int>
+   <bool>true</bool>
+   <deeper>
+      <Level2>Yes</Level2>
+      <deeperstill>
+         <Level3>Yes</Level3>
+      </deeperstill>
+   </deeper>
+</File1>

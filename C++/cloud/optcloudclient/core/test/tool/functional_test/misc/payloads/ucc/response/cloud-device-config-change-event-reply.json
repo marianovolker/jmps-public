@@ -1,0 +1,19 @@
+{
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+  "success": true,
+  "associatedId": [
+    {
+      "deviceType": "FDT",
+      "deviceId": "32459",
+      "localId": "1",
+      "cloudState": "enabled"
+    },
+    {
+      "deviceType": "FDT",
+      "deviceId": "6776",
+      "localId": "2",
+      "cloudState": "enabled"
+    }
+  ]
+}
+

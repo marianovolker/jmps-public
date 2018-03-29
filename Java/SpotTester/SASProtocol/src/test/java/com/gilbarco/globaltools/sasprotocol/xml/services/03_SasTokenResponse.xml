@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VanguardTokenProtocolUnitTest xmlns:xsi="http://www.gilbarco.com/VanguardTokenProtocolSchema" xsi:noNamespaceSchemaLocation="VanguardTokenProtocol.xsd">
+  <Command>TokenResponse</Command>
+  <Body>
+    <Version>0001.0001.0021</Version>
+    <TokenCode>YYXU EVRL TLB3 UEMZ J22P 62AC TK6G W72Z</TokenCode>
+    <TimeWindow>
+      <StartTime>2012-11-01T10:15:30</StartTime>
+      <EndTime>2012-11-20T22:30:00</EndTime>
+    </TimeWindow>
+    <Session>
+      <Times>5</Times>
+      <MaxDuration>20</MaxDuration>
+    </Session>
+    <Terminal>
+      <TargetUnit>000000111111</TargetUnit>
+    </Terminal>
+    <RemoteMaintenance>Disabled</RemoteMaintenance>
+    <Permissions>
+		DateAndTimeSetup
+		NetworkConfiguration
+		SecureDevicesConfiguration
+		SecureDevicesActivation
+		SecureLogRetrieval
+		FirmwareUpdate
+		FirmwareInfo
+		UploadSystemKeys</Permissions>
+    <Technician-ID>123456</Technician-ID>
+    <Technician-Device>Technician-Device1</Technician-Device>
+    <Operator-ID>Operator-ID1</Operator-ID>
+  </Body>
+  <X.509-Certificate>
+    <Signature></Signature>
+  </X.509-Certificate>
+</VanguardTokenProtocolUnitTest>

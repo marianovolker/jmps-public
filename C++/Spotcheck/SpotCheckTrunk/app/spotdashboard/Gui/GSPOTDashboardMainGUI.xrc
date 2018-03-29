@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<resource xmlns="http://www.wxwindows.org/wxxrc" version="2.3.0.1">
+	<object class="wxFrame" name="GSPOTDashboardMainGUI">
+		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
+		<size>900,710</size>
+		<bg>#ffffff</bg>
+		<title>SPOTDashboard</title>
+		<centered>1</centered>
+		<object class="wxFlexGridSizer">
+			<rows>5</rows>
+			<cols>4</cols>
+			<vgap>3</vgap>
+			<hgap>5</hgap>
+			<growablecols></growablecols>
+			<growablerows></growablerows>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel132511">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel1325111">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel1325112">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticBitmap" name="m_bitmap41">
+					<bitmap>images/gilbarco_logo.jpg</bitmap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticText" name="m_staticText5">
+					<label>SPOT type:</label>
+					<wrap>-1</wrap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxTextCtrl" name="m_textCtrlSpotType">
+					<style>wxTE_READONLY</style>
+					<value>M3</value>
+					<maxlength>0</maxlength>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel13251">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel132514">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticText" name="m_staticText6">
+					<label>SPOT serial (PPN):</label>
+					<wrap>-1</wrap>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxTextCtrl" name="m_textCtrlSpotSerial">
+					<style>wxTE_READONLY</style>
+					<value>0002061115731202</value>
+					<maxlength>0</maxlength>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel132512">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel132513">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panelCategories">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+					<object class="wxFlexGridSizer">
+						<rows>1</rows>
+						<cols>2</cols>
+						<minsize>5,-1</minsize>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols></growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND</flag>
+							<border>5</border>
+							<object class="wxFlexGridSizer">
+								<rows>2</rows>
+								<cols>1</cols>
+								<vgap>0</vgap>
+								<hgap>0</hgap>
+								<growablecols></growablecols>
+								<growablerows></growablerows>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText412">
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Categories</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>1</option>
+									<flag>wxEXPAND | wxALL</flag>
+									<border>5</border>
+									<object class="wxPanel" name="m_panel1325131">
+										<style>wxTAB_TRAVERSAL</style>
+										<size>-1,185</size>
+										<bg>#ffffff</bg>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText11311">
+										<size>-1,18</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Device S/N:</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText1131">
+										<size>-1,18</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Device F/W:</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText11">
+										<size>-1,18</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Comm OK?</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText111">
+										<size>-1,18</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Dismount OK?</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText1111">
+										<size>-1,18</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Other Errors OK?</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText112">
+										<size>-1,15</size>
+										<enabled>0</enabled>
+										<hidden>1</hidden>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Tampered OK?</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText113">
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Status:</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panelDisplay">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+					<object class="wxFlexGridSizer">
+						<rows>1</rows>
+						<cols>2</cols>
+						<minsize>5,-1</minsize>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols></growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND | wxALL</flag>
+							<border>5</border>
+							<object class="wxPanel" name="m_panel171">
+								<style>wxTAB_TRAVERSAL</style>
+								<size>5,-1</size>
+								<bg>#000000</bg>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND</flag>
+							<border>5</border>
+							<object class="wxFlexGridSizer">
+								<rows>2</rows>
+								<cols>1</cols>
+								<vgap>0</vgap>
+								<hgap>0</hgap>
+								<growablecols></growablecols>
+								<growablerows></growablerows>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText41">
+										<size>200,-1</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>SPOT Display</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticBitmap" name="m_bitmap12">
+										<size>230,180</size>
+										<bitmap>images/screen.png</bitmap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlSerialDISPLAY">
+										<style>wxTE_READONLY</style>
+										<size>-1,20</size>
+										<value>263B971100000052</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlFirmwareDISPLAY">
+										<style>wxTE_READONLY</style>
+										<size>230,20</size>
+										<value>DY0178</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextCommDISPLAY">
+										<style>wxSIMPLE_BORDER</style>
+										<size>-1,20</size>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALIGN_CENTER|wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextDismountDISPLAY">
+										<style>wxSIMPLE_BORDER</style>
+										<size>230,20</size>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextOtherErrorsDISPLAY">
+										<style>wxSIMPLE_BORDER</style>
+										<size>230,20</size>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextTamperedDISPLAY">
+										<style>wxSIMPLE_BORDER</style>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<hidden>1</hidden>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlStatusDISPLAY">
+										<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP</style>
+										<size>230,70</size>
+										<value>Installation sensor not activated: cannot operate\nSoftware Master Key not loaded into the device\nError in encrypted communication: SMK not matching</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panelCR">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+					<object class="wxFlexGridSizer">
+						<rows>1</rows>
+						<cols>2</cols>
+						<minsize>5,-1</minsize>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols></growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND | wxALL</flag>
+							<border>5</border>
+							<object class="wxPanel" name="m_panel1711">
+								<style>wxTAB_TRAVERSAL</style>
+								<size>5,-1</size>
+								<bg>#000000</bg>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND</flag>
+							<border>5</border>
+							<object class="wxFlexGridSizer">
+								<rows>2</rows>
+								<cols>1</cols>
+								<vgap>0</vgap>
+								<hgap>0</hgap>
+								<growablecols></growablecols>
+								<growablerows></growablerows>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText411">
+										<size>200,-1</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Card Reader</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALIGN_BOTTOM|wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticBitmap" name="m_bitmap1">
+										<size>130,180</size>
+										<bitmap>images/hcr.png</bitmap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlSerialCR">
+										<style>wxTE_READONLY</style>
+										<size>230,20</size>
+										<value>130A502868101709</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlFirmwareCR">
+										<style>wxTE_READONLY</style>
+										<size>230,20</size>
+										<value>RD012-100204__1</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextCommCR">
+										<style>wxSIMPLE_BORDER</style>
+										<size>-1,20</size>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextDismountCR">
+										<style>wxSIMPLE_BORDER</style>
+										<size>230,20</size>
+										<bg>#ff0000</bg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>NO</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextOtherErrorsCR">
+										<style>wxSIMPLE_BORDER</style>
+										<size>230,20</size>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextTamperedCR">
+										<style>wxSIMPLE_BORDER</style>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<hidden>1</hidden>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlStatusCR">
+										<style>wxTE_MULTILINE|wxTE_READONLY</style>
+										<size>230,70</size>
+										<value>SYSTEM is in error due to errors on one or more critical subsystems 4 (M5 only)\nSecurity module command failed\nGeneric error or timely frw cryptographic-check failed (SPOT M3c-2.1)</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panelKP">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+					<object class="wxFlexGridSizer">
+						<rows>1</rows>
+						<cols>2</cols>
+						<minsize>5,-1</minsize>
+						<vgap>0</vgap>
+						<hgap>0</hgap>
+						<growablecols></growablecols>
+						<growablerows></growablerows>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND | wxALL</flag>
+							<border>5</border>
+							<object class="wxPanel" name="m_panel17111">
+								<style>wxTAB_TRAVERSAL</style>
+								<size>5,-1</size>
+								<bg>#000000</bg>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND</flag>
+							<border>5</border>
+							<object class="wxFlexGridSizer">
+								<rows>2</rows>
+								<cols>1</cols>
+								<vgap>0</vgap>
+								<hgap>0</hgap>
+								<growablecols></growablecols>
+								<growablerows></growablerows>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticText4111">
+										<size>200,-1</size>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>Keypad</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL</flag>
+									<border>5</border>
+									<object class="wxStaticBitmap" name="m_bitmap11">
+										<size>200,180</size>
+										<bitmap>images/keypad_py.png</bitmap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlSerialKP">
+										<style>wxTE_READONLY</style>
+										<size>230,20</size>
+										<value>26683971000000D4</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlFirmwareKP">
+										<style>wxTE_READONLY</style>
+										<size>230,20</size>
+										<value>KB0172</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextCommKP">
+										<style>wxSIMPLE_BORDER</style>
+										<size>230,20</size>
+										<bg>#ff0000</bg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>NO</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextDismountKP">
+										<style>wxSIMPLE_BORDER</style>
+										<size>230,20</size>
+										<bg>#ff0000</bg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>NO</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextOtherErrorsKP">
+										<style>wxSIMPLE_BORDER</style>
+										<size>230,20</size>
+										<bg>#008000</bg>
+										<fg>#ffffff</fg>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>YES</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_staticTextTamperedKP">
+										<style>wxSIMPLE_BORDER</style>
+										<bg>#ff0000</bg>
+										<hidden>1</hidden>
+										<font>
+											<family>default</family>
+											<style>normal</style>
+											<weight>bold</weight>
+											<underlined>0</underlined>
+										</font>
+										<label>NO</label>
+										<wrap>-1</wrap>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrlStatusKP">
+										<style>wxTE_MULTILINE|wxTE_READONLY</style>
+										<size>230,70</size>
+										<value>Error initializing driver\nDevice connection timeout (warning)\nDevice connection failure (fatal error) – device could be tampered</value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel13251211">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel132512111">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_panel132512112">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#ffffff</bg>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALIGN_RIGHT|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="m_buttonRefresh">
+							<font>
+								<family>default</family>
+								<style>normal</style>
+								<weight>normal</weight>
+								<underlined>0</underlined>
+							</font>
+							<label>Refresh</label>
+							<default>0</default>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>1</option>
+						<flag>wxEXPAND | wxALL</flag>
+						<border>5</border>
+						<object class="wxPanel" name="m_panel17">
+							<style>wxTAB_TRAVERSAL</style>
+							<bg>#ffffff</bg>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALIGN_RIGHT|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="m_buttonExit">
+							<font>
+								<family>default</family>
+								<style>normal</style>
+								<weight>normal</weight>
+								<underlined>0</underlined>
+							</font>
+							<label>Exit</label>
+							<default>0</default>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="m_statusBar">
+			<style>wxST_SIZEGRIP</style>
+			<font>
+				<size>12</size>
+				<family>swiss</family>
+				<style>italic</style>
+				<weight>bold</weight>
+				<underlined>0</underlined>
+				<face>Tahoma</face>
+			</font>
+			<fields>2</fields>
+		</object>
+	</object>
+</resource>

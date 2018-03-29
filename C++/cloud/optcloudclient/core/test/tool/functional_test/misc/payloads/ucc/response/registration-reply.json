@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "config": {
+    "gvrSiteId": 1234,
+    "deviceId": "32459",
+    "connect": {
+      "uri": "wss://device.gilbarco.com/socket/device/32459",
+      "certFormat": "JKS",
+      "cert": "2iorS82312mSFAFOAIW34......",
+      "userid": "devices/32459",
+      "pwd": "K45M4%5kB$KWj15P&dIt"
+      },
+      "deviceList": [
+        {
+          "deviceType": "FDT",
+          "deviceId": "32459",
+          "localId": "1",
+          "cloudState": "enabled",
+          "fileUploadURL": "https://transfer.gilbarco.com/services/upload-v1/32459"
+        },
+        {
+          "deviceType": "m5",
+          "deviceId": "38910",
+          "localId": "1",
+          "cloudState": "enabled",
+          "fileUploadURL": "https://transfer.gilbarco.com/services/upload-v1/38910"
+        },
+        {
+          "deviceType": "m5",
+          "deviceId": "31935",
+          "localId": "3",
+          "cloudState": "enabled",
+          "fileUploadURL": "https://transfer.gilbarco.com/services/upload-v1/31935"
+        },
+        {
+          "deviceType": "E7000",
+          "deviceId": "38912",
+          "localId": "1",
+          "cloudState": "enabled",
+          "fileUploadURL": "https://transfer.gilbarco.com/services/upload-v1/38912"
+        }
+      ]
+    }
+  }

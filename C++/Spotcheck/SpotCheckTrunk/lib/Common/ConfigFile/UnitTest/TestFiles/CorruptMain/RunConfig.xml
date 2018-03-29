@@ -1,0 +1,6 @@
+<RunConfig>
+   <OptDir>./TestFiles/CorruptMain/opt/</OptDir>
+   <EtcDir>./TestFiles/CorruptMain/etc/</EtcDir>
+   <VarDir>./TestFiles/CorruptMain/var/</VarDir>
+</RunConfig>
+

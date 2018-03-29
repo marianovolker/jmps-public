@@ -1,0 +1,17 @@
+#!/bin/sh
+# prerm script for displaymanager package
+#
+set -e
+[ -n "$DM_DEBUG" ] && echo "now debugging $0 $@" && set -x
+
+echo "$0 $@"
+
+if [ -x "/etc/init.d/displaymanager" ]
+then
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]
+	then
+		invoke-rc.d displaymanager stop || exit $?
+	else
+		/etc/init.d/displaymanager stop || exit $?
+	fi
+fi

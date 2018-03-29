@@ -1,0 +1,12 @@
+##-#######################################################################-##
+# Copyright © 2014 Gilbarco Inc.
+# Confidential and Proprietary.
+##
+## @file .essential
+## @author pcantarini
+## @date Wednesday, October 22, 2014
+## @copyright Copyright © 2014 Gilbarco Inc. Confidential and Proprietary.
+##-#######################################################################-##
+
+# This is just a stamp file to let the Makefile verify this directory is present.
+

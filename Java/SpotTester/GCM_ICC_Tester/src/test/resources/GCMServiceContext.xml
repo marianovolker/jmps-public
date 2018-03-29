@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<description>
+		GCM Service Configuration
+	</description>
+
+	<!-- ProcessService -->
+	<bean id="GCMProcessDefinition"
+		class="com.gilbarco.globaltools.edt.services.EdtServiceDefinition">
+		<constructor-arg name="name" index="0" value="GCMProcessDefinition"></constructor-arg>
+		<constructor-arg name="adapterClass" index="1"
+			value="com.gilbarco.globaltools.edt.services.process.EdtProcessAdapter"></constructor-arg>
+	</bean>
+	<bean id="GCMProcessService"
+		class="com.gilbarco.globaltools.edt.services.process.EdtProcessService">
+		<constructor-arg>
+			<ref bean="GCMProcessDefinition" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- Services definition -->
+	<bean id="GCMServicesDefinitionFactory"
+		class="com.gilbarco.globaltools.gcm.model.GCMServiceDefinitionsFactory">
+		<property name="gcmProcessDefinition">
+			<ref bean="GCMProcessDefinition" />
+		</property>
+	</bean>
+	
+</beans>

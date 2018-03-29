@@ -1,0 +1,74 @@
+#!/bin/sh
+# preinst script for displaymanager package
+#
+set -e
+[ -n "$DM_DEBUG" ] && echo "now debugging $0 $@" && set -x
+
+echo "$0 $@"
+
+if [ ! -d "/etc/config/extapps" ]
+then
+	echo "wrong version of spot apps, the sysman will not be able to manage external apps."
+	exit 1
+fi
+
+# As the new DisplayManager version has its deamon being managed with the sysman control process,
+# the old displaymanager init script from the /etc/init.d directory has to be removed.
+# If not removed it could lead to have more than one DisplayManager running at the same time,
+# which could lead to unexpected issues.
+if [ -x "/etc/init.d/displaymanager" ]
+then
+	rm -f /etc/init.d/displaymanager
+fi
+
+# In this function we need to check if the installed config file has been modified or not.
+# If the config file has been modified we need to do a backup and then (in postinst script)
+# merge with the new config file.
+rm_conffile()
+{
+    local PKGNAME="displaymanager"
+    local CONFFILE="/etc/opt/displaymanager/displaymanager.properties"
+    local CONFFILEBAK=$CONFFILE.dpkg-bak
+    local GLIBRARY="/etc/opt/displaymanager/glibrary.js"
+
+    [ -e "$CONFFILE" ] || return 0
+
+    local md5sum="$(md5sum $CONFFILE | sed -e 's/ .*//')"
+    local old_md5sum="$(dpkg-query -W -f='${Conffiles}' $PKGNAME | sed -n -e "\' $CONFFILE ' { s/ obsolete$//; s/.* //; p }")"
+    
+    if [ "$md5sum" != "$old_md5sum" ]
+    then
+        echo "Obsolete conffile $CONFFILE has been modified."
+        echo "Saving as $CONFFILEBAK ..."
+        mv -f "$CONFFILE" "$CONFFILEBAK"
+    else
+        echo "Removing obsolete conffile $CONFFILE ..."
+        rm -f "$CONFFILE"
+    fi
+    
+    # In newer version of this package we will not use this file anymore. 
+    # We have replaced the file with the compact version of it (glibrary.min.js).
+    if [ -f "$GLIBRARY" ]
+    then
+        rm -f "$GLIBRARY"
+    fi    
+}
+
+case "$1" in
+	install)
+	;;
+
+    upgrade)
+		rm_conffile
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+		echo "$0 called with unknown argument \`$1'" 1>&2
+		exit 1
+    ;;
+esac
+
+exit 0

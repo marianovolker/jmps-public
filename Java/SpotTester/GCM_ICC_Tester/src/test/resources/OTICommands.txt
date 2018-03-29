@@ -1,0 +1,5 @@
+command.9F1A = 03 76
+command.0000 = 1000
+command.DF3B = 07 A0 00 00 00 04 10 10 00 00 12 34 56 78 
+command.0000 = 1000
+command.5F2A = 07 A0 00 00 00 04 10 10 08 26 

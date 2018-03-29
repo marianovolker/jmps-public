@@ -1,0 +1,12 @@
+XXXREPLACE_DM_DIR_LOG/DisplayManager.log
+{
+    missingok
+    size 5M
+    rotate 8
+    postrotate
+	kill -HUP $(ps -ef | grep dispmgrd_signal_handler | grep -v grep | awk '{printf$2}')
+    endscript
+    compress
+    create 644 nsu nsfb
+    nomail
+}

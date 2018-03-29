@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- MgpService -->
+	<bean id="RKLMgpServiceDefinition"
+		class="com.gilbarco.globaltools.edt.services.EdtServiceDefinition">
+		<constructor-arg name="name" index="0"
+			value="RKLMgpServiceDefinition"></constructor-arg>
+		<constructor-arg name="adapterClass" index="1"
+			value="com.gilbarco.globaltools.mgp.edt.service.MgpServiceAdapter"></constructor-arg>
+	</bean>
+
+	<bean id="PersistenceManager" class="com.gilbarco.globaltools.mgp.persistence.XstreamPersistenceManager">
+		<property name="persistenceDirectory" value="/src/main/resources/"></property>
+	</bean>
+	
+	<bean id="ProtocolImplementation" class="com.gilbarco.globaltools.rklnativeprotocol.RklNativeProtocol"/>
+	
+	<bean id="protocolBean" factory-bean="ProtocolImplementation" factory-method="buildRklNativeProtocol" />
+	
+	<bean id="MgpProvider" class="com.gilbarco.globaltools.mgp.persistence.ProtocolProvider">
+		<constructor-arg ref="PersistenceManager"/>
+		<!--<property name="protocolDefinition" value="RKL Native Protocol_7.5.xml"></property>  -->
+		<property name="protocol" ref="protocolBean"></property>
+	</bean>
+	
+	<bean id="RKLMgpFactory" class="com.gilbarco.globaltools.flexpay.rkl.rklnativeprotocol.RKLNativeMessageFactory">
+		<constructor-arg ref="MgpProvider"/>
+	</bean>
+	
+	<bean id="RKLProtocolApi" class="com.gilbarco.globaltools.mgp.api.ProtocolApi">
+		<constructor-arg ref="RKLMgpFactory"/>
+	</bean>
+
+	<bean id="RKLProtocolValidator" class="com.gilbarco.globaltools.flexpay.rkl.rklnativeprotocol.RKLNativeValidator">
+	</bean>
+
+	<bean id="RKLMgpService" class="com.gilbarco.globaltools.mgp.edt.service.MgpService">
+		<constructor-arg ref="RKLMgpServiceDefinition"></constructor-arg>
+		<property name="protocolApi">
+			<ref bean="RKLProtocolApi" />
+		</property>
+		<property name="validator">
+			<ref bean="RKLProtocolValidator" />
+		</property>
+	</bean>
+
+</beans>

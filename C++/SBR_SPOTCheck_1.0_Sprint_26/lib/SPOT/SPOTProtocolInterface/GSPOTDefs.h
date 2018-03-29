@@ -1,0 +1,918 @@
+//========================================================================
+//
+// File:		SpotDefs.h
+//
+// Description:	Definitions of data types and structures for SPOT protocol
+//
+// Created:		16 Feb 2004
+//
+// Author:		Lorenzo Menghini
+//
+//========================================================================
+
+#ifndef GSPOTDefs_h
+#define GSPOTDefs_h
+
+#include <GTypes.h>
+
+//#########################
+//######## GENERAL ########
+//#########################
+
+namespace GSpotDefs
+{
+	enum SPOT_CATEGORY
+	{
+		eSPOT_SERVICE_CATEGORY	= 0x00,
+		eSPOT_PP_CATEGORY 		= 0x01,
+		eSPOT_EMV_CATEGORY 		= 0x02,
+		eSPOT_SETUP_CATEGORY 	= 0x03,
+		eSPOT_OPT_CATEGORY 		= 0x04,
+		eSPOT_EFT_CATEGORY 		= 0x05,
+	};
+
+	enum SPOT_ANSWER_CATEGORY
+	{
+		eSPOT_SERVICE_ANSWER	= 0x80,
+		eSPOT_PP_ANSWER 		= 0x81,
+		eSPOT_EMV_ANSWER	 	= 0x82,
+		eSPOT_SETUP_ANSWER	 	= 0x83,
+		eSPOT_OPT_ANSWER		= 0x84,
+		eSPOT_EFT_ANSWER	 	= 0x85
+	};
+
+	//#########################
+	//######## SERVICE ########
+	//#########################
+
+	enum SPOT_SERVICE_CMDS
+	{
+		eSPOT_SERVICE_LOGIN			= 0x01,
+		eSPOT_SERVICE_LOGOUT		= 0x02,
+		eSPOT_SERVICE_PING			= 0x03,
+		eSPOT_SERVICE_LOCK			= 0x04,
+		eSPOT_SERVICE_UNLOCK		= 0x05,
+		eSPOT_SERVICE_RESET			= 0x06,
+		eSPOT_SERVICE_INITLOG		= 0x08,
+		eSPOT_SERVICE_LOGLINE		= 0x09,
+		eSPOT_SERVICE_SSKEYS		= 0x11,
+		eSPOT_SERVICE_DIAGNOSTIC	= 0x0f,	// answer-only
+	};
+
+	enum SPOT_SERVICE_LOGLINE_LOGTYPE
+	{
+		eSPOT_SERVICE_LOGLINE_ERROR				= 0x00,
+		eSPOT_SERVICE_LOGLINE_WARNING			= 0x01,
+		eSPOT_SERVICE_LOGLINE_INFOCHANGESTATE	= 0x02,
+		eSPOT_SERVICE_LOGLINE_INFOCMDRECEIVED	= 0x03,
+		eSPOT_SERVICE_LOGLINE_INFOCMDREQUEST	= 0x04,
+		eSPOT_SERVICE_LOGLINE_INFODATA			= 0x05,
+		eSPOT_SERVICE_LOGLINE_INFOTRACE			= 0x06,
+		eSPOT_SERVICE_LOGLINE_DEBUG				= 0x07,
+		eSPOT_SERVICE_LOGLINE_EVENT				= 0x08,
+	};
+
+	enum SPOT_SERVICE_LOGLINE_LEVEL
+	{
+		eSPOT_SERVICE_LOGLINE_LEVEL_CRITICAL	= 0x01,
+		eSPOT_SERVICE_LOGLINE_LEVEL_SEVERE		= 0x02,
+		eSPOT_SERVICE_LOGLINE_LEVEL_TEMPORARY	= 0x03,
+	};
+	//#########################
+	//######## PINPAD #########
+	//#########################
+
+	enum SPOT_PP_CMDS
+	{
+		eSPOT_PP_RESOURCES 	= 0x00,
+		eSPOT_PP_SYSTEM 			= 0x10,
+		eSPOT_PP_CARDREADER 	= 0x20,
+		eSPOT_PP_DISPLAY 		= 0x30,
+		eSPOT_PP_KEYBOARD 		= 0x40,
+		eSPOT_PP_GENERIC 		= 0xFF,
+	};
+
+	enum SPOT_PP_RESOURCES_SUBCMDS
+	{
+		eSPOT_PP_RM_FILE_TRANSFER_REQUEST	  = 0x01,
+		eSPOT_PP_RM_FILE_TRANSFER			      = 0x02,
+		eSPOT_PP_RM_FILE_BROWSE				      = 0x03,
+		eSPOT_PP_RM_FILE_DELETE				      = 0x04,
+		eSPOT_PP_RM_UPLOAD_TRANSFER_REQUEST	= 0x05,
+		eSPOT_PP_RM_UPLOAD_TRANSFER			    = 0x06,
+	};
+
+	enum SPOT_PP_KEYBOARD_SUBCMDS
+	{
+		eSPOT_PP_KB_ENABLE					   = 0x01,
+		eSPOT_PP_KB_DISABLE					 = 0x02,
+		eSPOT_PP_KB_ABORT					   = 0x02,
+		eSPOT_PP_KB_DATAENCRYPTION	   = 0x03,
+		eSPOT_PP_KB_KEYDOWNLOAD		   = 0x04,
+		eSPOT_PP_KB_KEYDERIVATION		 = 0x05,
+		eSPOT_PP_KB_KEYSTATUS				 = 0x06,
+		eSPOT_PP_KB_MACVERIFICATION	 = 0x07,
+	};
+
+	enum SPOT_PP_CARDREADER_SUBCMDS
+	{
+		eSPOT_PP_CR_ENABLE					= 0x01,
+		eSPOT_PP_CR_DISABLE				= 0x02,
+		eSPOT_PP_CR_READ						= 0x03,
+		eSPOT_PP_CR_WRITE					= 0x04,
+		eSPOT_PP_CR_EJECT					= 0x05,
+		eSPOT_PP_CR_CAPTURE				= 0x06,
+		eSPOT_PP_ICC_RESET					= 0x07,
+	};
+
+	enum SPOT_PP_DISPLAY_SUBCMDS
+	{
+		eSPOT_PP_DY_SELECT_RESOURCE			       = 0x01,
+		eSPOT_PP_DY_DISPLAY_TEXT				         = 0x02, // for text-only display models
+		eSPOT_PP_DY_CREATE_WINDOW			         = 0x03,
+		eSPOT_PP_DY_DESTROY_WINDOW			         = 0x04,
+		eSPOT_PP_DY_SET_WINDOW_TEXT			       = 0x05,
+		eSPOT_PP_DY_SET_WINDOW_IMAGE			       = 0x06,
+		eSPOT_PP_DY_SHOW_WINDOW				         = 0x07,
+		eSPOT_PP_DY_HIDE_WINDOW				         = 0x08,
+		eSPOT_PP_DY_BEEP						             = 0x09,
+		eSPOT_PP_DY_CREATE_WINDOW_FROM_RESOURCE = 0x0A,
+		eSPOT_PP_DY_GETSCREENSTATUS			       = 0x0F,
+		eSPOT_PP_DY_SECUREMEDIACONNECTOR        	= 0x11,
+	};
+
+	enum SPOT_PP_SYSTEM_SUBCMDS
+	{
+		eSPOT_PP_SYS_STATUS_INFO			= 0x01,
+		eSPOT_PP_SYS_HWR_INFO				= 0x02,
+		eSPOT_PP_SYS_SWR_INFO				= 0x03,
+		eSPOT_PP_SYS_DIAG_INFO				= 0x04,
+		eSPOT_PP_SYS_SET_DATETIME			= 0x05,
+		eSPOT_PP_SYS_GET_DATETIME			= 0x06,
+	};
+
+	enum SPOT_PP_GENERIC_SUBCMD
+	{
+		eSPOT_PP_PROTOCOLVERSION		  = 0xFF
+	};
+
+
+	//
+	//defines for message FileTransferRequest
+	//
+	enum SPOT_RESOURCE_AUTHENTICATION {
+		eSPOT_AUTH_NONE 		= 0,
+		eSPOT_PIN_AUTH 		= 1,
+		eSPOT_NOTPIN_AUTH	= 2,
+		eSPOT_EMV_AUTH		  = 3,
+	};
+
+	enum SPOT_RESOURCE_TYPE {
+		eSPOT_MESSAGES		  = 0x10,
+		eSPOT_IMAGE			  = 0x11,
+		eSPOT_FONT			    = 0x12,
+		eSPOT_LOGS			    = 0x13,
+		eSPOT_KEYBOARD_MAP	= 0x14,
+		eSPOT_DISPLAY_SCR	= 0x15,
+		eSPOT_SYSCFG			  = 0x1A,
+		eSPOT_CRCFG			  = 0x1B,
+		eSPOT_KBCFG			  = 0x1C,
+		eSPOT_DYCFG			  = 0x1D,
+
+		eSPOT_EMVTABLES		= 0x20,
+		eSPOT_EMVMESSAGES	= 0x21,
+		eSPOT_EMVSCRIPTS		= 0x22,
+		eSPOT_EMV_LOG		  = 0x23,
+
+		eSPOT_SWUPD_LOG		= 0x30,
+		eSPOT_SWUPD_LOGCFG	= 0x31,
+
+		eSPOT_OPT_LOG		  = 0x40,
+
+		eSPOT_EFT_LOG		  = 0x50,
+
+		eSPOT_GENERIC		  = 0xff,
+	};
+
+	enum SPOT_DIAG_CODE {
+		eSPOT_ENCRYPT_ERROR	= 1,
+		eSPOT_NO_LOGIN				= 2,
+	};
+
+	enum SPOT_ERROR_CODE {
+		eSPOT_NO_ERROR								= 0x00,
+		eSPOT_DOWNLOAD_COMPLETED			= 0x02,
+
+	// resource management
+		eSPOT_ERR_NOT_ENOUGH_SPACE 		  = 0x11,
+		eSPOT_ERR_BLOCK_OUT_OF_SEQUENCE	= 0x12,
+		eSPOT_ERR_OVERRUN				        = 0x13,
+		eSPOT_ERR_BAD_SIGNATURE			    = 0x14,
+		eSPOT_ERR_BLOCK_WRITE			      = 0x15,
+		eSPOT_ERR_CANNOT_ADD_RESOURCE	  = 0x16,
+		eSPOT_ERR_CANNOT_DELETE_RESOURCE	= 0x17,
+		eSPOT_ERR_CANNOT_CREATE_TMP_FILE	= 0x18,
+		eSPOT_ERR_CANNOT_READ_RESOURCE	= 0x19,
+		eSPOT_ERR_BLOCK_READ				= 0x1A,
+	// keyboard management
+		eSPOT_ERR_USER_ABORT				= 0x20,
+		eSPOT_ERR_USER_TIMEOUT			= 0x21,
+		eSPOT_ERR_KEYBOARD_ERROR			= 0x22,
+		eSPOT_ERR_ICCCOMM_ERROR			= 0x23,
+		eSPOT_ERR_CHALLENGE_ERROR		= 0x24,
+		eSPOT_ERR_FORMATTING_ERROR		= 0x25,
+		eSPOT_ERR_ENCRYPTION_ERROR		= 0x26,
+		eSPOT_ERR_PIN_VERIFY_ERROR        = 0x27,
+		eSPOT_ERR_WRONG_PIN_ENTERED_ERROR = 0x28,
+		eSPOT_ERR_EMPTY_KEY_SLOT          = 0x29,
+	// crypto service
+		eSPOT_ERR_SECURITY_DEVICE_FAILURE = 0x30,
+		eSPOT_ERR_SECURITY_DEVICE_INTERNAL_ERROR = 0x31,
+		eSPOT_ERR_BAD_KEY_SLOT			= 0x32,
+		eSPOT_ERR_BAD_KEY_TYPE			= 0x33,
+		eSPOT_ERR_BAD_KEY_USAGE			= 0x34,
+		eSPOT_ERR_BAD_KEY_CRC			= 0x35,
+		eSPOT_ERR_DUKPT_END_COUNTER		= 0x36,
+		eSPOT_ERR_DATA_SIZE				= 0x37,
+		eSPOT_ERR_UNSUPPORTED_SERVICE	= 0x38,
+		eSPOT_ERR_VERIFY_ERROR			= 0x39, // MAC verification failed
+		eSPOT_ERR_TR31_DATA				= 0x3A, // TR31 data not corrected
+		eSPOT_ERR_TR31_MAC				= 0x3B, // TR31 MAC verification failed
+		eSPOT_ERR_TR31_UNSUPPORTED		= 0x3C, // TR31 key attributes not supported by SPOT translation.
+		eSPOT_ERR_DUKPT_DERIV_NEEDED 	= 0x3D, // DUKPT pin input failed since derivation is needed.
+		eSPOT_ERR_SECURITY_GENERIC_ERROR	= 0x3f,
+	// cardreader management
+		eSPOT_ERR_CARDREADER_SYSTEM		= 0x40,
+		eSPOT_ERR_CARDREADER_DEVICE		= 0x41,
+		eSPOT_ERR_CARDREADER_GENERIC	= 0x42,
+
+	// protocol generic
+		eSPOT_ERR_GENERIC				    = 0x80,
+		eSPOT_ERR_MESSAGE_SIZE			  = 0x81,
+		eSPOT_ERR_MESSAGE_UNKNOWN		= 0x82,
+		eSPOT_ERR_MESSAGE_FORMAT			= 0x83,
+		eSPOT_ERR_MESSAGE_OPTION			= 0x84,
+	// application generic
+		eSPOT_ERR_INTERNAL				    = 0x90,
+		eSPOT_ERR_CMDNOTEXECUTABLE		= 0x91,
+		eSPOT_ERR_LOCKED					    = 0x92,
+	// transport protocol
+		eSPOT_ERR_NO_CATEGORY			  = 0xA0,
+		eSPOT_ERR_ALREADY_LOGGED			= 0xA1,
+		eSPOT_ERR_LOGIN_FAILED			  = 0xA2,
+		eSPOT_ERR_LOGOUT_FAILED			= 0xA3,
+		eSPOT_ERR_PMK_FAILURE			  = 0xA4,
+		eSPOT_ERR_SSKEYS_FAILURE			= 0xA5,
+
+	//##
+	//##	OPT terminal
+	//##
+	// printer
+		eSPOT_OPT_ERR_JOB_PRINTER_ERROR	      = 0x10,
+		eSPOT_OPT_ERR_JOB_ALREADY_OPEN		      = 0x11,
+		eSPOT_OPT_ERR_JOB_NOT_CREATED		      = 0x12,
+		eSPOT_OPT_ERR_SPOOLER_OVERFLOW		      = 0x13,
+		eSPOT_OPT_ERR_SPOOLER_WRITE			      = 0x14,
+		eSPOT_OPT_ERR_DEVICE_ID				        = 0x15,
+		eSPOT_OPT_ERR_RESOURCE_ID			        = 0x16,
+		eSPOT_OPT_ERR_UNSUPPORTED_FUNCTION	    = 0x1f,
+	//barcode
+		eSPOT_OPT_BCR_TIMEOUT				          = 0x01,	// barcode read timeout
+	//softkeys
+		eSPOT_OPT_ERR_KEY_ENABLED_BY_OTHER_DEV = 0x20,
+		eSPOT_OPT_ERR_ALARM_STILL_ACTIVE		    = 0x21,
+
+	//##
+	//## Setup/ swUpdate
+	//##
+		eSPOT_SETUP_ERR_BAD_CERT_SIGN		  = 0x10,
+		eSPOT_SETUP_ERR_BAD_CERT_CONTENT		= 0x11,
+		eSPOT_SETUP_ERR_BAD_PKG_HASH			  = 0x12,
+		eSPOT_SETUP_ERR_BAD_PKG_FORMAT		  = 0x13,
+		eSPOT_SETUP_ERR_WRONG_PKG_SIZE		  = 0x14,
+		eSPOT_SETUP_ERR_NOT_ENOUGH_SPACE		= 0x15,
+
+		eSPOT_SETUP_ERR_WRITING_FILE			  = 0x16,
+		eSPOT_SETUP_ERR_READING_FILE			  = 0x17,
+		eSPOT_SETUP_ERR_FILE_NOT_FOUND		  = 0x18,
+
+		eSPOT_SETUP_ERR_PKG_UPDATE_FAILED	= 0x19,
+		eSPOT_SETUP_ERR_PKG_VERIFY_FAILED	= 0x1a,
+		eSPOT_SETUP_ERR_NO_PKGS_TO_UPDATE	= 0x1b,
+
+		eSPOT_SETUP_ERR_SYSTEM_BUSY			  = 0x1c,
+		eSPOT_SETUP_ERR_PINPAD_FAILURE		  = 0x1d,
+
+	//##
+	//## EftInterface
+	//##
+		eSPOT_ERR_LOAD_KMPB_ALREADY_REQUEST_WAIT_AND_RETRAY		= 0x10,
+		eSPOT_ERR_LOAD_KMPB_INTERNAL_LOGIN_ERROR								= 0x11,
+		eSPOT_ERR_LOAD_KMPB_MSG_IS_WRONG										    = 0x12,
+		eSPOT_ERR_LOAD_KMPB_KT2_ALREADY_USED									  = 0x13,
+		eSPOT_ERR_LOAD_KMPB_KLOAD_FILE_NOT_OPEN								= 0x14,
+		eSPOT_ERR_LOAD_KMPB_KLOAD_FILE_NOT_READ								= 0x15,
+		eSPOT_ERR_LOAD_KMPB_RESPONSE_AT_CRYPT_KLOAD_IS_WRONG		= 0x16,
+		eSPOT_ERR_LOAD_KMPB_RESPONSE_AT_CRYPT_KLOAD_WRONG_LEN_OF_KLOADSTRUCT	= 0x17,
+		eSPOT_ERR_LOAD_KMPB_KEY_LOAD_ANSWER_WRONG							= 0x18,
+		eSPOT_ERR_GENERATE_KEK_WRONG_MSG_LEN									  = 0x19,
+		eSPOT_ERR_GENERATE_KEK_WRONG_MODULE_LEN								= 0x1A,
+		eSPOT_ERR_GENERATE_KEK_WRONG_PASSWORD_LEN							= 0x1B,
+		eSPOT_ERR_GENERATE_KEK_PASSWFILE_NOT_EXIST							= 0x1C,
+		eSPOT_ERR_GENERATE_KEK_PASSWFILE_NOT_OPEN							= 0x1D,
+		eSPOT_ERR_GENERATE_KEK_PASSWORD_IS_DIFFERENT						= 0x1E,
+		eSPOT_ERR_GENERATE_KEK_ERROR_WRITING_PASSWFILE					= 0x1F,
+		eSPOT_ERR_GENERATE_KEK_WRONG_RSA_PUBLIC_ENCRIPT				= 0x20,
+		eSPOT_ERR_POS_EFT_SINTAX_OF_MSG_IS_WRONG								= 0x21,
+
+	//##
+	//## EMV
+	//##
+		eSPOT_EMV_ERR_COMMAND_ACKNOLEDGE					        = 0x00,
+		eSPOT_EMV_ERR_TABMAN_OK							            = 0x00,
+		eSPOT_EMV_ERR_TABMAN_NOTALLOWED					        = 0x01,
+		eSPOT_EMV_ERR_TABMAN_DBERROR						          = 0x02,
+		eSPOT_EMV_ERR_TABMAN_PARAM						            = 0x03,
+		eSPOT_EMV_ERR_TABMAN_PROTECTED					          = 0x04,
+		eSPOT_EMV_ERR_COMMAND_REJECT						          = 0x10,
+		eSPOT_EMV_ERR_COMMAND_REJECT_DB_INIT_ERROR		    = 0x11,
+		eSPOT_EMV_ERR_COMMAND_REJECT_RULES_INIT_ERROR	  = 0x12,
+		eSPOT_EMV_ERR_COMMAND_REJECT_KERNEL_LOGIN_ERROR	= 0x13,
+	 };
+
+
+
+	//
+	//defines for message InformationRequest
+	//
+
+	// Subsystem type
+	enum SPOT_SUBSYSTEM_TYPE {
+		eSPOT_SYS_MAIN			      =	0x01,
+		eSPOT_SYS_SECURITYMODULE	=	0x02,
+		eSPOT_SYS_DISPLAY		    =	0x04,
+		eSPOT_SYS_KEYBOARD		    =	0x08,
+		eSPOT_SYS_CARDREADER		  =	0x10,
+	};
+
+	// System status
+	enum SPOT_SYS_STATUS {
+		eSPOT_STARTUP_STATE		  =	0x01,
+		// SPOT_ERROR_STATE		  =	0x02,
+		eSPOT_INOPERATIVE_STATE	=	0x02,
+		eSPOT_OFFLINE_STATE		  =	0x03,
+		eSPOT_ONLINE_STATE		    =	0x04,
+		eSPOT_BUSY_STATE			    =	0x05,
+		eSPOT_SERVICE_STATE		  =	0x06,
+	};
+
+	// CardReader status
+	enum SPOT_CR_STATUS {
+		eSPOT_CR_DISABLED_STATE	=	0x00,
+		eSPOT_CR_ENABLED_STATE		=	0x01,
+		eSPOT_CR_BUSY_STATE			=	0x02,
+		eSPOT_CR_ERROR_STATE			=	0x03,
+		eSPOT_CR_INOPERATIVE_STATE	=	0x04,
+		eSPOT_CR_STARTUP				  =	0x05,
+		eSPOT_CR_DALLASDOWNLOAD	=	0x06,
+	};
+
+	// CardReader status ext
+	enum SPOT_CR_EVENTS {
+		eSPOT_CR_CARDIN_EVENT	    =	0x01,
+		eSPOT_CR_SENSORARMED_EVENT =	0x80,
+	};
+
+	// CardReader errors
+	enum SPOT_CR_ERRORS {
+		eSPOT_CR_NOERROR 				= 0,
+
+		eSPOT_CR_DRIVERINITERROR 		= 1,
+
+		eSPOT_CR_DEVICECONNECTIONTIMEOUT = 2,
+		eSPOT_CR_DEVICECONNECTIONERROR	= 3,
+
+		eSPOT_CR_BADSOFTWAREVERSION 		= 4,
+		eSPOT_CR_DEVICENOARMEDERROR		= 5,
+		eSPOT_CR_NOSMKERROR				= 6,
+		eSPOT_CR_ENCRYPTIONERROR			= 7,
+
+		eSPOT_CR_READERCONNECTIONERROR 	= 8,
+
+		eSPOT_CR_READERERROR 			= 9,
+		eSPOT_CR_ICCERROR		 		= 10,
+
+		eSPOT_CR_GENERICERROR	   		= 127,
+	};
+
+	// SecurityManager status
+	enum SPOT_SM_STATUS {
+		eSPOT_SM_IDLE_STATE			=	0x00,
+		eSPOT_SM_BUSY_STATE			=	0x01,
+		eSPOT_SM_ERROR_STATE			=	0x02,
+		eSPOT_SM_INOPERATIVE_STATE	=	0x03,
+		eSPOT_SM_STARTUP				=	0x04,
+		eSPOT_SM_DALLASDOWNLOAD		=	0x05,
+	};
+
+	// SecurityManager status ext
+	enum SPOT_SM_EVENTS {
+		eSPOT_SM_SENSORARMED_EVENT =	0x80,
+	};
+
+	// SecurityManager errors
+	enum SPOT_SM_ERRORS {
+		eSPOT_SM_NOERROR 				= 0,
+
+		eSPOT_SM_DRIVERINITERROR 		= 1,
+
+		eSPOT_SM_DEVICECONNECTIONTIMEOUT = 2,
+		eSPOT_SM_DEVICECONNECTIONERROR	= 3,
+
+		eSPOT_SM_BADSOFTWAREVERSION 		= 4,
+		eSPOT_SM_DEVICENOARMEDERROR		= 5,
+		eSPOT_SM_NOSMKERROR				= 6,
+		eSPOT_SM_ENCRYPTIONERROR			= 7,
+
+		eSPOT_SM_SECURITYMODULEERROR 	= 9,
+		eSPOT_SM_KEYDB_ERROR				= 10,
+
+		eSPOT_SM_GENERICERROR	   		= 127,
+	};
+
+	// Keyboard status
+	enum SPOT_KB_STATUS {
+		eSPOT_KB_DISABLED_STATE			=	0x00,
+		eSPOT_KB_ENABLED_STATE			=	0x01,
+		eSPOT_KB_BUSY_STATE				=	0x02,
+		eSPOT_KB_ERROR_STATE				=	0x03,
+		eSPOT_KB_INOPERATIVE_STATE		=	0x04,
+		eSPOT_KB_STARTUP					=	0x05,
+		eSPOT_KB_DALLASDOWNLOAD			=	0x06,
+	};
+
+	// Keyboard status ext
+	enum SPOT_KB_EVENTS {
+		eSPOT_KB_SENSORARMED_EVENT =	0x80,
+	};
+
+	// Keyboard errors
+	enum SPOT_KB_ERRORS {
+		eSPOT_KB_NOERROR 				= 0,
+
+		eSPOT_KB_DRIVERINITERROR 		= 1,
+
+		eSPOT_KB_DEVICECONNECTIONTIMEOUT = 2,
+		eSPOT_KB_DEVICECONNECTIONERROR	= 3,
+
+		eSPOT_KB_BADSOFTWAREVERSION 		= 4,
+		eSPOT_KB_DEVICENOARMEDERROR		= 5,
+		eSPOT_KB_NOSMKERROR				= 6,
+		eSPOT_KB_ENCRYPTIONERROR			= 7,
+
+		eSPOT_KB_KEYBOARDERROR 			= 9,
+
+		eSPOT_KB_GENERICERROR	   		= 127,
+	};
+
+	// Display status
+	enum SPOT_DY_STATUS {
+		eSPOT_DY_IDLE_STATE		=	0x00,
+	};
+
+	// Software config fields
+	enum SPOT_SYS_SWRCFG_FIELDS {
+		eSPOT_SYS_BOOT_VERSION	=	0x01,
+		eSPOT_SYS_OS_VERSION	=	0x02,
+		eSPOT_SYS_PACK1_VERSION	=	0x03,
+		eSPOT_SYS_PACK2_VERSION	=	0x04,
+		eSPOT_SYS_PACK3_VERSION	=	0x05,
+		eSPOT_SYS_PACK4_VERSION	=	0x06,
+		eSPOT_SYS_PACK5_VERSION	=	0x07,
+		eSPOT_SYS_PACK6_VERSION	=	0x08,
+		eSPOT_SYS_PACK7_VERSION	=	0x09,
+		eSPOT_SYS_PACK8_VERSION	=	0x0a,
+		eSPOT_CR_FWR_VERSION		=	0x0b,
+		eSPOT_KB_FWR_VERSION		=	0x0c,
+		eSPOT_SM_FWR_VERSION		=	0x0d,
+	};
+
+	// Hardware config fields
+	enum SPOT_HWRCFG_FIELDS {
+		eSPOT_SERIALNUMBER		=	0x01,
+
+		eSPOT_SM_SERIALNUMBER	=	0x10,
+		eSPOT_SM_HWRID			=	0x11,
+
+		eSPOT_KB_SERIALNUMBER	=	0x20,
+		eSPOT_KB_HWRID			=	0x21,
+		eSPOT_KB_DEVTYPE			=	0x22,
+
+		eSPOT_CR_SERIALNUMBER	=	0x30,
+		eSPOT_CR_HWRID			=	0x31,
+		eSPOT_CR_DEVTYPE		=	0x32,
+		eSPOT_CR_DEVFUNCTIONS	=	0x33,
+		eSPOT_CR_DEVMODEL		=	0x34,
+
+		eSPOT_DY_DEVTYPE		=	0x40,
+		eSPOT_DY_DEVFUNCTIONS	=	0x41,
+		eSPOT_DY_DEVMODEL		=	0x42,
+		eSPOT_DY_DEVHWRCONFIG	=	0x43,
+	};
+
+	// Diag fields
+	enum SPOT_DIAG_FIELDS {
+		eSPOT_CR_CARDINSERTIONCNT =	0x10,
+		eSPOT_CR_READISO1OK		=	0x11,
+		eSPOT_CR_READISO2OK		=	0x12,
+		eSPOT_CR_READISO3OK		=	0x13,
+		eSPOT_CR_READISO1KO		=	0x14,
+		eSPOT_CR_READISO2KO		=	0x15,
+		eSPOT_CR_READISO3KO		=	0x16,
+		eSPOT_CR_READICCOK		=	0x17,
+		eSPOT_CR_READICCKO		=	0x18,
+		eSPOT_KB_KEYSTROKECNT	=	0x20,
+	};
+
+	//
+	//defines for message keyboardAndSecurityRequest
+	//
+
+	// Keyboard input mode
+	enum SPOT_KEYBOARD_INPUTMODE {
+		eSPOT_KB_CLEARTEXT		= 0x00,
+		eSPOT_KB_PIN				= 0x01,
+	};
+
+	// Keyboard encryption type
+	enum SPOT_KEYBOARD_ENCRYPTIONTYPE {
+		eSPOT_KB_NOTENCRYPTED		= 0x00,	// not encrypted (for non-PIN inputs)
+		eSPOT_KB_ENCKEYID			= 0x01,	// refer to KeyId
+		eSPOT_KB_VERIFYISO			= 0x02,	// use ISO7816 VERIFY command with clear PIN data
+		eSPOT_KB_VERIFYISOENC		= 0x03,	// use ISO7816 GET_CHALLENGE & VERIFY encrypted PIN data
+	};
+
+	// Keyboard encryption type
+	enum SPOT_KEYBOARD_ENCRYPTIONMODE {
+		eSPOT_KB_EMDIRECT			= 0x00,	// direct, encrypt PIN with KeyId
+		eSPOT_KB_EMINDIRECT			= 0x01,	// indirect, encrypt PIN with working key
+		eSPOT_KB_EMINDIRECTAUTO		= 0x02,	// indirect-auto, encrypt PIN with random key & random key with working key
+		eSPOT_KB_EMDIRECTAUTO		= 0x03,	// direct-auto, encrypt PIN with random key & random key with KeyId
+	};
+
+	// Keyboard format mode
+	enum SPOT_KEYBOARD_PADDINGMODE {
+		eSPOT_KB_UNFORMATTED		= 0x00,
+		eSPOT_KB_LEFTPADDING		= 0x01,
+		eSPOT_KB_RIGHTPADDING		= 0x02,
+		eSPOT_KB_COMMAPADDING		= 0x03,
+		eSPOT_KB_PROPOSEDPADDING	= 0x04,
+	};
+	// Keyboard format mode
+	enum SPOT_KEYBOARD_FORMATMODE {
+		eSPOT_KB_PIN0PADDING	 	= 0x00,	// ANSI PIN block type 0
+		eSPOT_KB_PIN1PADDING	 	= 0x01,	// ANSI PIN block type 1
+		eSPOT_KB_APBPADDING	 		= 0x02,	// AP Bancomat
+		eSPOT_KB_ISO7816PADDING		= 0x03,	// ISO7816 PIN Block
+	};
+
+	// Keyboard map
+	enum SPOT_KEYBOARD_MAP {
+		eSPOT_KB_NUMKEYS			= 0x01,
+		eSPOT_KB_FKEYS				= 0x02,
+		eSPOT_KB_ALFAKEYS			= 0x04,
+		eSPOT_KB_DELETEKEY			= 0x08,
+	};
+
+	// Keyboard remeber pin mode
+	enum SPOT_KEYBOARD_PINREMEMBERMODE {
+		eSPOT_KB_NOREMEMBERPIN	= 0x00,
+		eSPOT_KB_REMEMBERPIN	= 0x01,
+		eSPOT_KB_REMEBEREDPIN	= 0x02,
+	};
+
+
+	// Encryption service
+	enum SPOT_ENCRYPTION_SERVICE {
+		eSPOT_ENCRYPTION		=	0x01,
+		eSPOT_DECRYPTION		=	0x02,
+		eSPOT_CBC_ENCRYPTION	=	0x03,
+		eSPOT_CBC_DECRYPTION	=	0x04,
+		eSPOT_MAC_X919			=	0x05,
+		eSPOT_MAC_DUKPT			=	0x06,
+	};
+
+	// key type
+	enum SPOT_KEY_TYPE {
+		eSPOT_KEY_DES			=	0x01,
+		eSPOT_KEY_DUKPT			=	0x02,
+		eSPOT_KEY_RSA			=	0x03,
+		eSPOT_KEY_TRIPLE_DES	=	0x04,
+		eSPOT_KEY_DUKPT2K		=	0x05,
+	};
+
+	// key use dest
+	enum SPOT_KEY_DESTUSE {
+		eSPOT_KEY_PIN			=	0x01,
+		eSPOT_KEY_MAC			=	0x02,
+		eSPOT_KEY_TRANSPORT		=	0x03,
+	};
+
+	// key derivation type
+	enum SPOT_KEY_DERTYPE {
+		eSPOT_DERIV_DESTROY		=	0x00,
+		eSPOT_DERIV_EMV2K		=	0x01,
+		eSPOT_DERIV_DUKPT		=	0x02,
+		eSPOT_DERIV_DUKPT2K		=	0x03,
+	};
+
+	//#########################
+	//########## EMV ##########
+	//#########################
+
+	enum SPOT_EMV_CMDS
+	{
+		eSPOT_EMV_EXECUTION 				= 0x10,
+		eSPOT_EMV_DATABASE 					= 0x20,
+		eSPOT_EMV_RESULTS					= 0x99,
+	};
+
+	enum SPOT_EMV_ACTION_SUBCMDS
+	{
+		eSPOT_EMV_STARTSEQUENCE				= 0x01,
+		eSPOT_EMV_ACTIONANALISYS			= 0x02,
+		eSPOT_EMV_ONLINEAUTHENTICATION		= 0x03,
+		eSPOT_EMV_ENDSEQUENCE				= 0x04,
+	};
+
+	enum SPOT_EMV_DATABASE_SUBCMDS
+	{
+		eSPOT_EMV_RECORDCOUNT				= 0x01,
+		eSPOT_EMV_RECORDCOPY				= 0x02,
+		eSPOT_EMV_RECORDDELETION			= 0x03,
+		eSPOT_EMV_TLVREAD					= 0x04,
+		eSPOT_EMV_TLVWRITE					= 0x05,
+		eSPOT_EMV_TABLEDUMPLOAD				= 0x06,
+	};
+
+	enum SPOT_EMV_RESULTS_SUBCMDS
+	{
+		eSPOT_EMV_RESULTCODE				= 0x01,
+		eSPOT_EMV_STATUSCHANGE				= 0x02,
+	};
+
+	//#########################
+	//########## OPT ##########
+	//#########################
+
+	enum SPOT_OPT_CMDS {
+		eSPOT_OPT_SYSTEM		= 0x10,
+		eSPOT_OPT_PRINTER		= 0x20,
+		eSPOT_OPT_TERMIO		= 0x30,
+		eSPOT_OPT_BARCODE		= 0x40,
+		eSPOT_OPT_CLESS			= 0x50,
+		eSPOT_OPT_BNA			= 0x90,
+	};
+
+	enum SPOT_OPT_SYSTEM_SUBCMDS {
+		eSPOT_OPT_SYS_STATUS_INFO		= 0x01,
+		eSPOT_OPT_SYS_HWR_INFO			= 0x02,
+		eSPOT_OPT_SYS_SWR_INFO			= 0x03,
+		eSPOT_OPT_SYS_BNA_STATUS                = 0x05,
+	};
+
+	enum SPOT_OPT_PRINTER_SUBCMDS {
+		eSPOT_OPT_PRN_TEXTDATA			= 0x01,
+		eSPOT_OPT_PRN_TEMPLATEDATA		= 0x02,
+		eSPOT_OPT_PRN_IMAGEDATA			= 0x03,
+		eSPOT_OPT_PRN_JOBSTATUS			= 0x03,
+		eSPOT_OPT_PRN_JOBCREATE			= 0x04,
+		eSPOT_OPT_PRN_JOBPRINT			= 0x05,
+		eSPOT_OPT_PRN_JOBCANCEL			= 0x06,
+	};
+
+	enum SPOT_OPT_TERMIO_SUBCMDS {
+		eSPOT_OPT_IO_KEYENABLE			= 0x01,
+		eSPOT_OPT_IO_OUTCTRL			= 0x02,
+	};
+
+	enum SPOT_OPT_BARCODE_SUBCMDS {
+		eSPOT_OPT_BCR_ENABLE			= 0x01,
+	};
+
+	enum SPOT_OPT_CLESS_SUBCMDS {
+		eSPOT_OPT_CLR_ENABLE			= 0x01,
+		eSPOT_OPT_CLR_CARD_DATA			= 0x04,
+		eSPOT_OPT_CLR_DISABLE			= 0x05,
+	};
+
+	enum SPOT_OPT_BNA_SUBCMDS {
+		eSPOT_OPT_BNA_ENABLE				= 0x01,
+		eSPOT_OPT_BNA_DISABLE				= 0x02,
+		eSPOT_OPT_BNA_READCONFIRM			= 0x03,
+		eSPOT_OPT_BNA_STATEQUERY			= 0x04,
+		eSPOT_OPT_BNA_VERSIONQUERY			= 0x05,
+		eSPOT_OPT_BNA_ENABLEALT				= 0x08,
+		eSPOT_OPT_BNA_CAPTURE				= 0x09,
+		eSPOT_OPT_BNA_EJECT					= 0x0A,
+	};
+
+	//defines for message InformationRequest
+
+	enum SPOT_OPT_SUBSYSTEM_TYPE {
+		eSPOT_SYS_PRINTER		=	0x01,
+		eSPOT_SYS_IOMODULE		=	0x02,
+		eSPOT_SYS_CLESS			=	0x08,
+	};
+
+	// Definizione stampante
+	enum SPOT_OPT_PRINTER_STATE {
+		eSPOT_PR_ERROR_STATE	= 0x01,
+		eSPOT_PR_READY_STATE	= 0x02,
+		eSPOT_PR_BUSY_STATE		= 0x03,
+		eSPOT_PR_STARTUP_STATE	= 0x04
+	};
+
+	enum SPOT_OPT_PRINTER_EVENT  {
+		eSPOT_PR_TICKET_PRESENT		= 0x01,
+		eSPOT_PR_PAPER_WARNING		= 0x02,
+		eSPOT_PR_PRINT_INPROGRESS	= 0x80,
+	};
+
+	enum SPOT_OPT_PRINTER_ERROR {
+		eSPOT_PR_DEVICEOFFLINE	= 0x01,
+		eSPOT_PR_PAPER_END		= 0x02,
+		eSPOT_PR_HEAD_UP		= 0x04,
+		eSPOT_PR_HEAD_ALARM		= 0x08,
+	};
+
+
+	// Definizione io module
+	enum SPOT_OPT_IO_STATE {
+		eSPOT_IO_ERROR_STATE	= 0x01,
+		eSPOT_IO_READY_STATE	= 0x02,
+		eSPOT_IO_BUSY_STATE		= 0x03,
+	};
+
+	enum SPOT_OPT_IO_EVENT  {
+		eSPOT_IO_CHASSIS_ALARM	= 0x01,
+		eSPOT_IO_PIR_SENSOR		= 0x80,
+	};
+
+	enum SPOT_OPT_IO_ERROR {
+		eSPOT_IO_DEVICEOFFLINE	= 0x01,
+	};
+
+	enum SPOT_OPT_IO_CMDS {
+		eSPOT_IO_LIGHTS_CMD		= 0x01,
+		eSPOT_IO_ALARMS_CMD		= 0x02,
+	};
+
+	// Software config fields
+	enum SPOT_OPT_SWRCFG_FIELDS {
+		eSPOT_PR_FWR_VERSION		=	0x01,
+		eSPOT_IO_FWR_VERSION		=	0x02,
+	};
+
+	// Hardware config fields
+	enum SPOT_OPT_HWRCFG_FIELDS {
+		eSPOT_PR_SERIALNUMBER	=	0x01,
+		eSPOT_PR_DEVTYPE		=	0x02,
+		eSPOT_PR_DEVFUNCTIONS	=	0x03,
+		eSPOT_PR_DEVMODEL		=	0x04,
+
+		eSPOT_IO_SERIALNUMBER	=	0x10,
+		eSPOT_IO_DEVTYPE		=	0x11,
+		eSPOT_IO_DEVFUNCTIONS	=	0x12,
+		eSPOT_IO_DEVMODEL		=	0x13,
+	};
+
+	// System Status fields
+	enum SPOT_OPT_SYSTEM_STATUS_FIELDS {
+		eSPOT_SS_PRINTER		=   0x01,
+		eSPOT_SS_BATTINPUT3		=   0x02,
+		eSPOT_SS_NOTBATTINPUT1	=   0x04,
+		eSPOT_SS_OTI    		=   0x08,
+		eSPOT_SS_NOTBATTINPUT2	=   0x10,
+		eSPOT_SS_BATTINPUT4		=   0x20,
+	};
+
+	//#########################
+	//########## SETUP ########
+	//#########################
+
+	enum SPOT_SETUP_DOWNLOAD_CMDS
+	{
+		eSPOT_SETUP_DOWNLOAD			= 0x10,
+	};
+
+	enum SPOT_SETUP_DOWNLOAD_SUBCMD
+	{
+		eSPOT_SETUP_DOWNLOAD_REQUEST	= 0x01,
+		eSPOT_SETUP_DOWNLOAD_BLOCK		= 0x02,
+		eSPOT_SETUP_INFO				= 0x03,
+		eSPOT_SETUP_UPDATE				= 0x04,
+	};
+
+
+	//######## EFT MICROKEYLOADER #############
+	enum SPOT_EFT_CMDS
+	{
+		eSPOT_EFT_KMPB 						= 0x10,
+	};
+
+	enum SPOT_EFT_ACTION_SUBCMDS
+	{
+		eSPOT_EFT_GENERATEKEK				= 0x01,
+		eSPOT_EFT_LOADKMPB					= 0x02,
+	};
+
+	enum SPOT_EFT_RESULTS_SUBCMDS
+	{
+		eSPOT_EMV_RETURNKEK					= 0x01,
+		eSPOT_EMV_LOADCOMPLETE				= 0x02,
+	};
+
+
+	//######## EFT CONNECTION WHIT POS ########
+	enum SPOT_EFT_POS_CMDS
+	{
+		eSPOT_EFT_POS 						= 0x20,
+	};
+
+	enum SPOT_EFT_POS_ACTION_SUBCMDS
+	{
+		ePOS_SEND_TERMINAL_STATUS_TO_SPOT	= 0x00,
+		eCARD_VALIDATION_ANSWER				= 0x01,
+		eAUTHORISATION_ANSWER				= 0x02,
+		eNOTIFICATION_ANSWER				= 0x03,
+	};
+
+	enum SPOT_EFT_POS_RESULTS_SUBCMDS
+	{
+		eTERMINAL_STATUS_INFO_REQUEST		= 0x00,
+		eCARD_VALIDATION_REQUEST			= 0x01,
+		eAUTHORISATION_REQUEST				= 0x02,
+		eNOTIFICATION_REQUEST				= 0x03,
+	};
+
+	//Some definitions related with SPOT comunication
+
+	const UINT8   CCRIND_APP                  =                            16;
+	const UINT8   CCRIND_APP_PASSTHRU         =                            17;
+	const UINT16  CPING_TIMEOUT               =                         10000; // 10 sec
+	const UINT16  CKEEP_SESSION_ALIVE_TIMEOUT =           (CPING_TIMEOUT / 2); //  5 sec
+	const UINT16  CRECONNECT_SESSION_TIMEOUT  =                          5000; //  5 sec
+	const UINT8   CSPOT_MSG_READ_TIMEOUT      =                             5; //  5 sec
+
+	const UINT16    TPDU_HEADER_LENGTH        =       3;  // 3 bytes header
+	const UINT8		WAIT_ERROR_GUARD          =     100;  // 100 milisec
+	const UINT16	WAIT_CONNECT_ERROR        =     300;  // 0.3 sec
+
+	const UINT16    SPOT_NUM_SESSION_KEYS     =       5;
+	const UINT16    SPOT_SOCKET_PORT          =    5200;
+
+	const char      SPOT_HOSTNAME[]           =  "127.0.0.1";
+
+	const UINT32    SPOT_RXMSG_TIMEOUT        =       5; // 5 milisec
+	const UINT32    SPOT_TXMSG_TIMEOUT        =      10; // 10 milisec
+
+	const UINT32    SPOT_CONNECT_TIMEOUT      =       2; // 2 sec
+	const UINT32    SPOT_CONNECT_RETRIES      =       2;
+
+	const UINT16    SPOT_MAXMSGLEN            =  8192;
+
+	typedef enum
+	{
+	  eSPOT_DATA_SENT        =  1,
+	  eSPOT_DATA_RECEIVED    =  1,
+	  eSPOT_NO_DATA_SENT     =  0,
+	  eSPOT_NO_DATA_RECEIVED =  0,
+	  eSPOT_CONNECTION_ERROR = -1,
+	  eSPOT_MESSAGE_ERROR    = -2,
+	  eSPOT_ENCRYPTION_ERROR = -3,
+	  eSPOT_TIMEOUT_ERROR    = -4,
+	  eSPOT_NO_PLACE_TO_MSG  = -5,
+	  eSPOT_NO_MESSAGE       = -6
+	} eSPOT_MSG_RESULT;
+
+	typedef enum
+	{
+		eConnectionError	= 0,
+		eLoginError,
+		eIncomingMessageError,
+		eOutgoingMessageError,
+		eReconnectedError
+	} eSPOTTransportLayerError;
+
+	typedef enum
+	{
+		eSPOTDisconnected = 0,
+		eSPOTConnecting,
+		eSPOTConnected,
+		eSPOTDisconnecting,
+		eSPOTConnectionError
+	} eSPOTConnectionState;
+}
+
+#endif

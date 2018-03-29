@@ -1,0 +1,9 @@
+{
+  "operation": "connect",
+  "deviceId": "1",
+  "payload": {
+    "success": false,
+    "code":    1000,
+    "message": "Generic Error"
+  }
+}

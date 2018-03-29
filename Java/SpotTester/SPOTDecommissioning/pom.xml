@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>SpotTester</artifactId>
+    <groupId>com.gilbarco.globaltools.edt</groupId>
+    <version>1.0.1</version>
+  </parent>
+  
+  <artifactId>SPOTDecommissioningApp</artifactId>
+  <version>1.0.0</version>
+  <name>SPOT Decommissioning Tool</name>
+  <description>SPOT decommissioning tool</description>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.gilbarco.globaltools.edt</groupId>
+      <artifactId>Edt3-Core</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.gilbarco.globaltools.edt</groupId>
+      <artifactId>Edt3-Services</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.gilbarco.globaltools.edt</groupId>
+      <artifactId>Edt3-Utils</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.gilbarco.globaltools.edt</groupId>
+      <artifactId>SpotProtocol</artifactId>
+      <version>1.0.1</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.gilbarco.globaltools.edt</groupId>
+      <artifactId>SpotTesterApp</artifactId>
+      <version>1.0.1</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+	<dependency>
+		<groupId>com.gilbarco.globaltools.edt</groupId>
+		<artifactId>mgp-core</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+  </dependencies>  
+</project>

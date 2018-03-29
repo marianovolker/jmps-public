@@ -1,0 +1,107 @@
+# Makefile for the new AS2805Services task
+
+DOXYGEN = $(shell which doxygen)
+DOXYGEN_PATH = docs
+
+EXEC = AS2805ServicesManager
+
+OBJS = main.o
+OBJS += ProtocolManager.o
+OBJS += PALManager.o
+OBJS += PALResources.o
+OBJS += PALTableData.o
+OBJS += ServicesLog.o
+OBJS += AbsState.o
+OBJS += Startup.o
+OBJS += Initializing.o
+OBJS += Operative.o
+OBJS += Processing.o
+OBJS += Error.o
+OBJS += DecryptVerifyMAC.o
+OBJS += GenerateMACEncrypt.o
+OBJS += GenKIA.o
+OBJS += GetCardDataInfo.o
+OBJS += GetKI.o
+OBJS += GetTCU.o
+OBJS += RecycleTI.o
+OBJS += KEKResynch.o
+OBJS += RollKIA.o
+OBJS += SetKCAKMACH.o
+OBJS += SetKEKs.o
+OBJS += SetSessionKeys.o
+OBJS += SetSponsor.o
+OBJS += SignOn.o
+OBJS += FactoryReset.o
+OBJS += FactoryInit.o
+OBJS += LegacyFactoryInit.o
+OBJS += GetInfo.o
+OBJS += PPProtocol.o
+OBJS += SponsorLookup.o
+OBJS += PersistCmdArg.o
+
+OBJS := $(addprefix objs/, $(OBJS))
+
+VPATH = StateMachine CardData
+
+objs/%.o : %.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<
+
+
+CXXFLAGS += -fno-rtti $(INCSSL) $(INCGILB) -I. -DBOARD_CODE=\"$(BOARD)\" -DCONFIG_USER_GILBARCO_AS2805_SERVICES
+LIBS := $(LIBGILBARCO) $(LIBCRYPTO)
+LIBS_DEP = $(LIBGILBARCO_DEP) $(SLIBCRYPTO_DEP)
+
+XXLDFLAGS=$(LDFLAGS)
+
+ifneq ($(CONFIG_USER_GILBARCO_SETUPANDSWUPDATE_ROMFS),0)
+	FLTFLAGS += -z
+	LIBS := $(LIBGILBARCO) $(SLIBCRYPTO)
+endif
+CXXFLAGS += -MD
+DFILES=$(OBJS:.o=.d)
+#ifeq (,$(findstring Devel,$(CONFIG_PRODUCT)))
+CXXFLAGS += -DSECURE_BOARD
+#endif
+
+all: objs $(EXEC) versions
+
+objs:
+	[ -d objs ] || mkdir objs
+
+$(EXEC): $(OBJS) $(LIBS_DEP)
+	$(CXX) $(XXLDFLAGS) -Wl,-Map,$@.map -o $@ $(OBJS) $(LIBS)
+
+romfs:
+ifeq ($(CONFIG_PLATFORM),OMAP)
+	EMV-install.sh -r $(ROMFS_NUMBER) default /etc/default
+	EMV-install.sh -r $(ROMFS_NUMBER) -m resources/resources.ini /home/resources/resources.ini
+ifdef CPATENABLED
+	EMV-install.sh -r $(ROMFS_NUMBER) resources/AS2805 /home/resources
+endif
+	EMV-install.sh -r $(ROMFS_NUMBER) -m resources/BackupList /etc/BackupList
+	EMV-install.sh -r $(ROMFS_NUMBER) -l 5 /bin/$(EXEC)
+else
+	EMV-install.sh -r $(CONFIG_USER_GILBARCO_AS2805_ROMFS) default /etc/default
+	EMV-install.sh -r $(CONFIG_USER_GILBARCO_AS2805_ROMFS) -m resources/logger.ini /home/resources/logger.ini
+	EMV-install.sh -r $(CONFIG_USER_GILBARCO_AS2805_ROMFS) -m resources/resources.ini /home/resources/resources.ini
+ifdef CPATENABLED
+	EMV-install.sh -r $(CONFIG_USER_GILBARCO_AS2805_ROMFS) resources/AS2805 /home/resources
+endif
+	EMV-install.sh -r $(CONFIG_USER_GILBARCO_AS2805_ROMFS) -m resources/BackupList /etc/BackupList
+	EMV-install.sh -r $(CONFIG_USER_GILBARCO_AS2805_ROMFS) -l 5 /bin/$(EXEC)
+endif
+
+clean:
+	rm -rf objs
+	rm -f $(EXEC) *.elf *.gdb core *.d *.map .cmake.state
+	rm -rf $(DOXYGEN_PATH)/output/*
+
+versions:
+ifeq ($(CONFIG_PLATFORM),OMAP)
+	$(ROOTDIR)/tools/versions.sh $(ROMFS_NUMBER)
+endif
+	
+doxygen:
+	$(DOXYGEN) $(DOXYGEN_PATH)/config.txt
+
+-include $(DFILES)

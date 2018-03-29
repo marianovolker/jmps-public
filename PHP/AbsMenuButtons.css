@@ -1,0 +1,71 @@
+#entire-container
+{
+   overflow       : hidden;
+   position       : fixed;
+   top            : 0px;
+   left           : 0%;
+   right          : 0%;
+   width          : 100%;
+   height         : 100%;
+   display        : none;
+}
+        
+#toolbar-buttons-container
+{
+   overflow       : hidden;
+   position       : fixed;
+   top            : 3%;
+   left           : 35%;
+   right          : 35%;
+   width          : 30%;
+   height         : 17%;
+}
+        
+#main-menu-buttons-container
+{
+   overflow       : hidden;
+   position       : fixed;
+   top            : 21%;
+   bottom         : 9%;
+   height         : 70%;
+   left           : 5%;
+   right          : 5%;
+   padding-top    : 0;
+   padding-bottom : 0;
+   padding-left   : 0;
+   padding-right  : 0;   
+}
+
+.btn-lgx 
+{
+  font-size       : 4vw;
+  border-radius   : 20px;
+  color           : #000000;
+  text-transform  : capitalize;
+}
+
+h1
+{
+  color           : #ffffff;
+  background-color: #000000;  
+}
+
+.action-button-wrapper
+{
+   display        : none;
+}
+
+td, tr
+{
+   top            : 0;
+   bottom         : 0;
+   left           : 0;
+   right          : 0;
+   padding-top    : 0;
+   padding-bottom : 0;
+   padding-left   : 0;
+   padding-right  : 0;
+   width          : 100%;
+   height         : 100%;   
+}
+

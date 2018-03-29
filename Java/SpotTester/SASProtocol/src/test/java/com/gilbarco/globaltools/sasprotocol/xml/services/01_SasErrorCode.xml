@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VanguardTokenProtocolUnitTest xmlns:xsi="http://www.gilbarco.com/VanguardTokenProtocolSchema" xsi:noNamespaceSchemaLocation="VanguardTokenProtocol.xsd">
+	<Command >ErrorCode</Command>
+	<Body>
+		<Code>0001</Code>
+		<Description>Description of the error</Description>
+	</Body>
+	<X.509-Certificate>
+		<Signature>a3:ce:8f:9f:2e:24:f9:51:99:86:4e:98:dc:22:0b:58:bd:69:8f:d9:be:34:4a:da:48:d8:11:af:80:98:ed:5a:44:68:5e:99:43:a5:3b:e9:c1:71:ef:bc:37:2a:49:b6:96:65:db:8a:43:80:ed:73:3d:45:3d:e6:7c:f2:47:ef:da:17:82:18:de:a6:8a:3f:67:ca:2d:bf:6f:8d:11:5a:86:84:2c:b3:0a:62:dd:d5:84:14:1a:a4:ce:de:d4:7b:7b:8a:d6:87:c1:6b:62:30:44:6c:b8:44:66:13:77:ee:fe:a5:10:3d:a9:b7:4d:d3:db:27:67:b0:f2:64:b1:82:a6:7d:ca:df:a2:a8:27:ce:4b:91:c9:ad:b0:d4:2a:76:4b:76:51:d9:a1:d9:90:4f:e0:d5:aa:ce:ff:01:31:d1:59:b9:fc:02:a5:a1:26:7c:e1:03:3f:b1:47:84:c5:e4:a8:34:96:a0:44:ec:69:4f:0d:2e:98:8b:66:b4:5f:34:b5:ca:2c:bd:9a:63:d5:c4:78:dc:be:53:5c:9f:2a:ee:ab:e7:56:37:e2:aa:44:40:52:64:3b:3d:ce:f1:71:8a:36:91:86:e6:d2:3d:5c:1a:2e:f1:c9:37:d9:26:b4:07:ab:24:51:de:65:4b:7e:9d:9e:61:66:e7:36:c6:5b:5c:53:21:38:63:8d:6c:11:4f:2c:88:06:b1:8d:01:fd:34:6d:15:56:61:77:dc:ff:5d:96:65:b2:73:86:e5:87:7b:6d:63:60:be:5e:60:b0:40:f0:64:ee:77:3b:fe:74:48</Signature>
+	</X.509-Certificate>
+</VanguardTokenProtocolUnitTest>

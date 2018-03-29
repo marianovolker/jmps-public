@@ -1,0 +1,11 @@
+{
+    "messageId":	"11111111-2222-3333-4444-555555555555",
+    "operation":	"server update",
+    "deviceId":	"32459",
+    "payload":	{
+        "success":	true,
+        "code":	0,
+        "message":	"success"
+    }
+}
+

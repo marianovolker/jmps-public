@@ -1,0 +1,101 @@
+diff -Nur pugixml-1.0/CMakeLists.txt pugixml-1.0-sprint2/CMakeLists.txt
+--- pugixml-1.0/CMakeLists.txt	1969-12-31 21:00:00.000000000 -0300
++++ pugixml-1.0-sprint2/CMakeLists.txt	2012-12-12 20:17:11.000000000 -0300
+@@ -0,0 +1,34 @@
++# CMakeLists for building pugixml library
++cmake_minimum_required(VERSION 2.8)
++
++project(pugixml)
++
++
++if(DEFINED CMAKE_TOOLCHAIN_FILE)
++
++# Print the platform to be compiled to
++	if("${CMAKE_TOOLCHAIN_FILE}" MATCHES "uclinux")
++		message("==== pugixml library configured for coldfire ====")
++		add_definitions(-DSPOT_M3)
++	endif()
++
++endif()
++
++set(SOURCES
++        src/pugixml.hpp
++        src/pugiconfig.hpp
++        src/pugixml.cpp
++)
++
++add_library(pugixml STATIC
++        ${SOURCES}
++)
++
++install(TARGETS pugixml
++        ARCHIVE DESTINATION ${VGLIB_BINARY_DIR}/lib
++)
++install(DIRECTORY src/
++        DESTINATION ${VGLIB_BINARY_DIR}/include/pugixml
++        FILES_MATCHING PATTERN "*.hpp"
++)
++
+diff -Nur pugixml-1.0/src/pugixml.cpp pugixml-1.0-sprint2/src/pugixml.cpp
+--- pugixml-1.0/src/pugixml.cpp	2010-10-31 11:42:22.000000000 -0300
++++ pugixml-1.0-sprint2/src/pugixml.cpp	2012-12-14 11:39:14.000000000 -0300
+@@ -15,10 +15,20 @@
+ 
+ #include <stdlib.h>
+ #include <stdio.h>
+-#include <string.h>
++
++#ifdef SPOT_M3 
++#	include <string>
++#else
++#	include <string.h>
++#endif
++
+ #include <assert.h>
+ #include <setjmp.h>
+-#include <wchar.h>
++#ifdef SPOT_M3 // Excluded by header macros, included by brute force :)
++#	include "wchar_M3uClinux.h"
++#else
++#	include <wchar.h>
++#endif
+ 
+ #ifndef PUGIXML_NO_XPATH
+ #	include <math.h>
+diff -Nur pugixml-1.0/src/wchar_M3uClinux.h pugixml-1.0-sprint2/src/wchar_M3uClinux.h
+--- pugixml-1.0/src/wchar_M3uClinux.h	1969-12-31 21:00:00.000000000 -0300
++++ pugixml-1.0-sprint2/src/wchar_M3uClinux.h	2012-12-14 11:16:42.000000000 -0300
+@@ -0,0 +1,33 @@
++// A wchar.h simplification suitable for coldfire uClinux (SPOT M3) platform
++
++#ifndef _WCHAR_H
++# define _WCHAR_H 1
++
++# include <features.h>
++#ifndef _WINT_T
++/* Integral type unchanged by default argument promotions that can
++   hold any value corresponding to members of the extended character
++   set, as well as at least one value that does not correspond to any
++   member of the extended character set.  */
++# define _WINT_T
++typedef unsigned int wint_t;
++#else
++/* Work around problems with the <stddef.h> file which doesn't put
++   wint_t in the std namespace.  */
++# if defined __cplusplus && defined _GLIBCPP_USE_NAMESPACES \
++     && defined __WINT_TYPE__
++__BEGIN_NAMESPACE_STD
++typedef __WINT_TYPE__ wint_t;
++__END_NAMESPACE_STD
++# endif
++#endif
++
++/* Return the number of wide characters in s.  */
++extern size_t wcslen (const wchar_t *s);
++
++namespace std
++{
++	typedef std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > wstring;
++};
++
++#endif

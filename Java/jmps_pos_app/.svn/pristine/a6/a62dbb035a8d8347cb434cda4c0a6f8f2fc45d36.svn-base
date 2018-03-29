@@ -1,0 +1,212 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.jmps.android.pos.AbMensualesAltaActivity$PlaceholderFragment" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/nombre"
+            android:inputType="textCapWords|textPersonName" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/apellido"
+            android:inputType="textCapWords|textPersonName" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaDni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="DNI"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Dirección"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaTelefono1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Teléfono 1"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaTelefono2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Teléfono 2"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaTelefono3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Teléfono 3"
+            android:inputType="phone" />
+
+        <Spinner
+            android:id="@+id/txtAbMensualesAltaTarifa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Tarifa" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnAbMensualesAltaAnterior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="Ant." />
+
+        <TextView
+            android:id="@+id/txtAbMensualesAltaInfoAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Auto"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaMarca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbMensualesAltaInfoAuto"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:hint="Marca"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaModelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbMensualesAltaMarca"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:hint="Modelo"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaPatente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbMensualesAltaModelo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:hint="Patente"
+            android:inputType="textCapCharacters" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbMensualesAltaPatente"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:hint="Color"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaNroMotor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbMensualesAltaColor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:hint="Número de motor"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/txtAbMensualesAltaTurno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtAbMensualesAltaNroMotor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:hint="Turno" />
+
+        <Button
+            android:id="@+id/btnAbMensualesAltaSiguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Sig." />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnAbMensualesAltaGuardar"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_centerHorizontal="false"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/save" />
+
+    <Button
+        android:id="@+id/btnAbMensualesAltaCancelar"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnAbMensualesAltaGuardar"
+        android:layout_alignBottom="@+id/btnAbMensualesAltaGuardar"
+        android:layout_marginRight="0dp"
+        android:layout_toRightOf="@+id/btnAbMensualesAltaGuardar"
+        android:text="@android:string/cancel" />
+
+</RelativeLayout>

@@ -1,0 +1,6 @@
+<RunConfig>
+   <OptDir>./TestFiles/DiskError/opt/</OptDir>
+   <EtcDir>./TestFiles/DiskError/etc/</EtcDir>
+   <VarDir>./TestFiles/DiskError/var/</VarDir>
+</RunConfig>
+

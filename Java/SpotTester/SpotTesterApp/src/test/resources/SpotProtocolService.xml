@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- MgpService -->
+	<bean id="SpotServiceDefinition"
+		class="com.gilbarco.globaltools.edt.services.EdtServiceDefinition">
+		<constructor-arg name="name" index="0"
+			value="SpotServiceDefinition"></constructor-arg>
+		<constructor-arg name="adapterClass" index="1"
+			value="com.gilbarco.globaltools.mgp.edt.service.MgpServiceAdapter"></constructor-arg>
+	</bean>
+
+	<bean id="PersistenceManager" class="com.gilbarco.globaltools.mgp.persistence.XstreamPersistenceManager">
+		<property name="persistenceDirectory" value="/src/test/resources/"></property>
+	</bean>
+	
+	<bean id="SpotProvider" class="com.gilbarco.globaltools.mgp.persistence.ProtocolProvider">
+		<constructor-arg ref="PersistenceManager"/>
+		<property name="protocolDefinition" value="SPOT Protocol_01.04-ext.2.3.xml"></property>
+	</bean>
+	
+	<bean id="SpotFactory" class="com.gilbarco.globaltools.spotprotocol.api.SpotMessageFactory">
+		<constructor-arg ref="SpotProvider"/>
+	</bean>
+	
+	<bean id="SpotProtocolApi" class="com.gilbarco.globaltools.mgp.api.ProtocolApi">
+		<constructor-arg ref="SpotFactory"/>
+	</bean>
+	<bean id="SpotProtocolValidator" class="com.gilbarco.globaltools.spotprotocol.utils.SpotProtocolValidator">
+		<property name="rules">
+			<list>
+		    	<value>00</value>
+		    	<value>02</value>
+            </list>
+        </property>
+	</bean>
+
+	<bean id="SpotService" class="com.gilbarco.globaltools.mgp.edt.service.MgpService">
+		<constructor-arg ref="SpotServiceDefinition"></constructor-arg>
+		<property name="protocolApi">
+			<ref bean="SpotProtocolApi" />
+		</property>
+		<property name="validator">
+			<ref bean="SpotProtocolValidator" />
+		</property>
+	</bean>
+
+</beans>

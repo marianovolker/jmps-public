@@ -1,0 +1,96 @@
+#!/bin/sh
+# postinst script for displaymanager package
+set -e
+[ -n "$DM_DEBUG" ] && echo "now debugging $0 $@" && set -x 
+
+echo "$0 $@"
+
+# create symlink for log download via SPOTUpdate utility
+if [ -d /var/opt/displaymanager/log ] && [ -d /gilbarco/logs/externalapps ]
+then
+	if [ ! -L /gilbarco/logs/externalapps/02.DisplayManager ]
+	then
+		ln -sf /var/opt/displaymanager/log /gilbarco/logs/externalapps/02.DisplayManager
+	fi
+else
+	if [ ! -L /var/log/dm ] && [ -d /var/opt/displaymanager/log ]
+	then
+		ln -s /var/opt/displaymanager/log /var/log/dm
+	fi
+fi
+
+restart_firewall()
+{
+	[ -x "/etc/init.d/firewall.sh" ] || return 0
+
+	echo
+	echo "Restarting firewall..."
+	echo
+
+	/etc/init.d/firewall.sh restart
+}
+
+merge_conffile()
+{
+	local DM_DIR_CFG=/etc/opt/displaymanager
+	local NEWCONFFILE=$DM_DIR_CFG/"displaymanager.properties"		
+	local OLDCONFFILE=$DM_DIR_CFG/"displaymanager.properties.dpkg-bak"
+	local MERCONFFILE=$DM_DIR_CFG/"displaymanager.properties.merge"
+	local PKGCONFFILE=$DM_DIR_CFG/"displaymanager.properties.dpkg-dist"
+
+	[ \! -e $NEWCONFFILE ] && [ -e $PKGCONFFILE ] && mv -f $PKGCONFFILE $NEWCONFFILE && echo "Recovered [$NEWCONFFILE] file from [$PKGCONFFILE] file."
+	[ \! -e $NEWCONFFILE ] && [ -e $OLDCONFFILE ] && mv -f $OLDCONFFILE $NEWCONFFILE && echo "Recovered [$NEWCONFFILE] file from [$OLDCONFFILE] file."
+	[ -e $MERCONFFILE    ] && rm -rf $MERCONFFILE
+	[ \! -e $NEWCONFFILE ] && echo "Can't find this [$NEWCONFFILE] file." && exit 1
+		
+	if [ -e $OLDCONFFILE ]
+	then
+		echo "Merging old and new configuration files..."
+		while read -r line
+		do
+	    	#At first we'll parse the line with the form "key = value"
+	    	if [ $(echo $line | grep -c " = ") -eq 1 ] && [ $(echo $line | awk '{printf "%d", NF}') -ge 3 ]
+	    	then
+	        	key=$(echo $line | awk '{printf "%s", $1}')
+	        	if [ $(grep -c $key $OLDCONFFILE) -eq 1 ] && [ $(echo $line | grep -c "\[OVERWRITE\]") -eq 0 ]
+	        	then
+	            	# If the key is in the old configuration file the key is that I will use to build the new configuration file.
+	            	# The only thing that contradicts this is that the line contains the word "[OVERWRITE]" in this way.
+	            	cat $OLDCONFFILE | awk -vkey=$key 'match($0,key){print $0}' | tr -d '\r'>> $MERCONFFILE
+	            	continue
+	        	fi
+	    	fi
+	    	#All the other lines will be copied exactly as they are.
+	    	IFS_OLD=$IFS; IFS=;
+	    	echo $line | sed -n -e "{s|\\r||g; s|\[OVERWRITE\]|           |g; p}" >> $MERCONFFILE
+	    	IFS=$IFS_OLD
+		done < $NEWCONFFILE
+		mv $MERCONFFILE $NEWCONFFILE
+	else
+		sed -n -i -e "{s|\\r||g; s|\[OVERWRITE\]|           |g; p}" $NEWCONFFILE
+	fi
+	
+	chown -R 200:1000 $DM_DIR_CFG/*
+}
+
+case "$1" in
+	install|upgrade)
+    ;;
+
+    configure)
+    	merge_conffile
+    	restart_firewall
+    ;;
+    
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0
+
+

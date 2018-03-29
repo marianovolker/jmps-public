@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Token xmlns="http://www.gilbarco.com">
+	<Body>
+		<Version>0001.0001.0020</Version>
+		<Type>TerminalMaintenance</Type>
+		<TokenCode>2219	6KJhF7S LKDA LKGA SFKL XM6Z 6IC9</TokenCode>
+		<TimeWindow>
+			<!-- YYYY-MM-DDTHH:MM:SS -->
+			<StartTime>2012-10-01T10:15:30</StartTime>
+			<EndTime>2012-11-20T22:30:40</EndTime>
+		</TimeWindow>
+		<Session>
+			<!-- number of times token can be used -->
+			<Times>1000</Times>
+			<!-- maintenance duration time : [hours] -->
+			<MaxDuration>20</MaxDuration>
+		</Session>
+		<Terminal>
+			<!-- PPN: Product Part Number -->
+			<TargetUnit>15729664</TargetUnit>
+		</Terminal>
+		<RemoteMaintenance>
+		<!-- Remote Maintenance is Enabled or Disabled (no case sensitive) -->
+		enabled
+		</RemoteMaintenance>
+		<!-- Below a list of all maintenance action operation --
+			DateAndTimeSetup
+			NetworkConfiguration
+			SecureDevicesConfiguration
+			SecureDevicesActivation
+			SecureLogRetrieval
+			FirmwareUpdate
+			FirmwareInfo
+			UploadSystemKeys
+		-->
+		<Permissions>
+			DateAndTimeSetup
+			NetworkConfiguration
+			SecureDevicesConfiguration
+			SecureDevicesActivation
+			SecureLogRetrieval
+			FirmwareUpdate
+			FirmwareInfo
+			UploadSystemKeys
+		</Permissions>
+		<Technician-ID>1234567890123456</Technician-ID>
+		<Technician-Device>Technician-Device1</Technician-Device>
+		<Operator-ID>Operator-ID1</Operator-ID>
+	</Body>
+	<X.509-Certificate>
+		<Signature>93:5f:8f:5f:c5:af:bf:0a:ab:a5:6d:fb:24:5f:b6:59:5d:9d:92:2e:4a:1b:8b:ac:7d:99:17:5d:cd:19:f6:ad:ef:63:2f:92:ab:2f:4b:cf:0a:13:90:ee:2c:0e:43:03:be:f6:ea:8e:9c:67:d0:a2:40:03:f7:ef:6a:15:09:79:a9:46:ed:b7:16:1b:41:72:0d:19:aa:ad:dd:9a:df:ab:97:50:65:f5:5e:85:a6:ef:19:d1:5a:de:9d:ea:63:cd:cb:cc:6d:5d:01:85:b5:6d:c8:f3:d9:f7:8f:0e:fc:ba:1f:34:e9:96:6e:6c:cf:f2:ef:9b:bf:de:b5:22:68:9f:97:50:65:f5:5e:85:a6:ef:19:d1:5a:de:9d:ea:63:cd:ef:63:2f:92:ab:2f:4b:cf:0a:13:90:ee:2c:0e:43:03:93:5f:8f:5f:c5:af:bf:0a:ab:a5:6d:fb:24:5f:b6:59:1f:34:e9:96:6e:6c:cf:f2:ef:9b:bf:de:b5:22:68:9f:be:f6:ea:8e:9c:67:d0:a2:40:03:f7:ef:6a:15:09:79:cb:cc:6d:5d:01:85:b5:6d:c8:f3:d9:f7:8f:0e:fc:ba:5d:9d:92:2e:4a:1b:8b:ac:7d:99:17:5d:cd:19:f6:ad:a9:46:ed:b7:16:1b:41:72:0d:19:aa:ad:dd:9a:df:ab</Signature>
+	</X.509-Certificate>
+</Token>
+ 

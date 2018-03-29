@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VanguardTokenProtocol xmlns:xsi="http://www.gilbarco.com/VanguardTokenProtocolSchema" xsi:noNamespaceSchemaLocation="VanguardTokenProtocol.xsd">
+<Command>TokenCodeRequest</Command>
+<Body>
+   <Technician-ID>123456</Technician-ID>
+   <Type>TerminalMaintenance</Type>
+   <StartingTime>
+      <Date>07-10-2012</Date>
+      <Time>00:00:00</Time>      
+   </StartingTime>
+   <Terminal>
+      <PPN>0000000000000000000000000000001023782539</PPN>
+   </Terminal>
+</Body>
+</VanguardTokenProtocol>

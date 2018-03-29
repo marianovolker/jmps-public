@@ -1,0 +1,12 @@
+
+{
+
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+
+  "success": false,
+
+  "code": "1",
+
+  "message": "Unsupported device event operation"
+
+}

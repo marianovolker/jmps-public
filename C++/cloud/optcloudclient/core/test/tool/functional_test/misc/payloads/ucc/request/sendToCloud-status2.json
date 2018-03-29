@@ -1,0 +1,13 @@
+{
+  "messageId":		"123e4567-e89b-12d3-a456-426655440000",
+  "operation":		"sendToCloud-status",
+  "deviceId":		"14",
+  "payload":		{
+    "status":			"in-progress",
+    "fileSize":			4000000,
+    "currentSize":		2000000,
+    "trackingNumber":	"2329D93PW830DI90",
+    "fileId":	"l001"
+  }
+}
+

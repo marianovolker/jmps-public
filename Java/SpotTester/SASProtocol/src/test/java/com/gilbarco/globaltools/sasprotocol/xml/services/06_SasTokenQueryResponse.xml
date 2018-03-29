@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VanguardTokenProtocolUnitTest xmlns:xsi="http://www.gilbarco.com/VanguardTokenProtocolSchema" xsi:noNamespaceSchemaLocation="VanguardTokenProtocol.xsd">
+<Command>TokenQueryResponse</Command>
+<Body>
+   <Technician-ID>123456789</Technician-ID>
+   <Terminal>
+      <TargetUnit>0000000000000000000000000000001023782539</TargetUnit>
+   </Terminal>
+   <TokenList>
+      <Token>
+         <TokenCode>ABCD SDKJ 3SF7 SLKD ALKG ASFK LXM6 Z6IC</TokenCode>
+         <TimeWindow>
+            <StartTime>2012-10-01T10:15:30</StartTime>
+            <EndTime>2012-10-20T22:30:40</EndTime>
+         </TimeWindow>
+         <Session>
+            <Times>5</Times>
+            <MaxDuration>20</MaxDuration>
+         </Session>
+         <RemoteMaintenance>Enabled</RemoteMaintenance>
+         <Permissions>
+            FirmwareUpdate
+         </Permissions>
+      </Token>
+      <Token>
+         <TokenCode>TYJA KISS KLOZ DART 5FG4 33TU L4M3 TROZ</TokenCode>
+         <TimeWindow>
+            <StartTime>2012-10-01T10:15:30</StartTime>
+            <EndTime>2012-10-20T22:30:40</EndTime>
+         </TimeWindow>
+         <Session>
+            <Times>7</Times>
+            <MaxDuration>23</MaxDuration>
+         </Session>
+         <RemoteMaintenance>Enabled</RemoteMaintenance>
+         <Permissions>
+            SecureLogRetrieval
+         </Permissions>
+      </Token>
+      <Token>
+         <TokenCode>WFS3 LKG4 ASFK LXM6 SDKJ 3SF7 SLKD Z1HA</TokenCode>
+         <TimeWindow>
+            <StartTime>2012-10-01T10:16:30</StartTime>
+            <EndTime>2012-11-20T22:30:40</EndTime>
+         </TimeWindow>
+         <Session>
+            <Times>6</Times>
+            <MaxDuration>21</MaxDuration>
+         </Session>
+         <RemoteMaintenance>Disabled</RemoteMaintenance>
+         <Permissions>
+            DateAndTimeSetup
+            NetworkConfiguration
+            SecureDevicesConfiguration
+            SecureDevicesActivation
+            SecureLogRetrieval
+            FirmwareUpdate
+            FirmwareInfo
+            UploadSystemKeys
+         </Permissions>
+      </Token>
+   </TokenList>
+</Body> 
+<X.509-Certificate>
+	<Signature></Signature>
+</X.509-Certificate>
+</VanguardTokenProtocolUnitTest>

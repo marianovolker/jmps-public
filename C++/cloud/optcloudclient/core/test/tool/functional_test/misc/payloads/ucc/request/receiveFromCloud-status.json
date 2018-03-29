@@ -1,0 +1,14 @@
+{
+  messageId:	UUID ,
+  operation:	"receiveFromCloud-status",
+  deviceId:		string,
+  payload:		{
+  	"status":		string,
+    "fileSize":		integer,
+    "currentSize":	integer,
+    "trackingNumber":	string,
+    "code":	Integer,
+    "message":	String
+  }
+}
+

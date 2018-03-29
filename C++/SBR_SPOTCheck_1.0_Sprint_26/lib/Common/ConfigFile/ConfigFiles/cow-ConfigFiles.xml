@@ -1,0 +1,5 @@
+<ConfigFiles>
+   <Default>/c/dev/cow/etc/opt/crindbios/</Default>
+   <Overrides>/c/dev/cow/var/opt/crindbios/config/</Overrides>
+</ConfigFiles>
+

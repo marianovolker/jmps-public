@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Abonados mensuales - Alta, Abonados -->
+    <string name="errAbMensualesAltaNombre">Debe completar el nombre</string>
+    <string name="errAbMensualesAltaApellido">Debe completar el apellido</string>
+    <string name="errAbMensualesAltaDni">Debe completar el DNI</string>
+    <string name="errAbMensualesAltaDireccion">Debe completar la dirección</string>
+    <string name="errAbMensualesAltaTelefono">Debe completar al menos un teléfono</string>
+    <string name="errAbMensualesAltaAuto">Debe completar los datos del auto del abonado</string>
+    <string name="errAbMensualesAltaSinTarifas">Antes de agregar un abonado mensual se debe agregar una tarifa</string>
+    <string name="errAbMensualesAltaInsert">Se produjo un error creando el nuevo abonado</string>
+    <string name="errAbMensualesAltaTarifaNotFound">No se encontró la tarifa del abonado</string>
+
+    <!-- Abonados mensuales - Alta, Autos -->
+    <string name="errAbMensualesAltaMarca">Debe completar la marca del auto</string>
+    <string name="errAbMensualesAltaModelo">Debe completar el modelo del auto</string>
+    <string name="errAbMensualesAltaPatente">Debe completar la patente del auto</string>
+    <string name="errAbMensualesAltaColor">Debe completar el color del auto</string>
+    <string name="errAbMensualesAltaNroMotor">Debe completar el número de motor del auto</string>
+    <string name="errAbMensualesAltaTurno">Debe completar el turno al que pertence el auto</string>
+
+    <!-- Abonados mensuales - Pagos -->
+    <string name="errAbMensualesPagosSinAbonados">Debe agregar un abonado mensual antes de registrar un pago</string>
+    <string name="errAbMensualesPagosAbonados">No hay abonado seleccionado</string>
+    <string name="errAbMensualesPagosPeriodo">No hay período seleccionado</string>
+    <string name="errAbMensualesPagosExcepcion">Se debe ingresar una excepción</string>
+
+    <!-- Abonados mensuales - Pagos pendientes -->
+    <string name="errAbMensualesPendientesSinAbonados">Debe ingresar al menos un abonado mensual antes de poder ver pagos pendientes</string>
+    <string name="errAbMensualesPagosInsert">El pago no se pudo realizar, intente nuevamente</string>
+
+    <!-- Abonados mensuales - Tarifas, listar -->
+    <string name="errAbMensualesTarifasListarSinTarifas">No hay tarifas cargadas</string>
+
+    <!-- Abonados diarios - Tarifas, listar -->
+    <string name="errAbDiariosTarifasListarSinTarifas">No hay tarifas cargadas</string>
+
+    <!-- Abonados diarios - Tarifas, agregar/modificar -->
+    <string name="errAbDiariosTarifasSinCategorias">Antes de agregar una tarifa diaria se debe agregar una cateogría</string>
+    <string name="errAbDiariosTarifasAltaCategoriaNotFound">No se encontró la categoría de la tarifa</string>
+    <string name="errAbDiariosTarifasAgregarNombre">Debe completar el nombre de la tarifa</string>
+    <string name="errAbDiariosTarifasAgregarTiempo">Debe completar el tiempo de la tarifa</string>
+    <string name="errAbDiariosTarifasAgregarTolerancia">Debe completar la tolerancia de la tarifa</string>
+    <string name="errAbDiariosTarifasAgregarPrecio">Debe completar el precio de la tarifa</string>
+    
+    <!-- Abonados diarios - Ingresar -->
+    <string name="errAbDiariosIngresarSinCategorias">Antes de realizar un ingreso se debe agregar una categoría</string>
+    <string name="errAbDiariosIngresoSinPatenteLetras">Debe completar las letras de la patente</string>
+    <string name="errAbDiariosIngresoSinPatenteNumeros">Debe completar los números de la patente</string>
+    <string name="errAbDiariosIngresoQr">Error al crear el código QR</string>
+
+    <!-- Abonados diarios - Egresar -->
+    <string name="errAbDiariosEgresoLetrasIncorrectas">Las letras de la patente son incorrectas</string>
+    <string name="errAbDiariosEgresoNumerosIncorrectos">Los números de la patente son incorrectos</string>
+    <string name="errAbDiariosEgresoVehiculoInexistente">El vehículo que se quiere egresar no existe o ya fue egresado</string>
+    <string name="errAbDiariosEgresoCalcularImporte">Error al calcular el importe, por favor calcularlo de manera manual</string>
+    
+    <!-- Abonados diarios - Egresar QR -->
+    <string name="errAbDiariosEgresoQrSinQr">No se detectó ningún código QR</string>
+    
+    <!-- Abonados diarios - Categorias, alta -->
+    <string name="errAbDiariosCategoriasAltaSinNombre">Debe completar el nombre de la categoría</string>
+    
+    <!-- Abonados diarios, Autos en playa -->
+    <string name="errAbDiariosPlayaVacia">No hay autos en playa</string>
+    
+</resources>

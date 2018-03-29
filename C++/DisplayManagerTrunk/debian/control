@@ -1,0 +1,12 @@
+Source: displaymanager
+Section: unknown
+Priority: extra
+Maintainer: mariano volker <mariano.volker@gilbarco.com>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: displaymanager
+Architecture: any
+Depends: gvr-qt-embedded-lgpl (>= 4.5.2-7), smartmerch-dispcerts (>= 01.0.01), displaymanager.diagnostics (>=01.0.00), displaymanager.76.card (>=01.0.00), displaymanager.blue (>=01.0.00), displaymanager.citgo (>=01.0.00),displaymanager.green (>=01.0.00),displaymanager.gvr (>=01.0.00),displaymanager.marble (>=01.0.00),displaymanager.maroon (>=01.0.00),displaymanager.on.the.run.card (>=01.0.00),displaymanager.phillips.card (>=01.0.00),displaymanager.red (>=01.0.00),displaymanager.startup (>=01.0.00),displaymanager.steel (>=01.0.00),displaymanager.teal (>=01.0.00), gvr-dvsdk (>=3.0.0.40-12), gvr-gstreamer (>=1.0.0-10), gvr-gstd (>=1.1j), gvr-libiconv (>=1.11-1), logrotate (>=3.7.7-3), sed (>=4.1.5-8), mawk (>=1.3.3-10), coreutils (>=6.10-3)
+Description: DisplayManager
+

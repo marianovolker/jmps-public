@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  <description>
+    FlexPay Service Configuration
+  </description>
+
+  <!-- ProcessService -->
+  <bean id="FlexPayProcessDefinition"
+    class="com.gilbarco.globaltools.edt.services.EdtServiceDefinition">
+    <constructor-arg name="name" index="0" value="FlexPayProcessDefinition"></constructor-arg>
+    <constructor-arg name="adapterClass" index="1"
+      value="com.gilbarco.globaltools.edt.services.process.EdtProcessAdapter"></constructor-arg>
+  </bean>
+  <bean id="FlexPayProcessService"
+    class="com.gilbarco.globaltools.edt.services.process.EdtProcessService">
+    <constructor-arg>
+      <ref bean="FlexPayProcessDefinition" />
+    </constructor-arg>
+  </bean>
+  
+  <!-- Services definition -->
+  <bean id="FlexPayServicesDefinitionFactory"
+    class="com.gilbarco.globaltools.flexpay.model.FlexPayServiceDefinitionsFactory">
+    <property name="flexPayProcessDefinition">
+      <ref bean="FlexPayProcessDefinition" />
+    </property>
+  </bean>
+  
+</beans>

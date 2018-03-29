@@ -1,0 +1,7 @@
+{
+  "operation": "test-dns",
+  "payload": {
+	"nameserver": "208.67.222.222",
+	"domain-name": "www.gilbarco.com"
+  }
+}

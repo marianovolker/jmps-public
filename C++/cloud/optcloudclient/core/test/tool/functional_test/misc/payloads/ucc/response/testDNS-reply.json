@@ -1,0 +1,9 @@
+{ 
+	"messageId": "123e4567-e89b-12d3-a456-426655440000",
+	"operation":"testDNS",
+	"deviceId":"32459",
+	"payload": { 
+	  "success": true,
+	  "host-ip": "64.90.126.8"
+	} 
+}

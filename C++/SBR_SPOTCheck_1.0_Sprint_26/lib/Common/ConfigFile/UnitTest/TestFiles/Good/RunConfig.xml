@@ -1,0 +1,6 @@
+<RunConfig>
+   <OptDir>./TestFiles/Good/opt/</OptDir>
+   <EtcDir>./TestFiles/Good/etc/</EtcDir>
+   <VarDir>./TestFiles/Good/var/</VarDir>
+</RunConfig>
+

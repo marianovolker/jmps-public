@@ -1,0 +1,10 @@
+{
+  "operation": "status",
+  "messageId": "0000-000000-000000-0000",
+  "deviceId": "1714",
+  "payload": {
+     "operative": true,
+     "connection": "Connected",
+     "registration": "Activated"
+  }
+}

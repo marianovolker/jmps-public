@@ -1,0 +1,10 @@
+{
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+  "operation": "sendToCloud",
+  "deviceId": "14",
+  "payload": {
+    "success": false,
+    "code":	1
+    "message":	"The url field is empty or invalid"
+  }
+}

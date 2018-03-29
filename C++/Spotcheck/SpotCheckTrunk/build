@@ -1,0 +1,271 @@
+#!/bin/bash
+#
+# SpotCheck front-end build script
+#
+
+# Include build rev number in code ?
+# Always true since sprint12
+USE_BUILD_INFO=true
+# Do cross compile?
+USE_ARM=false
+USE_JIBE=false
+USE_COLDFIRE=false
+USE_NO_NATIVE_WINDOWS=false
+# Perform a build?
+DO_BUILD=false
+# Peform a clean?
+DO_CLEAN=false
+# Run unit tests?
+DO_TEST=false
+# Build a release package?
+DO_PACKAGE=false
+PKG_GENERATOR="-G DEB"
+
+# Function to display usage information
+usage()
+{
+	echo "Usage: $0 [-b] [-c] [-t|m3|m5|w] [target]"
+	echo "    -b		build"
+	echo "    -c		clean"
+	echo "    -d		build with debug info turned on"
+	echo "    -3		perform operations for M3 production platform (coldfire compiler)"
+	echo "    -5		perform operations for M5 production platform (ARM compiler)"
+	echo "    -j		perform operations for VGD production platform (ARM compiler)"
+	echo "    -r		build debian release package"
+	echo "    -t		test"
+	echo "    -w		perform operations for Windows production platform (mingw compiler)"
+	echo "    target	The target to build (defaults to 'all')"
+	echo "    If no arguments are specified, the default action is to build all"
+	echo "    for the native platform."
+}
+
+
+while getopts ":bcd35jrtw" OPT; do
+	case $OPT in
+		b) 
+			DO_BUILD=true
+			;;
+		c) 
+			DO_CLEAN=true
+			;;
+		d)
+			BUILD_TYPE=-DCMAKE_BUILD_TYPE=Debug
+			;;
+		3)
+			USE_COLDFIRE=true
+			;;
+		5)
+			USE_ARM=true
+			;;
+		j)
+			USE_JIBE=true
+			;;
+		r) 
+			DO_PACKAGE=true
+			;;
+		t) 
+			DO_TEST=true
+			# Testing requires a build
+			DO_BUILD=true
+			;;
+		w)
+			USE_NO_NATIVE_WINDOWS=true
+			;;
+		\?) 
+			echo "Unknown option -$OPTARG."
+			usage
+			exit 1
+			;;
+		:) 
+			echo "Option -$OPTARG needs a argument."
+			usage
+			exit 1
+			;;
+	esac
+done
+
+shift $((OPTIND-1))
+
+# Check for a target
+TARGET=$1
+if [[ -z $TARGET ]]; then
+	TARGET=all
+fi
+
+# If no flags are set, set the build flag
+if ! $DO_BUILD && ! $DO_CLEAN && ! $DO_TEST; then
+	DO_BUILD=true
+fi
+
+# Allow the user to specify the location of our external libraries
+if [[ "x$EXTLIB_PATH" == "x" ]]; then
+	EXTLIB_PATH="$(pwd)/extlib"
+fi
+
+# Make sure we can find the external libraries
+if [[ ! -d $EXTLIB_PATH ]]; then
+	echo "Could not find the external library repository, $EXTLIB_PATH."
+	echo "Did you forget to set the EXTLIB_PATH environment variable?"
+	exit 1
+fi
+
+# Set cmake build directory name based on what platform we're building for
+
+#If we're using native windows platform
+if [[ $(uname) == MINGW* ]]; then
+	BUILD_DIR=.build_windows
+	GENERATOR="-G\"MSYS Makefiles\""
+	PKG_GENERATOR="-G ZIP"
+else
+	BUILD_DIR=.build_linux
+fi
+
+# If we're using ARM cross-compiler, override some stuff
+if $USE_ARM; then
+	BUILD_DIR=.build_spotm5
+	TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=tool-codesourcery.cmake
+#	External gtest library is built only for unit test
+#	(only when -t option is passed to this script), or Linux Native platform
+	EXCLUDE_GTEST=-DEXCLUDE_GTEST_LIBRARY=ON
+#	Make sure the proper toolchain exist in the external libraries directory
+	cp tool-codesourcery.cmake $EXTLIB_PATH
+	if $DO_TEST; then
+		echo "Cannot perform ARM testing in native Linux.  Test flag ignored."
+		DO_TEST=false
+	fi
+fi
+
+# If we're using ARM cross-compiler, override some stuff
+if $USE_JIBE; then
+	BUILD_DIR=.build_vgd
+	TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=tool-jibe.cmake
+#	External gtest library is built only for unit test
+#	(only when -t option is passed to this script), or Linux Native platform
+	EXCLUDE_GTEST=-DEXCLUDE_GTEST_LIBRARY=ON
+#	Make sure the proper toolchain exist in the external libraries directory
+	cp tool-jibe.cmake $EXTLIB_PATH
+	if $DO_TEST; then
+		echo "Cannot perform ARM testing in native Linux.  Test flag ignored."
+		DO_TEST=false
+	fi
+fi
+
+# If we're using coldfire cross-compiler, override some stuff
+if $USE_COLDFIRE; then
+	BUILD_DIR=.build_spotm3
+	TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=tool-uclinux.cmake
+#	External gtest library is built only for unit test
+#	(only when -t option is passed to this script), or Linux Native platform
+	EXCLUDE_GTEST=-DEXCLUDE_GTEST_LIBRARY=ON
+#	Make sure the proper toolchain exist in the external libraries directory
+	cp tool-uclinux.cmake $EXTLIB_PATH 
+	if $DO_TEST; then
+		echo "Cannot perform Coldfire testing in native Linux.  Test flag ignored."
+		DO_TEST=false
+	fi
+fi
+
+# If we're using mingw Windows cross-compiler, NON-NATIVE Windows, override some stuff
+if $USE_NO_NATIVE_WINDOWS; then
+	BUILD_DIR=.build_windows
+	TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=tool-windows.cmake
+#	External gtest library is built only for unit test
+#	(only when -t option is passed to this script), using Linux Native platform
+	EXCLUDE_GTEST=-DEXCLUDE_GTEST_LIBRARY=ON
+#	Make sure the proper toolchain exist in the external libraries directory
+	cp tool-windows.cmake $EXTLIB_PATH
+	if $DO_TEST; then
+		echo "Cannot perform Windows testing in native Linux.  Test flag ignored."
+		DO_TEST=false
+	fi
+fi
+
+EXTLIB_BUILD_DIR=${EXTLIB_PATH}/${BUILD_DIR}
+
+EXIT_STATUS=0
+# Perform a clean if requested
+if $DO_CLEAN; then
+	if [[ "$TARGET" == "all" ]]; then
+		# Cleaning all is a super clean
+		rm -rf $BUILD_DIR
+		rm -rf $EXTLIB_BUILD_DIR
+	else
+		if [[ -d $BUILD_DIR ]]; then
+			pushd $BUILD_DIR > /dev/null
+			make clean-$TARGET
+			EXIT_STATUS=$?
+			popd > /dev/null
+			if [[ $EXIT_STATUS -gt 0 ]]; then
+				exit $EXIT_STATUS
+			fi
+		fi
+	fi
+fi
+
+
+# Perform a build if requested
+if $DO_BUILD; then
+	if $DO_TEST; then
+		UNIT_TEST="-DUNIT_TEST:BOOL=ON"
+	fi
+
+	if $USE_BUILD_INFO; then
+		GENERATE_BUILD_INFO="-DGENERATE_BUILD_INFO:BOOL=ON"
+	fi
+
+	# Build all external libs
+	if [[ ! -d $EXTLIB_BUILD_DIR ]]; then
+		mkdir $EXTLIB_BUILD_DIR
+	fi
+	pushd $EXTLIB_BUILD_DIR > /dev/null
+	eval cmake $EXCLUDE_GTEST $GENERATOR $TOOLCHAIN $BUILD_TYPE $UNIT_TEST ..
+	make
+	EXIT_STATUS=$?
+	popd > /dev/null
+	if [[ $EXIT_STATUS -gt 0 ]]; then
+		exit $EXIT_STATUS
+	fi
+
+	# Build specific target
+	if [[ ! -d $BUILD_DIR ]]; then
+		mkdir $BUILD_DIR
+	fi
+	pushd $BUILD_DIR > /dev/null
+	eval cmake $GENERATOR $TOOLCHAIN $BUILD_TYPE $UNIT_TEST $GENERATE_BUILD_INFO .. $CMAKE_OPTS
+	make $TARGET
+	EXIT_STATUS=$?
+	popd > /dev/null
+	if [[ $EXIT_STATUS -gt 0 ]]; then
+		exit $EXIT_STATUS
+	fi
+fi
+
+
+# Run tests if requested
+TEST_TIMEOUT=180
+if $DO_TEST; then
+	pushd $BUILD_DIR > /dev/null
+	if [[ "$TARGET" == "all" ]]; then
+		ctest -V --timeout $TEST_TIMEOUT
+	else
+		ctest -V --timeout $TEST_TIMEOUT -R $TARGET
+	fi
+	EXIT_STATUS=$?
+	popd > /dev/null
+	if [[ $EXIT_STATUS -gt 0 ]]; then
+		exit $EXIT_STATUS
+	fi
+fi
+
+
+# Create a package if requested
+if $DO_PACKAGE; then
+	pushd $BUILD_DIR > /dev/null
+	cpack $PKG_GENERATOR
+	EXIT_STATUS=$?
+	popd > /dev/null
+	if [[ $EXIT_STATUS -gt 0 ]]; then
+		exit $EXIT_STATUS
+	fi
+fi
+

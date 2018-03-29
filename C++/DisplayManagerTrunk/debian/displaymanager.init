@@ -1,0 +1,53 @@
+#!/bin/sh
+# Start/stop the displaymanager.
+#
+### BEGIN INIT INFO
+# Provides:          displaymanager
+# Required-Start:    $syslog $time
+# Required-Stop:     $syslog $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Displaymanager application
+# Description:       Displaymanager application 
+### END INIT INFO
+
+DM_PATH=XXXREPLACE_DM_DIR_BIN
+DM_RUN_PATH=XXXREPLACE_DM_DIR_RUN
+DM_CONFIG_PATH=XXXREPLACE_DM_DIR_CFG
+ARGS="-qws"
+
+export PATH=/opt/gstreamer/bin:$PATH
+export LD_LIBRARY_PATH=/opt/gstreamer/lib:/opt/gstreamer/lib/gstreamer-0.10:/usr/lib/gstreamer-0.10
+export GST_PLUGIN_PATH=/opt/gstreamer/lib
+export GST_REGISTRY=/tmp/gst_registry.bin
+
+## Temp vars in order to make the process run
+##
+export DM_CONFIG_PATH=${DM_CONFIG_PATH}
+export QWS_DISPLAY="LinuxFb:/dev/fb1"
+
+. /lib/lsb/init-functions
+
+case "$1" in
+start)  log_daemon_msg "Starting displaymanager" "displaymanager"
+        start-stop-daemon --start --quiet --chdir ${DM_PATH} --pidfile ${DM_RUN_PATH}/dispmgrd.pid --make-pidfile --background --name dispmgrd --chuid nsu --startas ${DM_PATH}/dispmgrd -- ${ARGS}
+        log_end_msg $?
+        ;;
+
+stop)   log_daemon_msg "Stopping displaymanager" "displaymanager"
+        start-stop-daemon --stop --quiet --pidfile ${DM_RUN_PATH}/dispmgrd.pid --name dispmgrd
+        log_end_msg $?
+        ;;
+
+restart)log_daemon_msg "Restarting displaymanager" "displaymanager"
+        start-stop-daemon --stop --retry 5 --quiet --pidfile ${DM_RUN_PATH}/dispmgrd.pid --name dispmgrd
+        start-stop-daemon --start --quiet --chdir ${DM_PATH} --pidfile ${DM_RUN_PATH}/dispmgrd.pid --make-pidfile --background --name dispmgrd --chuid nsu --startas ${DM_PATH}/dispmgrd -- ${ARGS}
+        log_end_msg $?
+        ;;
+
+*)      log_action_msg "Usage: /etc/init.d/displaymanager {start|stop|restart}"
+        exit 2
+        ;;
+esac
+exit 0
+

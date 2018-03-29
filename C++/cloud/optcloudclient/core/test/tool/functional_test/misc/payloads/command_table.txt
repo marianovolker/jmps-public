@@ -1,0 +1,42 @@
+# class operation				protocol_id	reply_filename
+
+
+#				UCC events and responses
+#				------------------------
+
+ucc	server%20update				1		server-update-reply.json
+ucc	registration				2		registration-reply.json
+ucc	connect					1		connect-reply.json
+ucc	file-download-status-event		0		file-download-event-reply.json
+ucc	file-upload-status-event		0		file-upload-event-reply.json
+ucc	install-event				0		install-event-reply.json
+ucc	cloud-device-config-change-event	0		cloud-device-config-change-event-reply.json
+ucc	receiveFromCloud			1		fileRcvSodaResponse.json
+#ucc	receiveFromCloud			1		error_fileRcvSodaResponse.json
+ucc	receiveFromCloud-status			1
+#ucc	error_receiveFromCloud-status		1
+ucc	sendToCloud				1		fileSndSodaResponse.json
+#ucc	sendToCloud				1		error_fileSndSodaResponse.json
+ucc	sendToCloud-status			1
+#ucc	error_sendToCloud-status		1
+ucc	testDNS					1		testDNS-reply.json
+#ucc	testDNS					1		error_testDNS-reply.json
+
+#			UCC commands
+#			------------
+ucc	file-upload-cmd				0
+ucc	file-download-cmd			0
+ucc	install-cmd				0
+ucc	reset-cmd				0
+ucc	reconnect-cmd				0
+ucc	security-change-cmd			0
+
+#			CRL commands
+#			------------
+
+crl	registration				0
+crl	cloud-status				0
+crl	set-dns					0
+crl	get-dns					0
+crl	test-dns				0
+

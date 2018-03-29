@@ -1,0 +1,11 @@
+{
+  "messageId": "123e4567-e89b-12d3-a456-426655440000",
+  "operation": "file-download-event",
+  "deviceId": "14",
+  "payload": {
+    "fileType": "software-bundle",
+    "trackingNumber": "2329D93PW830DI90",
+    "status": "failure",
+    "message": "Corrupted file unable to process"
+  }
+}

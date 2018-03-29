@@ -1,0 +1,10 @@
+XXXREPLACE_DM_DIR_LOG/dm_stdout.log
+{
+    missingok
+    size 5M
+    rotate 8
+    copytruncate
+    compress
+    nomail
+}
+

@@ -1,0 +1,5 @@
+libgvrlog (0.0.0) m3 m5 win32 native; urgency=low
+
+  * Initially copied from dummy library for testing purposes.
+
+ -- Guillermo Paris <guillermo.parisi@gilbarco.com>  Tue, 30 Sep 2014 12:00:00 -0300

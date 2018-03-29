@@ -1,0 +1,4 @@
+#Tue Apr 16 20:16:14 ART 2013
+spotlogcollector.communication.terminal.ip=10.28.120.12
+spotlogcollector.communication.terminal.port=5200
+spotlogcollector.settings.logs_download_path=C\:\\SPOT

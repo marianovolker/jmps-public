@@ -1,0 +1,11 @@
+<Root>
+  <Name>Filename.xml</Name>
+  <Purpose>Unit Test</Purpose>
+  <type binary="false">XML</type>
+  <deeper>
+    <Level2>Yes</Level2>
+    <deeperstill>
+      <Level3>Yes</Level3>
+    </deeperstill>
+  </deeper>
+</Root>

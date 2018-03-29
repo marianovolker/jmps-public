@@ -1,0 +1,41 @@
+#!/bin/sh
+# postrm script for displaymanager package
+#
+set -e
+[ -n "$DM_DEBUG" ] && echo "now debugging $0 $@" && set -x
+
+echo "$0 $@"
+
+rm_conffile()
+{
+    local PKGNAME="displaymanager"
+    local CONFFILE="/etc/opt/displaymanager/displaymanager.properties"
+    local GLIBRARY="/etc/opt/displaymanager/glibrary.js"
+
+    if [ -f "$CONFFILE".dpkg-del ]
+    then
+        rm -f "$CONFFILE".dpkg-del
+    fi
+
+    if [ -f "$CONFFILE".dpkg-bak ]
+    then
+        rm -f "$CONFFILE".dpkg-bak
+    fi
+    
+    if [ -f "$CONFFILE".dpkg-dist ]
+    then
+        rm -f "$CONFFILE".dpkg-dist
+    fi    
+    
+    if [ -f "$GLIBRARY" ]
+    then
+        rm -f "$GLIBRARY"
+    fi    
+}
+
+# See policy 6.6, item 3 and 5
+case "$1" in
+	abort-install|abort-upgrade|remove)
+       	rm_conffile        	
+    ;;
+esac

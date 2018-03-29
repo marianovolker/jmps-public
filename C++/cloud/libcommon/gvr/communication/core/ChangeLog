@@ -1,0 +1,24 @@
+libgvrcommunication (0.4.0) m3 m5 m7 native; urgency=low
+   * RM-16: implement business logic for OPT Cloud registration flow: 
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Thu, 07 May 2015 10:00:00 -0300
+
+libgvrcommunication (0.3.0) m3 m5 m7 native; urgency=low
+   * RM-41: create the sw install flow process
+   * RM-25: create the file download flow process
+   * RM-288: create Server Stream Channel
+   * RM-289: upload a complete SW bundle to the SPOT
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Thu, 23 Apr 2015 10:00:00 -0300
+
+libgvrcommunication (0.2.0) m3 m5 m7 native; urgency=low
+  * RM-173: create UCC Connection Status unsolicited command
+  * RM-77: process GVR Cloud reset payload (request and response)
+ -- Rodrigo Castro <rodrigo.castro@gilbarco.com>  Wed, 08 Apr 2015 10:00:00 -0300
+
+libgvrcommunication (0.1.0) m3 m5 win32 native; urgency=low
+  * Added communication library to libcommon set.
+ -- Mariano Volker <mariano.volker@gilbarco.com>  Tue, 15 Dec 2014 10:00:00 -0300
+
+libgvrcommunication (0.0.0) m3 m5 win32 native; urgency=low
+  * Changed SpotSession
+ -- Angeles Grieco <maria.grieco@gilbarco.com>  Wnd, 25 Feb 2015 16:00:00 -0300
+ 

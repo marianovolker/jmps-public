@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<DeviceRegistrationRequest xmlns="http://commons.apache.org/employee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.gilbarco.com/DeviceRegistrationRequestSechema" xsi:noNamespaceSchemaLocation="DeviceRegistrationRequest.xsd">
+  <registerDevice>
+    <registrationCode>8575062944</registrationCode>
+    <certFormat>JKS</certFormat>
+    <dnsSupported>true</dnsSupported>
+  </registerDevice>
+  
+  <deviceConfig>
+    <deviceType>OPT</deviceType>
+    <localId>2</localId>
+    <assetInfo>
+      <manufacturer>Gilbarco</manufacturer>
+      <model>EPKENC</model>
+      <serialNbr>EA590383</serialNbr>
+      <firmware></firmware>
+      <components></components>
+    </assetInfo>
+    <events>
+      <event>
+        <eventName>event_name1</eventName>
+        <payload>payload1</payload>
+      </event>
+    </events>
+    <cmds>
+      <cmd>
+        <cmdName>CMD</cmdName>
+        <request>"pjr, xml"</request>
+        <response>"pjr, xml2"</response>
+      </cmd>
+    </cmds>
+    <associated>	
+    </associated>
+  </deviceConfig>
+</DeviceRegistrationRequest>
+
