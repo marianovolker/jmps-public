@@ -1,7 +1,0 @@
-CONFIG += ordered warn_on
-TEMPLATE = subdirs
-SUBDIRS = src
-
-# Common PRI Include
-ROOT = ..
-include($${ROOT}/displaymanager.pri)
